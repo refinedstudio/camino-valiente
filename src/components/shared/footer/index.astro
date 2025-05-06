@@ -1,0 +1,166 @@
+---
+const gridImages = [
+  {
+    src: "https://images.pexels.com/photos/13421255/pexels-photo-13421255.jpeg",
+    alt: "Fashion outdoor autumn look",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/19988408/pexels-photo-19988408/free-photo-of-paisaje-montanas-naturaleza-punto-de-referencia.jpeg",
+    alt: "Travel outfit with luggage",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/17862061/pexels-photo-17862061/free-photo-of-bote-en-el-humedal-de-santa-elena-en-medio-de-la-selva.jpeg",
+    alt: "Outdoor countryside style",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/27676044/pexels-photo-27676044/free-photo-of-paisaje-naturaleza-cielo-puesta-de-sol.jpeg",
+    alt: "Cafe style outfit",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/2847475/pexels-photo-2847475.jpeg",
+    alt: "Vintage car fashion shoot",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/22484294/pexels-photo-22484294/free-photo-of-paisaje-punto-de-referencia-viaje-viajar.jpeg",
+    alt: "Holiday decoration scene",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/6780760/pexels-photo-6780760.jpeg",
+    alt: "Outdoor cafe style",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+];
+
+const socialLinks = [
+  {
+    platform: "Twitter",
+    url: "https://twitter.com/sincerelyjules",
+    icon: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>`,
+  },
+  {
+    platform: "Pinterest",
+    url: "https://pinterest.com/sincerelyjules",
+    icon: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>`,
+  },
+  {
+    platform: "Instagram",
+    url: "https://instagram.com/sincerelyjules",
+    icon: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>`,
+  },
+];
+
+const navLinks = [
+  { name: "Acerca de", url: "/about" },
+  { name: "Políticas", url: "/policies" },
+  { name: "Contacto", url: "/contact" },
+];
+---
+
+<div class="bg-[#F1E5D7] text-stone-800">
+  <header class="py-8 px-4">
+    <div class="flex items-center justify-center max-w-4xl w-full flex-wrap">
+      <div
+        class="text-2xl md:text-4xl italic font-light mr-4 font-brittany-signature"
+      >
+        Siguenos en
+      </div>
+      <div class="text-2xl md:text-4xl font-light font-playfair-display">
+        @CAMINOVALIENTE
+      </div>
+      <div class="ml-4 h-[1px] hidden sm:block bg-stone-800 flex-grow"></div>
+    </div>
+  </header>
+
+  <div
+    class="grid grid-cols-1 md:grid-cols-[30%_70%] overflow-x-hidden grid-rows-[auto] md:grid-rows-[720px] overflow-y-hidden"
+  >
+    <div class="h-full md:h-full relative cursor-pointer group">
+      <img
+        src={gridImages[0].src}
+        alt={gridImages[0].alt}
+        class="w-full h-full object-cover"
+      />
+      <div
+        class="absolute bottom-0 left-0 w-full h-full bg-black/50 flex items-center justify-center p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      >
+        <p class="text-white text-center text-sm font-normal">
+          {gridImages[0].description}
+        </p>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2 h-[600px] md:h-full"
+    >
+      {
+        gridImages.slice(1).map((image) => (
+          <div class="aspect-square h-full w-full relative group cursor-pointer">
+            <img
+              src={image.src || "/placeholder.svg"}
+              alt={image.alt}
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute bottom-0 left-0 w-full h-full bg-black/50 flex items-center justify-center p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="text-white text-center text-sm font-normal">
+                {image.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <footer class="py-8 px-4">
+    <div class="flex flex-col md:flex-row items-center justify-between">
+      <div class="flex space-x-6 mb-6 md:mb-0">
+        {
+          socialLinks.map((link) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[#333333] hover:text-[#666666] transition-colors"
+              set:html={link.icon}
+            />
+          ))
+        }
+      </div>
+      <div class="font-sans">
+        <p
+          class="text-2xl tracking-[0.25em] font-light text-center text-stone-800 mb-4"
+        >
+          CAMINO VALIENTE
+        </p>
+        <p class="text-sm text-stone-600 text-center">
+          © Copyright 2025 Camino Valiente
+        </p>
+      </div>
+
+      <div class="flex space-x-6">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.url}
+              class="text-sm font-sans text-[#333333] hover:text-[#666666] transition-colors"
+            >
+              {link.name}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </footer>
+</div>

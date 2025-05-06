@@ -17,7 +17,7 @@ export const NavHeader = ({
     <nav className="flex items-center justify-between px-6 py-6">
       <div className="flex-1">
         <button
-          className={`cursor-pointer hover:bg-black/10 transition-colors p-2 ${
+          className={`cursor-pointer hover:bg-white/10 transition-colors p-2 ${
             hasScrolled ? "text-neutral-900" : "text-white"
           }`}
           onClick={onMenuClick}

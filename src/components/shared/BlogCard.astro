@@ -1,0 +1,58 @@
+---
+interface Props {
+  category: string;
+  title: string;
+  subtitle?: string;
+  imageUrl: string;
+  altText: string;
+}
+
+const { category, title, subtitle, imageUrl, altText } = Astro.props;
+---
+
+<a href="#" class="relative overflow-hidden group cursor-pointer block">
+  <!-- Imagen de fondo con overlay oscuro -->
+  <div class="relative h-screen overflow-hidden">
+    <img
+      src={imageUrl || "/placeholder.svg"}
+      alt={altText}
+      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+    />
+    <div
+      class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300"
+    >
+    </div>
+  </div>
+
+  <!-- Contenido superpuesto -->
+  <div
+    class="absolute inset-0 flex flex-col justify-center items-center p-8 text-white"
+  >
+    <span class="uppercase text-sm tracking-wider font-semibold mb-2"
+      >{category}</span
+    >
+    <h2
+      class="text-2xl sm:text-4xl md:text-5xl font-playfair-display leading-tight mb-2 text-center"
+    >
+      {title}
+    </h2>
+    {
+      subtitle && (
+        <h3 class="text-2xl sm:text-4xl md:text-5xl mb-8 text-center">
+          {subtitle}
+        </h3>
+      )
+    }
+    <div class="w-full flex justify-center md:justify-end max-w-lg">
+      <button
+        class="uppercase tracking-widest text-sm group sm:text-base font-bold pb-1 hover:border-opacity-70 transition-all duration-300 items-center gap-2 flex justify-end"
+      >
+        <div
+          class="w-12 sm:w-24 h-[1px] bg-white group-hover:w-16 group-hover:sm:w-32 transition-all duration-300"
+        >
+        </div>
+        LEER MÁS
+      </button>
+    </div>
+  </div>
+</a>

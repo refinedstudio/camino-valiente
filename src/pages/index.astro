@@ -5,6 +5,10 @@ import HeroSection from "../components/pages/home/hero_section/hero_section.astr
 import DestinationCard from "../components/shared/DestinationCard.astro";
 import ArticleCard from "../components/shared/ArticleCard.astro";
 import ArticlesCarousel from "../components/shared/articles_carousel";
+import ArticleCarouselTwo from "../components/shared/article_carousel_two";
+import BlogCards from "../components/shared/BlogCards.astro";
+import FashionCards from "../components/shared/FashionCards.astro";
+import Footer from "../components/shared/footer/index.astro";
 ---
 
 <Layout>
@@ -78,4 +82,50 @@ import ArticlesCarousel from "../components/shared/articles_carousel";
     imageAlt="Lago Titicaca"
     isReversed={true}
   />
+
+  <ArticleCarouselTwo client:load />
+
+  <DestinationCard
+    location="AMAZONAS - PERU"
+    subtitle="RESERVA NACIONAL DE"
+    title="TAMBOPATA"
+    description="Escondida entre la selva del Amazonas, la catarata Gocta se impone con más de 770 metros de altura, siendo una de las más altas del mundo. Rodeada de vegetación exuberante y aves exóticas, su acceso implica una caminata que vale cada paso. Su mística presencia ha inspirado leyendas locales y atrae a aventureros que buscan naturaleza pura y emoción al borde del abismo verde."
+    imageUrl="https://www.peru.travel/Contenido/Destino/Imagen/es/10/1.1/Principal/Tambopata.jpg"
+    imageAlt="Catarata de Gocta"
+  />
+
+  <DestinationCard
+    location="AMAZONAS - PERU"
+    subtitle="PARQUE NACIONAL DE"
+    title="MANU"
+    description="El lago Titicaca, ubicado a más de 3,800 m s. n. m., es el lago navegable más alto del mundo y un ícono de la cultura andina. En sus aguas azules flotan las islas de los Uros, hechas de totora, donde vive un pueblo ancestral. Con paisajes majestuosos y una historia que se entrelaza con leyendas, el Titicaca es un destino que mezcla espiritualidad, tradición viva y belleza natural."
+    imageUrl="https://upload.wikimedia.org/wikipedia/commons/d/d6/Manu_National_Park-71.jpg"
+    imageAlt="Lago Titicaca"
+    isReversed={true}
+  />
+
+  <BlogCards />
+
+  <DestinationCard
+    location="AMAZONAS - PERU"
+    subtitle="LAGO SAGRADO"
+    title="SANDOVAL"
+    description="Escondida entre la selva del Amazonas, la catarata Gocta se impone con más de 770 metros de altura, siendo una de las más altas del mundo. Rodeada de vegetación exuberante y aves exóticas, su acceso implica una caminata que vale cada paso. Su mística presencia ha inspirado leyendas locales y atrae a aventureros que buscan naturaleza pura y emoción al borde del abismo verde."
+    imageUrl="https://gotambopata.com/wp-content/uploads/slider/cache/5a8488261d1dba5be4bfa69f6253fd57/Atardecer-en-el-Lago-Sandoval.jpg"
+    imageAlt="Catarata de Gocta"
+  />
+
+  <DestinationCard
+    location="IQUITOS - PERU"
+    subtitle="IQUITOS Y EL"
+    title="RIO AMAZONAS"
+    description="El lago Titicaca, ubicado a más de 3,800 m s. n. m., es el lago navegable más alto del mundo y un ícono de la cultura andina. En sus aguas azules flotan las islas de los Uros, hechas de totora, donde vive un pueblo ancestral. Con paisajes majestuosos y una historia que se entrelaza con leyendas, el Titicaca es un destino que mezcla espiritualidad, tradición viva y belleza natural."
+    imageUrl="https://www.raptravelperu.com/wp-content/uploads/portada-rio-amazonas-iquitos.webp"
+    imageAlt="Lago Titicaca"
+    isReversed={true}
+  />
+
+  <FashionCards />
+
+  <Footer />
 </Layout>

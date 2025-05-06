@@ -55,7 +55,7 @@ const ArticlesCarousel: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full relative bg-[#F1E5D7] py-12 sm:py-24 md:py-32 overflow-hidden px-4 sm:px-12 md:px-24">
+    <div className="w-full relative bg-[#F1E5D7] py-8 sm:py-8 md:py-12 overflow-hidden px-4 sm:px-12 ">
       <div className="flex flex-col mx-auto px-4">
         <div className="flex items-center mb-12">
           <h2 className="text-3xl md:text-5xl font-light italic text-[#2d2d2d] font-brittany-signature pr-4">

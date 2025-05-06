@@ -1,0 +1,70 @@
+---
+interface FashionItem {
+  id: string;
+  imageUrl: string;
+  title: string;
+  category: string;
+  subtitle?: string;
+}
+
+const items = [
+  {
+    id: "1",
+    imageUrl:
+      "https://images.pexels.com/photos/18477788/pexels-photo-18477788/free-photo-of-paisaje-montanas-bosque-arboles.jpeg",
+    title: "Colección Verano",
+    category: "Moda",
+    subtitle: "Nuevas Tendencias",
+  },
+  {
+    id: "2",
+    imageUrl:
+      "https://images.pexels.com/photos/9035474/pexels-photo-9035474.jpeg",
+    title: "Estilo Casual",
+    category: "Ropa",
+    subtitle: "Comodidad y Elegancia",
+  },
+  {
+    id: "3",
+    imageUrl: "https://images.pexels.com/photos/90597/pexels-photo-90597.jpeg",
+    title: "Accesorios",
+    category: "Complementos",
+    subtitle: "Detalles que Marcan",
+  },
+];
+---
+
+<div class="px-4 py-24">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {
+      items.map((item) => (
+        <div class="space-y-4">
+          <img
+            src={item.imageUrl}
+            alt={item.title}
+            class="w-full aspect-[3/4] object-cover"
+          />
+          <div class="space-y-2 md:space-y-4">
+            <p class="uppercase text-xs tracking-wider text-center font-bold">
+              {item.category}
+            </p>
+            <div>
+              <h2 class="font-playfair-display text-2xl md:text-4xl leading-tight text-center uppercase">
+                {item.title}
+              </h2>
+              {item.subtitle && (
+                <h3 class="text-2xl md:text-4xl leading-tight text-center font-black uppercase">
+                  {item.subtitle}
+                </h3>
+              )}
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+  <div class="flex justify-center my-24 flex-col items-center gap-4">
+    <button class="uppercase text-sm font-bold"> cargar más </button>
+    <div class="w-[1px] h-24 bg-neutral-900"></div>
+  </div>
+</div>

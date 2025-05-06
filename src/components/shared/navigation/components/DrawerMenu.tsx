@@ -54,7 +54,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               <li>
                 <a
                   href="#"
-                  className="block text-xs tracking-wider font-lato hover:text-neutral-900 transition-colors text-neutral-800"
+                  className="block text-xs font-black tracking-wider font-lato hover:text-neutral-900 transition-colors text-neutral-800"
                 >
                   INICIO
                 </a>
