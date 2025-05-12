@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.2.7",
+    "@astrojs/vercel": "^8.1.4",
     "@fontsource-variable/playfair-display": "^5.2.5",
     "@fontsource/lato": "^5.2.5",
     "@lucide/astro": "^0.507.0",
