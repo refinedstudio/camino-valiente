@@ -1,0 +1,194 @@
+---
+interface Props {
+  storyParagraphs: string[];
+  tertiaryImageUrl: string;
+  tertiaryImageAlt: string;
+  quaternaryImageUrl: string;
+  quaternaryImageAlt: string;
+  bottomQuote: string;
+}
+
+const {
+  storyParagraphs,
+  tertiaryImageUrl,
+  tertiaryImageAlt,
+  quaternaryImageUrl,
+  quaternaryImageAlt,
+  bottomQuote
+} = Astro.props;
+---
+
+<div class="story-section flex flex-wrap">
+  <div class="story-text text-neutral-700 leading-relaxed mb-4 text-sm sm:text-base">
+    {storyParagraphs.map((paragraph) => (
+      <p class="story-paragraph">
+        {paragraph}
+      </p>
+    ))}
+  </div>
+
+  <div class="image-box-tertiary">
+    <img
+      src={tertiaryImageUrl}
+      alt={tertiaryImageAlt}
+      class="image-tertiary"
+    />
+  </div>
+
+  <div class="quote-section-bottom relative w-full">
+    <img
+      src={quaternaryImageUrl}
+      alt={quaternaryImageAlt}
+      class="image-quaternary block"
+    />
+    <div class="quote-box-bottom text-2xl sm:text-4xl md:text-5xl font-playfair-display text-center mb-1 uppercase text-neutral-950" set:html={bottomQuote}>
+    </div>
+  </div>
+</div>
+
+<style>
+  .story-section {
+    @apply relative pb-24;
+    margin-top: 200px;
+    position: relative;
+    clear: both;
+  }
+
+  .story-text {
+    @apply w-1/2;
+    margin-top: 6%;
+    padding-left: 10%;
+  }
+
+  .story-paragraph {
+    @apply mb-5;
+  }
+
+  .image-box-tertiary {
+    @apply mb-12;
+    width: 35%;
+    margin-left: 15%;
+  }
+
+  .image-tertiary {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: cover;
+  }
+
+  .quote-section-bottom {
+    @apply relative w-full;
+    margin-top: 100px;
+  }
+
+  .image-quaternary {
+    @apply h-auto;
+    width: 50%;
+    margin-left: 0;
+    margin-right: 12%;
+  }
+
+  .quote-box-bottom {
+    @apply absolute text-right z-[2];
+    right: 10%;
+    top: 50%;
+    line-height: 1.2;
+    margin-right: 25%;
+    transform: translateY(-50%);
+  }
+
+  /* Estilos para teléfonos móviles (hasta 768px) */
+  @media (max-width: 768px) {
+    .story-section {
+      @apply pb-8 flex flex-col;
+      margin-left: 0;
+      margin-top: 80px;
+    }
+
+    .story-text {
+      @apply w-full mt-0;
+      text-align: left;
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+
+    .image-box-tertiary {
+      @apply w-full mb-8 ml-0;
+      padding: 0 5%;
+    }
+
+    .image-tertiary {
+      @apply ml-auto mr-0;
+      width: 70%;
+      height: auto;
+    }
+
+    .quote-section-bottom {
+      @apply flex flex-col items-center w-full;
+      margin-top: 40px;
+    }
+
+    .image-quaternary {
+      @apply w-[90%] ml-0;
+      margin-right: 10px;
+    }
+
+    .quote-box-bottom {
+      @apply static w-[90%] mt-4 text-center mr-0;
+      position: relative;
+      right: auto;
+      top: auto;
+      transform: none;
+      margin-right: 0;
+      padding: 20px 0;
+    }
+  }
+
+  /*  ESTILOS PARA 769px - 1465px  */
+  @media (min-width: 769px) and (max-width: 1465px) {
+    .story-section {
+      @apply flex flex-col items-center gap-8 pb-16;
+      margin-top: 100px;
+    }
+
+    .story-text {
+      @apply w-full max-w-3xl text-left;
+      margin-top: 0;
+      padding-left: 0;
+    }
+
+    .story-paragraph {
+      @apply text-base;
+    }
+
+    .image-box-tertiary {
+      @apply w-full max-w-2xl mx-auto mb-8;
+      margin-left: 0;
+    }
+
+    .image-tertiary {
+      height: auto;
+    }
+
+    .quote-section-bottom {
+      @apply flex flex-col items-center gap-4 w-full;
+      margin-top: 60px;
+    }
+
+    .image-quaternary {
+      @apply w-full max-w-2xl mx-auto;
+      margin-right: 0;
+    }
+
+    .quote-box-bottom {
+      @apply w-full max-w-xl text-center text-2xl;
+      margin-right: 0;
+      position: relative;
+      top: auto;
+      right: auto;
+      transform: none;
+      padding: 20px 0;
+    }
+  }
+</style> 

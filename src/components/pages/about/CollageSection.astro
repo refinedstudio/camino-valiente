@@ -1,0 +1,216 @@
+---
+interface Props {
+  quote: string;
+  primaryImageUrl: string;
+  primaryImageAlt: string;
+  introText: string;
+  signature: string;
+  secondaryImageUrl: string;
+  secondaryImageAlt: string;
+}
+
+const {
+  quote,
+  primaryImageUrl,
+  primaryImageAlt,
+  introText,
+  signature,
+  secondaryImageUrl,
+  secondaryImageAlt
+} = Astro.props;
+---
+
+<div class="collage-section">
+  <div class="quote-box-top">
+    <div class="quote-text-top md:text-6xl font-playfair-display text-center mb-1 uppercase text-neutral-950" set:html={quote}>
+    </div>
+  </div>
+
+  <div class="image-box-primary">
+    <img
+      src={primaryImageUrl}
+      alt={primaryImageAlt}
+      class="image-primary object-cover"
+    />
+  </div>
+
+  <div class="intro-box">
+    <div class="intro-text text-neutral-700 leading-relaxed mb-4 text-sm sm:text-base" set:html={introText}>
+    </div>
+    <div class="intro-signature text-neutral-700 leading-relaxed mb-4 text-sm sm:text-base" set:html={signature}>
+    </div>
+  </div>
+  
+  <div class="image-box-secondary">
+    <img
+      src={secondaryImageUrl}
+      alt={secondaryImageAlt}
+      class="image-secondary object-cover object-center"
+    />
+  </div>
+</div>
+
+<style>
+  .collage-section {
+    @apply relative h-auto mb-12;
+    min-height: 800px;
+    padding-bottom: 400px;
+  }
+
+  .quote-box-top {
+    @apply absolute z-10;
+    width: 35%;
+    top: 5%;
+    left: 0;
+  }
+
+  .quote-text-top {
+    @apply text-left;
+    margin-left: 3rem;
+  }
+
+  .image-box-primary {
+    @apply absolute right-0 top-0 overflow-hidden z-[1];
+    width: 72%;
+    height: auto;
+  }
+
+  .image-primary {
+    @apply w-full h-full;
+  }
+
+  .intro-box {
+    @apply absolute z-10;
+    width: 45%;
+    right: 2%;
+    bottom: 10%;
+    margin-right: 10%;
+  }
+
+  .intro-text {
+    @apply mb-4;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .intro-signature {
+    @apply mt-5;
+    font-size: 0.75rem;
+  }
+
+  .image-box-secondary {
+    @apply relative left-0 bottom-0 z-[2] overflow-hidden;
+    width: 37%;
+    height: auto;
+    padding-top: 25%;
+  }
+
+  .image-secondary {
+    @apply w-full h-auto;
+  }
+
+  /* Estilos para teléfonos móviles (hasta 768px) */
+  @media (max-width: 768px) {
+    .collage-section {
+      @apply static mb-8 flex flex-col items-center;
+      position: relative;
+      min-height: auto;
+      padding-bottom: 0;
+    }
+
+    .quote-box-top {
+      @apply static w-[90%] mb-4 text-center;
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      z-index: 10;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .quote-text-top {
+      @apply text-2xl ml-0;
+    }
+
+    .image-box-primary {
+      @apply static w-full h-auto;
+      position: relative;
+    }
+
+    .image-primary {
+      @apply ml-auto mr-0;
+      width: 72%;
+      height: auto;
+    }
+
+    .intro-box {
+      @apply static w-[80%];
+      padding-top: 50px;
+      position: relative;
+      bottom: auto;
+      right: auto;
+      margin-right: 0;
+    }
+
+    .intro-text {
+      @apply text-sm;
+      text-align: left;
+    }
+
+    .intro-signature {
+      padding-bottom: 30px;
+    }
+
+    .image-box-secondary {
+      @apply static w-full pt-0;
+    }
+  }
+
+  /*  ESTILOS PARA 769px - 1465px  */
+  @media (min-width: 769px) and (max-width: 1465px) {
+    .collage-section {
+      @apply static flex flex-col items-center gap-8 mb-10;
+      min-height: auto;
+      padding-bottom: 0;
+    }
+
+    .quote-box-top {
+      @apply static w-full max-w-2xl text-center;
+      order: 1;
+      position: relative;
+    }
+
+    .quote-text-top {
+      @apply text-4xl;
+      margin-left: 0;
+    }
+
+    .image-box-primary {
+      @apply static w-full max-w-3xl mx-auto;
+      order: 2;
+      position: relative;
+    }
+
+    .intro-box {
+      @apply static w-full max-w-2xl mx-auto text-left;
+      margin-right: 0;
+      padding: 1rem;
+      order: 3;
+      position: relative;
+    }
+
+    .intro-text {
+      @apply text-base;
+    }
+
+    .intro-signature {
+      @apply text-center mt-4;
+    }
+
+    .image-box-secondary {
+      @apply static w-full max-w-xl mx-auto pt-0;
+      order: 4;
+    }
+  }
+</style> 

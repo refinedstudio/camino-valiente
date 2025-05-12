@@ -1,0 +1,37 @@
+---
+interface Props {
+  children: any;
+}
+
+const { children } = Astro.props;
+---
+
+<div class="about-container">
+  {children}
+</div>
+
+<style>
+  .about-container {
+    @apply w-full relative;
+    padding-left: 7%;
+    padding-top: 5%;
+    min-height: 100vh; 
+  }
+
+  @media (max-width: 768px) {
+    .about-container {
+      @apply px-[5%];
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-top: 5%;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1465px) {
+    .about-container {
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-top: 4%;
+    }
+  }
+</style> 
