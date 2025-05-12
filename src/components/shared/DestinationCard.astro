@@ -21,12 +21,23 @@ const {
 ---
 
 <div
-  class="w-full flex flex-col md:flex-row relative mb-16 mt-24 md:gap-24 gap-16"
+  class:list={[
+    "w-full",
+    "flex",
+    "flex-col",
+    "md:flex-row",
+    "relative",
+    "mb-16",
+    "mt-24",
+    "md:gap-24",
+    "gap-16",
+    "animated-card",
+  ]}
 >
   {
     !isReversed && (
-      <div class="w-full md:w-1/2 h-[500px] sm:h-[720px] md:h-screen relative">
-        <img src={imageUrl} alt={imageAlt} class="object-cover h-full w-full" />
+      <div class="w-full md:w-1/2 h-[500px] sm:h-[720px] md:h-screen relative" data-speed="0.9">
+        <img src={imageUrl} alt={imageAlt} class:list={["object-cover", "h-full", "w-full", "card-image"]} />
       </div>
     )
   }
@@ -35,7 +46,7 @@ const {
     class="w-full md:w-1/2 relative h-full md:h-screen flex items-center justify-center"
   >
     <div
-      class="w-full md:max-w-3xl mx-auto p-4 md:p-8 flex flex-col justify-center"
+      class:list={["w-full", "md:max-w-3xl", "mx-auto", "p-4", "md:p-8", "flex", "flex-col", "justify-center", "card-text-content"]}
     >
       <p class="uppercase text-sm tracking-widest text-center mb-4">
         {location}
@@ -69,8 +80,8 @@ const {
 
   {
     isReversed && (
-      <div class="w-full md:w-1/2 h-[500px] sm:h-[720px] md:h-screen relative order-first md:order-last">
-        <img src={imageUrl} alt={imageAlt} class="object-cover h-full w-full" />
+      <div class="w-full md:w-1/2 h-[500px] sm:h-[720px] md:h-screen relative order-first md:order-last" data-speed="0.9">
+        <img src={imageUrl} alt={imageAlt} class:list={["object-cover", "h-full", "w-full", "card-image"]} />
       </div>
     )
   }

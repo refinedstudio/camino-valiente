@@ -3,12 +3,13 @@ import { useEffect, useRef, useState } from "react";
 // Importamos Swiper y sus módulos
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { Navigation } from "swiper/modules"; // Eliminado Pagination
+import { Navigation, Mousewheel } from "swiper/modules";
 import type { NavigationOptions } from "swiper/types";
 // Importamos los estilos de Swiper
 import "swiper/css";
 import "swiper/css/navigation";
-// Eliminado import "swiper/css/pagination"
+import "swiper/css/mousewheel";
+import { gsap } from "gsap";
 
 // Definimos la interfaz para los datos de cada outfit
 interface OutfitData {
@@ -43,13 +44,13 @@ const OutfitSlide: React.FC<{
           />
         </div>
         <div className="text-center mt-8 px-2">
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-medium text-stone-800 font-playfair-display">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-medium text-stone-800 font-playfair-display slide-title">
             {title}
           </h2>
-          <h3 className="text-2xl sm:text-4xl md:text-5xl font-bold text-stone-800 mb-4">
+          <h3 className="text-2xl sm:text-4xl md:text-5xl font-bold text-stone-800 mb-4 slide-subtitle">
             {subtitle}
           </h3>
-          <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto slide-description">
             {description}
           </p>
         </div>
@@ -167,6 +168,59 @@ const ArticleCarouselTwo: React.FC = () => {
     };
   }, []);
 
+  // <--- USEEFFECT MODIFICADO PARA ANIMACIONES DE TEXTO --->
+  useEffect(() => {
+    const swiperInstance = swiperRef.current;
+
+    if (swiperInstance && swiperInstance.el) {
+      // swiperInstance.el es el contenedor principal del Swiper
+
+      // 1. Resetear (ocultar) textos en todos los slides que NO estén actualmente activos
+      const allSlideElements =
+        swiperInstance.el.querySelectorAll(".swiper-slide");
+      allSlideElements.forEach((slideEl) => {
+        if (!slideEl.classList.contains("swiper-slide-active")) {
+          const title = slideEl.querySelector(".slide-title");
+          const subtitle = slideEl.querySelector(".slide-subtitle");
+          const description = slideEl.querySelector(".slide-description");
+
+          if (title) gsap.set(title, { opacity: 0, y: 20 });
+          if (subtitle) gsap.set(subtitle, { opacity: 0, y: 20 });
+          if (description) gsap.set(description, { opacity: 0, y: 20 });
+        }
+      });
+
+      // 2. Animar textos del slide activo
+      //    Usamos swiperInstance.el.querySelector para asegurarnos de obtener el slide del DOM actual
+      const activeSlideEl = swiperInstance.el.querySelector(
+        ".swiper-slide-active"
+      ) as HTMLElement | null;
+
+      if (activeSlideEl) {
+        const titleEl = activeSlideEl.querySelector(".slide-title");
+        const subtitleEl = activeSlideEl.querySelector(".slide-subtitle");
+        const descEl = activeSlideEl.querySelector(".slide-description");
+
+        if (titleEl && subtitleEl && descEl) {
+          // Primero, asegurarse de que el estado inicial para la animación sea el correcto
+          // (por si este slide no fue "reseteado" arriba, o por si es la primera carga)
+          gsap.set([titleEl, subtitleEl, descEl], { opacity: 0, y: 20 });
+
+          // Luego animamos a la visibilidad
+          gsap.to([titleEl, subtitleEl, descEl], {
+            opacity: 1,
+            y: 0,
+            duration: 0.6, // Un poco más de duración
+            stagger: 0.15, // Un poco más de stagger
+            ease: "power2.out",
+            delay: 0.1, // Aumentamos ligeramente el delay por si Swiper necesita un instante más
+          });
+        }
+      }
+    }
+  }, [activeIndex, swiperRef]); // Ejecutar cuando activeIndex cambie o swiperRef esté disponible
+  // <--- FIN DEL USEEFFECT MODIFICADO --->
+
   return (
     <div className="overflow-x-hidden w-full relative bg-[#F1E5D7] py-8 sm:py-8 md:py-12 overflow-hidden px-4 sm:px-12 ">
       <div className="flex items-center mb-12 px-4">
@@ -180,15 +234,16 @@ const ArticleCarouselTwo: React.FC = () => {
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          modules={[Navigation]}
+          modules={[Navigation, Mousewheel]}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
           }}
+          mousewheel={true}
           slidesPerView={2}
           spaceBetween={20}
-          loop={true}
-          autoplay={true}
+          loop={false}
+          rewind={true}
           className="fashion-swiper"
           breakpoints={{
             0: {

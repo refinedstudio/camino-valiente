@@ -53,7 +53,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="block text-xs font-black tracking-wider font-lato hover:text-neutral-900 transition-colors text-neutral-800"
                 >
                   INICIO
@@ -61,10 +61,10 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/about"
                   className="block text-xs font-black tracking-wider hover:text-neutral-500 transition-colors"
                 >
-                  COLECCIÓN
+                  SOBRE NOSOTROS
                 </a>
               </li>
               <li>
@@ -81,14 +81,6 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
                   className="block text-xs font-black tracking-wider hover:text-neutral-500 transition-colors"
                 >
                   BLOG
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block text-xs font-black tracking-wider hover:text-neutral-500 transition-colors"
-                >
-                  SOBRE NOSOTROS
                 </a>
               </li>
               <li>

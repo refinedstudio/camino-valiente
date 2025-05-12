@@ -38,11 +38,20 @@ const items = [
   <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
     {
       items.map((item) => (
-        <div class="space-y-12">
+        <div class:list={[
+          "space-y-12", 
+          "fashion-card-item",
+          "shadow-lg",
+          "hover:shadow-2xl",
+          "transition-shadow",
+          "duration-300",
+          "p-6",
+          "rounded-lg"
+        ]}>
           <img
             src={item.imageUrl}
             alt={item.title}
-            class="w-full aspect-[3/4] object-cover"
+            class="w-full aspect-[3/4] object-cover rounded-md"
           />
           <div class="space-y-2">
             <p class="uppercase text-xs tracking-wider text-center font-bold">
