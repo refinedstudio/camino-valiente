@@ -1,11 +1,7 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --font-brittany-signature: "BrittanySignature", sans-serif;
-}
 
-@theme {
-  --font-brittany-signature: "BrittanySignature", "sans-serif";
-  --font-playfair-display: "Playfair Display", "serif";
-  --font-sans: "Lato", "sans-serif";
 }
