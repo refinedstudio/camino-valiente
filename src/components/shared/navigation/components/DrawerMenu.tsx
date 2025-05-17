@@ -91,6 +91,14 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
                   CONTACTO
                 </a>
               </li>
+              <li>
+                <a
+                  href="policies"
+                  className="block text-xs font-black tracking-wider hover:text-neutral-500 transition-colors"
+                >
+                  POLÍTICA
+                </a>
+              </li>
             </ul>
           </div>
         </div>
