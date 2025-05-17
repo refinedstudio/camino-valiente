@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { SearchBar } from "./components/SearchBar";
-import { DrawerMenu } from "./components/DrawerMenu";
-import { ScrollToTop } from "./components/ScrollToTop";
-import { NavHeader } from "./components/NavHeader";
-import { useScroll } from "../../../hooks/useScroll";
+import { useScroll } from "../../../hooks";
+import { SearchBar, NavHeader, DrawerMenu, ScrollToTop } from "./components";
 
 export default function Navigation() {
   const [showScrollTop, setShowScrollTop] = useState(false);

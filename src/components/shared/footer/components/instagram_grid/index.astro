@@ -1,0 +1,86 @@
+---
+const gridImages = [
+  {
+    src: "https://images.pexels.com/photos/13421255/pexels-photo-13421255.jpeg",
+    alt: "Fashion outdoor autumn look",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/19988408/pexels-photo-19988408/free-photo-of-paisaje-montanas-naturaleza-punto-de-referencia.jpeg",
+    alt: "Travel outfit with luggage",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/17862061/pexels-photo-17862061/free-photo-of-bote-en-el-humedal-de-santa-elena-en-medio-de-la-selva.jpeg",
+    alt: "Outdoor countryside style",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/27676044/pexels-photo-27676044/free-photo-of-paisaje-naturaleza-cielo-puesta-de-sol.jpeg",
+    alt: "Cafe style outfit",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/2847475/pexels-photo-2847475.jpeg",
+    alt: "Vintage car fashion shoot",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/22484294/pexels-photo-22484294/free-photo-of-paisaje-punto-de-referencia-viaje-viajar.jpeg",
+    alt: "Holiday decoration scene",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+  {
+    src: "https://images.pexels.com/photos/6780760/pexels-photo-6780760.jpeg",
+    alt: "Outdoor cafe style",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  },
+];
+---
+
+<div
+  class="grid grid-cols-1 md:grid-cols-[30%_70%] overflow-x-hidden grid-rows-[auto] md:grid-rows-[720px] overflow-y-hidden"
+>
+  <div class="h-full md:h-full relative cursor-pointer group">
+    <img
+      src={gridImages[0].src}
+      alt={gridImages[0].alt}
+      class="w-full h-full object-cover"
+    />
+    <div
+      class="absolute bottom-0 left-0 w-full h-full bg-black/50 flex items-center justify-center p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+      <p class="text-white text-center text-sm font-normal">
+        {gridImages[0].description}
+      </p>
+    </div>
+  </div>
+  <div
+    class="grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2 h-[600px] md:h-full"
+  >
+    {
+      gridImages.slice(1).map((image) => (
+        <div class="aspect-square h-full w-full relative group cursor-pointer">
+          <img
+            src={image.src || "/placeholder.svg"}
+            alt={image.alt}
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute bottom-0 left-0 w-full h-full bg-black/50 flex items-center justify-center p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="text-white text-center text-sm font-normal">
+              {image.description}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
