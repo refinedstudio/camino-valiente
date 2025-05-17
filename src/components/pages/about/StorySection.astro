@@ -14,181 +14,265 @@ const {
   tertiaryImageAlt,
   quaternaryImageUrl,
   quaternaryImageAlt,
-  bottomQuote
+  bottomQuote,
 } = Astro.props;
 ---
 
-<div class="story-section flex flex-wrap">
-  <div class="story-text text-neutral-700 leading-relaxed mb-4 text-sm sm:text-base">
-    {storyParagraphs.map((paragraph) => (
-      <p class="story-paragraph">
-        {paragraph}
-      </p>
-    ))}
+<!-- Contenedor general -->
+<div class="story-wrapper">
+  <!-- Primera sección -->
+  <div class="story-section">
+    <div class="story-container">
+      <div class="story-text-content text-neutral-700">
+        {
+          storyParagraphs.map((paragraph) => (
+            <p class="story-paragraph-item">{paragraph}</p>
+          ))
+        }
+      </div>
+
+      <div class="image-box-tertiary">
+        <img
+          src={tertiaryImageUrl}
+          alt={tertiaryImageAlt}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
   </div>
 
-  <div class="image-box-tertiary">
-    <img
-      src={tertiaryImageUrl}
-      alt={tertiaryImageAlt}
-      class="image-tertiary"
-    />
-  </div>
-
-  <div class="quote-section-bottom relative w-full">
-    <img
-      src={quaternaryImageUrl}
-      alt={quaternaryImageAlt}
-      class="image-quaternary block"
-    />
-    <div class="quote-box-bottom text-2xl sm:text-4xl md:text-5xl font-playfair-display text-center mb-1 uppercase text-neutral-950" set:html={bottomQuote}>
+  <!-- Sección quote -->
+  <div class="quote-section-bottom">
+    <div class="quote-container">
+      <img
+        src={quaternaryImageUrl}
+        alt={quaternaryImageAlt}
+        class="image-quaternary-img object-cover"
+      />
+      <div
+        class="quote-box-bottom-text font-playfair-display uppercase text-neutral-950 text-left leading-[1.2]"
+        set:html={bottomQuote}
+      />
     </div>
   </div>
 </div>
 
 <style>
+  .story-wrapper {
+    @apply w-full mx-auto mb-32;
+    max-width: 1920px;
+  }
+
   .story-section {
-    @apply relative pb-24;
-    margin-top: 200px;
-    position: relative;
-    clear: both;
+    @apply relative w-full aspect-video p-0 overflow-visible;
+    max-height: 1080px;
   }
 
-  .story-text {
-    @apply w-1/2;
-    margin-top: 6%;
-    padding-left: 10%;
+  .story-container {
+    @apply relative w-full h-full min-h-full;
   }
 
-  .story-paragraph {
-    @apply mb-5;
+  .story-text-content {
+    @apply absolute z-10;
+    top: 30%;
+    left: 5%;
+    width: 40%;
+    max-width: 600px;
+    font-size: clamp(0.875rem, 1vw, 1rem);
+    line-height: clamp(1.5, 1.5vw, 1.75);
+  }
+
+  .story-paragraph-item {
+    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
   }
 
   .image-box-tertiary {
-    @apply mb-12;
-    width: 35%;
-    margin-left: 15%;
-  }
-
-  .image-tertiary {
-    width: 100%;
-    height: auto;
-    max-height: 600px;
-    object-fit: cover;
+    @apply absolute overflow-hidden z-[1];
+    width: 37%;
+    height: 95%;
+    right: -6%;
+    top: 5%;
   }
 
   .quote-section-bottom {
-    @apply relative w-full;
-    margin-top: 100px;
+    @apply relative w-full aspect-[16/5] overflow-hidden mt-8;
+    .image-quaternary-img {
+      @apply absolute object-cover z-10;
+      top: 10%;
+      left: 5%;
+      width: 49.5%;
+      height: auto;
+      max-height: 80%;
+    }
+
+    .quote-box-bottom-text {
+      @apply absolute z-20;
+      top: 40%;
+      right: 10%;
+      width: 40%;
+      font-size: clamp(1rem, 2.5vw, 3.75rem);
+    }
   }
 
-  .image-quaternary {
-    @apply h-auto;
-    width: 50%;
-    margin-left: 0;
-    margin-right: 12%;
+  @media (min-width: 1201px) {
+    .quote-section-bottom {
+      margin-top: -5rem;
+    }
   }
 
-  .quote-box-bottom {
-    @apply absolute text-right z-[2];
+  .quote-container {
+    @apply relative w-full h-full;
+  }
+
+  .image-quaternary-img {
+    @apply absolute object-cover z-10;
+    top: 10%;
+    left: 5%;
+    width: 49.5%;
+    height: auto;
+    max-height: 80%;
+  }
+
+  .quote-box-bottom-text {
+    @apply absolute z-20;
+    top: 20%;
     right: 10%;
-    top: 50%;
-    line-height: 1.2;
-    margin-right: 25%;
-    transform: translateY(-50%);
+    width: 40%;
+    font-size: clamp(1rem, 2.5vw, 3.75rem);
   }
 
-  /* Estilos para teléfonos móviles (hasta 768px) */
-  @media (max-width: 768px) {
+  /* BREAKPOINTS */
+  /* Los breakpoints ajustan el layout general o refinan el escalado para rangos específicos. */
+  /* El texto dentro de estos rangos seguirá escalando proporcionalmente con clamp(). */
+
+  @media (min-width: 1466px) {
+    .story-wrapper {
+      @apply mb-40;
+    }
+  }
+
+  @media (max-width: 1465px) and (min-width: 1201px) {
     .story-section {
-      @apply pb-8 flex flex-col;
-      margin-left: 0;
-      margin-top: 80px;
+      @apply aspect-[16/10];
+    }
+    .quote-section-bottom {
+      @apply aspect-[16/6];
+    }
+  }
+
+  @media (max-width: 1200px) and (min-width: 769px) {
+    .story-section {
+      @apply aspect-[4/3];
+    }
+    .quote-section-bottom {
+      @apply aspect-[4/1.2] mt-12;
+    }
+    .quote-box-bottom-text {
+      font-size: clamp(1rem, 2.2vw, 2.5rem);
+    }
+  }
+
+  @media (max-width: 965px) and (min-width: 769px) {
+    .story-text-content {
+      margin-top: -14%;
+    }
+    .quote-section-bottom {
+      @apply aspect-[4/2];
+      margin-top: 20%;
+    }
+    .image-quaternary-img {
+      width: 55%;
+      left: 0;
+    }
+    .quote-box-bottom-text {
+      width: 45%;
+      right: 0;
+
+      font-size: clamp(0.9rem, 2vw, 2rem);
+    }
+  }
+
+  @media (max-width: 768px) and (min-width: 641px) {
+    .story-wrapper {
+      @apply mb-24;
+    }
+    .story-section {
+      @apply aspect-square overflow-visible;
+    }
+    .story-text-content {
+      width: 45%;
+      top: 20%;
+      left: 5%;
+      max-width: 400px;
+      font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+      line-height: clamp(1.4, 1.6vw, 1.7);
+    }
+    .image-box-tertiary {
+      width: 45%;
+      height: 85%;
+      top: 10%;
+      right: 0;
+    }
+    .quote-section-bottom {
+      @apply aspect-[4/2] mt-20;
+    }
+    .image-quaternary-img {
+      width: 55%;
+      left: 0;
+    }
+    .quote-box-bottom-text {
+      width: 45%;
+      right: 0;
+      font-size: clamp(0.9rem, 2.2vw, 2rem);
+    }
+  }
+
+  /* Breakpoint para móviles (642px y menos) */
+  @media (max-width: 642px) {
+    .story-wrapper {
+      @apply mb-14;
+    }
+    .story-section {
+      @apply aspect-auto h-auto max-h-none overflow-visible pb-4 mb-6;
+    }
+    .story-container {
+      @apply static h-auto flex flex-col gap-6;
     }
 
-    .story-text {
-      @apply w-full mt-0;
-      text-align: left;
-      padding-left: 5%;
-      padding-right: 5%;
+    .story-text-content {
+      @apply relative w-[85%] max-w-full top-auto left-auto order-1 rounded-lg shadow-sm p-4;
+      font-size: clamp(0.85rem, 2.8vw, 1.1rem);
+      line-height: clamp(1.5, 2.5vw, 1.8);
+      background-color: rgba(250, 250, 250, 0.8);
+    }
+
+    .story-paragraph-item {
+      margin-bottom: clamp(0.75rem, 2vw, 1rem);
+    }
+    .story-paragraph-item:last-child {
+      @apply mb-0;
     }
 
     .image-box-tertiary {
-      @apply w-full mb-8 ml-0;
-      padding: 0 5%;
-    }
-
-    .image-tertiary {
-      @apply ml-auto mr-0;
-      width: 70%;
-      height: auto;
+      @apply relative w-[75%] h-[95vw] left-auto right-auto top-auto mx-auto order-2 overflow-hidden rotate-1;
     }
 
     .quote-section-bottom {
-      @apply flex flex-col items-center w-full;
-      margin-top: 40px;
+      @apply aspect-auto h-auto mt-6 overflow-visible relative py-8 rounded-lg;
+    }
+    .quote-container {
+      @apply static h-auto flex flex-col items-center gap-6 px-4;
     }
 
-    .image-quaternary {
-      @apply w-[90%] ml-0;
-      margin-right: 10px;
+    .image-quaternary-img {
+      @apply relative w-[85%] h-[60vw] top-auto overflow-hidden -rotate-1 mx-auto;
     }
 
-    .quote-box-bottom {
-      @apply static w-[90%] mt-4 text-center mr-0;
-      position: relative;
-      right: auto;
-      top: auto;
-      transform: none;
-      margin-right: 0;
-      padding: 20px 0;
+    .quote-box-bottom-text {
+      @apply relative w-full top-auto right-auto mx-auto p-4 text-center backdrop-blur-sm;
+      max-width: 350px;
+      font-size: clamp(1.2rem, 5vw, 2rem);
+      line-height: clamp(1.3, 2vw, 1.5);
     }
   }
-
-  /*  ESTILOS PARA 769px - 1465px  */
-  @media (min-width: 769px) and (max-width: 1465px) {
-    .story-section {
-      @apply flex flex-col items-center gap-8 pb-16;
-      margin-top: 100px;
-    }
-
-    .story-text {
-      @apply w-full max-w-3xl text-left;
-      margin-top: 0;
-      padding-left: 0;
-    }
-
-    .story-paragraph {
-      @apply text-base;
-    }
-
-    .image-box-tertiary {
-      @apply w-full max-w-2xl mx-auto mb-8;
-      margin-left: 0;
-    }
-
-    .image-tertiary {
-      height: auto;
-    }
-
-    .quote-section-bottom {
-      @apply flex flex-col items-center gap-4 w-full;
-      margin-top: 60px;
-    }
-
-    .image-quaternary {
-      @apply w-full max-w-2xl mx-auto;
-      margin-right: 0;
-    }
-
-    .quote-box-bottom {
-      @apply w-full max-w-xl text-center text-2xl;
-      margin-right: 0;
-      position: relative;
-      top: auto;
-      right: auto;
-      transform: none;
-      padding: 20px 0;
-    }
-  }
-</style> 
+</style>

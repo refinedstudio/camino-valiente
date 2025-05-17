@@ -3,6 +3,7 @@ interface Props {
   quote: string;
   primaryImageUrl: string;
   primaryImageAlt: string;
+  introSpan: string;
   introText: string;
   signature: string;
   secondaryImageUrl: string;
@@ -13,204 +14,305 @@ const {
   quote,
   primaryImageUrl,
   primaryImageAlt,
+  introSpan,
   introText,
   signature,
   secondaryImageUrl,
-  secondaryImageAlt
+  secondaryImageAlt,
 } = Astro.props;
 ---
 
 <div class="collage-section">
-  <div class="quote-box-top">
-    <div class="quote-text-top md:text-6xl font-playfair-display text-center mb-1 uppercase text-neutral-950" set:html={quote}>
+  <div class="collage-container">
+    <!-- Contenedor principal para mantener proporciones -->
+    <div class="quote-box-top">
+      <div
+        class="font-playfair-display text-left mb-1 uppercase text-neutral-950 lg:text-6xl md:text-5xl sm:text-4xl text-2xl"
+        set:html={quote}
+      />
+    </div>
+
+    <div class="image-box-primary">
+      <img
+        src={primaryImageUrl}
+        alt={primaryImageAlt}
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <div class="intro-box">
+      <div class="intro-content">
+        <div
+          class="intro-span-text font-times font-normal float-left pb-1 font-playfair-display text-center uppercase text-neutral-950"
+          set:html={introSpan}
+        />
+
+        <div class="intro-text-content text-justify" set:html={introText} />
+
+        <div class="intro-signature-wrapper clear-both">
+          <div class="m-0" set:html={signature} />
+        </div>
+      </div>
+    </div>
+
+    <div class="image-box-secondary">
+      <img
+        src={secondaryImageUrl}
+        alt={secondaryImageAlt}
+        class="w-full h-full object-cover"
+      />
     </div>
   </div>
 
-  <div class="image-box-primary">
-    <img
-      src={primaryImageUrl}
-      alt={primaryImageAlt}
-      class="image-primary object-cover"
-    />
-  </div>
+  <style>
+    .collage-section {
+      @apply relative w-full mx-auto;
+      max-width: 1920px;
+      aspect-ratio: 16/9;
+      margin-bottom: 8rem;
+    }
 
-  <div class="intro-box">
-    <div class="intro-text text-neutral-700 leading-relaxed mb-4 text-sm sm:text-base" set:html={introText}>
-    </div>
-    <div class="intro-signature text-neutral-700 leading-relaxed mb-4 text-sm sm:text-base" set:html={signature}>
-    </div>
-  </div>
-  
-  <div class="image-box-secondary">
-    <img
-      src={secondaryImageUrl}
-      alt={secondaryImageAlt}
-      class="image-secondary object-cover object-center"
-    />
-  </div>
+    .collage-container {
+      @apply relative w-full h-full m-0 p-0;
+    }
+
+    .quote-box-top {
+      @apply absolute z-10;
+      top: 8%;
+      left: 5%;
+      width: 30%;
+      max-width: 600px;
+    }
+
+    .quote-box-top > div {
+      font-size: clamp(1rem, 2.5vw, 3.75rem);
+      line-height: clamp(1.2, 0.5vw + 1em, 1.3);
+    }
+
+    .image-box-primary {
+      @apply absolute overflow-hidden z-[1];
+      width: 75%;
+      height: 75%;
+      right: 0;
+      top: 0;
+    }
+
+    .intro-box {
+      @apply absolute z-10 bg-white/80 flex flex-col m-0;
+      width: 40%;
+      max-width: 45%;
+      right: 12%;
+      top: 80%;
+      padding: clamp(10px, 1.5vw, 20px);
+      min-height: 20%;
+      transform-origin: bottom right;
+      max-height: 70%;
+      overflow: auto;
+      box-sizing: border-box;
+      backdrop-filter: blur(5px);
+    }
+
+    .intro-content {
+      @apply relative w-full flex flex-col;
+    }
+
+    .intro-span-text {
+      font-size: clamp(1.5rem, 3vw, 4rem);
+      line-height: 0.6;
+      margin-right: clamp(8px, 1vw, 25px);
+      margin-bottom: clamp(3px, 0.5vw, 5px);
+      padding-bottom: clamp(3px, 0.5vw, 10px);
+    }
+
+    .intro-text-content {
+      font-size: clamp(0.75rem, 1.2vw, 1rem);
+      line-height: clamp(1.6, 1vw + 0.8em, 1.8);
+      margin-bottom: clamp(10px, 1.5vw, 20px);
+    }
+
+    .intro-signature-wrapper {
+      font-size: clamp(0.6rem, 0.8vw, 0.75rem);
+      line-height: clamp(1.3, 0.5vw + 0.8em, 1.5);
+      margin-top: clamp(15px, 1.5vw, 30px);
+    }
+
+    .image-box-secondary {
+      @apply absolute overflow-hidden z-[2];
+      width: 34%;
+      max-width: 670px;
+      height: 85%;
+      left: 0;
+      top: 35%;
+    }
+
+    /* BREAKPOINTS */
+    @media (min-width: 1466px) {
+      .image-box-secondary {
+        top: 32%;
+      }
+    }
+
+    @media (max-width: 1465px) and (min-width: 1201px) {
+      .image-box-secondary {
+        top: 38%;
+        height: 80%;
+      }
+      .intro-box {
+        top: 75%;
+      }
+    }
+
+    @media (max-width: 1200px) and (min-width: 769px) {
+      /* Tablets */
+      .collage-section {
+        aspect-ratio: 4/3;
+        margin-bottom: 5rem;
+      }
+      .intro-box {
+        width: 45%;
+        right: 8%;
+        top: 75%;
+      }
+      .image-box-secondary {
+        width: 34%;
+        top: 45%;
+        height: 70%;
+        left: 5%;
+      }
+
+      .intro-span-text {
+        font-size: clamp(1.2rem, 2.5vw, 3rem);
+      }
+      .intro-text-content {
+        font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+        line-height: clamp(1.5, 1vw + 0.7em, 1.7);
+      }
+    }
+
+    @media (max-width: 768px) and (min-width: 641px) {
+      /* Tablets pequeñas */
+      .collage-section {
+        aspect-ratio: 1/1.3;
+        margin-bottom: 4rem;
+      }
+      .quote-box-top {
+        width: 35%;
+        left: 5%;
+        top: 5%;
+      }
+      .quote-box-top > div {
+        font-size: clamp(1rem, 2.8vw, 2.5rem);
+        line-height: clamp(1.2, 0.8vw + 1em, 1.35);
+      }
+      .image-box-primary {
+        width: 65%;
+        height: 50%;
+      }
+      .intro-box {
+        width: 50%;
+        max-width: 90%;
+        right: 7%;
+        top: 53%;
+      }
+      .image-box-secondary {
+        z-index: 20;
+        width: 38%;
+        height: 40%;
+        left: 5%;
+        top: 30%;
+      }
+
+      .intro-text-content {
+        font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+        line-height: clamp(1.5, 1.2vw + 0.7em, 1.7);
+      }
+    }
+
+    @media (max-width: 642px) {
+      /* Móviles */
+      .collage-section {
+        aspect-ratio: auto;
+        height: auto;
+        margin-bottom: 3rem;
+        padding-bottom: 0;
+        @apply flex flex-col;
+      }
+      .collage-container {
+        @apply static h-auto flex flex-col;
+      }
+
+      .quote-box-top {
+        @apply relative w-1/4 order-1 flex items-center float-left;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 1.5rem 0;
+      }
+      .quote-box-top > div {
+        @apply text-left ml-[50%];
+        font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+        line-height: clamp(1.2, 1vw + 1em, 1.4);
+      }
+
+      .image-box-primary {
+        @apply relative order-2 self-end overflow-hidden shadow-lg;
+        width: 70%;
+        height: 40vw;
+        margin-top: -30vw;
+        margin-left: 40%;
+      }
+      .collage-container::after {
+        content: "";
+        @apply block clear-both h-6;
+      }
+
+      .intro-box {
+        @apply relative order-3 clear-both w-[94%] max-w-none right-auto left-auto mx-auto mb-8 p-6;
+      }
+      .intro-text-content {
+        font-size: clamp(0.85rem, 2.5vw, 1rem);
+        line-height: clamp(1.6, 2vw, 1.8);
+      }
+      .intro-span-text {
+        font-size: clamp(1.2rem, 4vw, 2.5rem);
+        line-height: 0.6;
+        margin-right: clamp(5px, 1.5vw, 15px);
+      }
+      .intro-signature-wrapper {
+        font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+        line-height: clamp(1.3, 1vw + 0.8em, 1.5);
+        margin-top: clamp(10px, 2vw, 20px);
+      }
+
+      .image-box-secondary {
+        @apply relative order-4 overflow-hidden clear-both w-[85%] h-[85vw] left-auto right-auto top-0 mx-auto -rotate-2;
+      }
+
+      .image-box-primary,
+      .image-box-secondary,
+      .intro-box {
+        @apply transition-opacity duration-500 ease-in-out;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .quote-box-top {
+        @apply w-full float-none py-4;
+      }
+      .quote-box-top > div {
+        font-size: clamp(1.3rem, 5vw, 1.8rem);
+        margin-left: 10%;
+      }
+      .image-box-primary {
+        @apply w-full h-[45vw] -mt-[45vw];
+      }
+      .intro-box {
+        @apply w-full;
+      }
+      .intro-text-content {
+        font-size: clamp(0.8rem, 2.8vw, 0.95rem);
+        line-height: clamp(1.5, 2.2vw, 1.7);
+      }
+    }
+  </style>
 </div>
-
-<style>
-  .collage-section {
-    @apply relative h-auto mb-12;
-    min-height: 800px;
-    padding-bottom: 400px;
-  }
-
-  .quote-box-top {
-    @apply absolute z-10;
-    width: 35%;
-    top: 5%;
-    left: 0;
-  }
-
-  .quote-text-top {
-    @apply text-left;
-    margin-left: 3rem;
-  }
-
-  .image-box-primary {
-    @apply absolute right-0 top-0 overflow-hidden z-[1];
-    width: 72%;
-    height: auto;
-  }
-
-  .image-primary {
-    @apply w-full h-full;
-  }
-
-  .intro-box {
-    @apply absolute z-10;
-    width: 45%;
-    right: 2%;
-    bottom: 10%;
-    margin-right: 10%;
-  }
-
-  .intro-text {
-    @apply mb-4;
-    font-size: 15px;
-    line-height: 1.75;
-  }
-
-  .intro-signature {
-    @apply mt-5;
-    font-size: 0.75rem;
-  }
-
-  .image-box-secondary {
-    @apply relative left-0 bottom-0 z-[2] overflow-hidden;
-    width: 37%;
-    height: auto;
-    padding-top: 25%;
-  }
-
-  .image-secondary {
-    @apply w-full h-auto;
-  }
-
-  /* Estilos para teléfonos móviles (hasta 768px) */
-  @media (max-width: 768px) {
-    .collage-section {
-      @apply static mb-8 flex flex-col items-center;
-      position: relative;
-      min-height: auto;
-      padding-bottom: 0;
-    }
-
-    .quote-box-top {
-      @apply static w-[90%] mb-4 text-center;
-      position: relative;
-      top: auto;
-      left: auto;
-      transform: none;
-      z-index: 10;
-      text-align: center;
-      margin: 2rem 0;
-    }
-
-    .quote-text-top {
-      @apply text-2xl ml-0;
-    }
-
-    .image-box-primary {
-      @apply static w-full h-auto;
-      position: relative;
-    }
-
-    .image-primary {
-      @apply ml-auto mr-0;
-      width: 72%;
-      height: auto;
-    }
-
-    .intro-box {
-      @apply static w-[80%];
-      padding-top: 50px;
-      position: relative;
-      bottom: auto;
-      right: auto;
-      margin-right: 0;
-    }
-
-    .intro-text {
-      @apply text-sm;
-      text-align: left;
-    }
-
-    .intro-signature {
-      padding-bottom: 30px;
-    }
-
-    .image-box-secondary {
-      @apply static w-full pt-0;
-    }
-  }
-
-  /*  ESTILOS PARA 769px - 1465px  */
-  @media (min-width: 769px) and (max-width: 1465px) {
-    .collage-section {
-      @apply static flex flex-col items-center gap-8 mb-10;
-      min-height: auto;
-      padding-bottom: 0;
-    }
-
-    .quote-box-top {
-      @apply static w-full max-w-2xl text-center;
-      order: 1;
-      position: relative;
-    }
-
-    .quote-text-top {
-      @apply text-4xl;
-      margin-left: 0;
-    }
-
-    .image-box-primary {
-      @apply static w-full max-w-3xl mx-auto;
-      order: 2;
-      position: relative;
-    }
-
-    .intro-box {
-      @apply static w-full max-w-2xl mx-auto text-left;
-      margin-right: 0;
-      padding: 1rem;
-      order: 3;
-      position: relative;
-    }
-
-    .intro-text {
-      @apply text-base;
-    }
-
-    .intro-signature {
-      @apply text-center mt-4;
-    }
-
-    .image-box-secondary {
-      @apply static w-full max-w-xl mx-auto pt-0;
-      order: 4;
-    }
-  }
-</style> 

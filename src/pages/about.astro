@@ -1,426 +1,49 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Navigation } from "../components/shared";
-import HeroSection from "../components/pages/home/hero_section/hero_section.astro";
 import Footer from "../components/shared/footer/index.astro";
+import AboutHeader from "../components/shared/title_page/index.astro";
+import CollageSection from "../components/pages/about/CollageSection.astro";
+import StorySection from "../components/pages/about/StorySection.astro";
+import AboutContainer from "../components/pages/about/AboutContainer.astro";
+import Carousel from "../components/shared/testimonials/index.astro";
+const storyParagraphs = [
+  "Inicié mi blog de viajes en 2009, mientras estudiaba Turismo y Gestión Cultural. En ese entonces, también trabajaba medio tiempo, colaboraba con una agencia de experiencias turísticas y trataba de equilibrar mi vida académica y profesional. ¡Era una locura! Recuerdo sentirme saturado, con la creatividad estancada y sin un espacio donde expresar mi pasión por explorar el mundo.",
+  "Fue mi hermana quien me animó a abrir un blog para compartir mis experiencias viajando, y no lo dudé. No tenía idea de cómo empezar, pero lo fui descubriendo paso a paso. Aunque no fue fácil organizar todo, el blog se convirtió en mi refugio, un espacio que me dio libertad, motivación y me devolvió la inspiración que sentía haber perdido.",
+  "Hoy, después de más de 12 años, miles de kilómetros recorridos y una comunidad increíble que me acompaña en cada aventura, puedo decir con el corazón lleno que este blog cambió mi vida. Aquí comparto lo que amo: culturas, paisajes, historias y aprendizajes que nacen del camino. Siempre he sido fiel a mi esencia y a lo que realmente me mueve: viajar con propósito y compartirlo desde el alma.",
+  "Si hay algo que quiero que te lleves de aquí es que TÚ PUEDES LOGRARLO. Sueña en grande, cree en ti, y da ese primer paso hacia lo desconocido. Cada viaje comienza con una decisión, y cada experiencia suma. Como siempre digo: SUEÑA, VIAJA, VIVE.",
+];
 ---
 
 <Layout>
+  <div class="fixed top-0 left-0 w-full z-50">
     <Navigation client:load />
-    
-    <div class="about-container">
-      <!-- Header section -->
-   <header class="about-header border-t border-b border-gray-600  md:text-6xl font-playfair-display text-center mb-1 uppercase text-neutral-950">
-  <h1 class="about-title">SOBRE NOSOTROS</h1>
-</header>
-
-      <!-- Top section with collage -->
-      <div class="collage-section">
-        <div class="quote-box-top">
-          <div class="quote-text-top   md:text-6xl font-playfair-display text-center mb-1 uppercase text-neutral-950 ">
-            “SUEÑA<br />
-             EXPLORA<br />
-             DESCUBRE.“
-          </div>
-        </div>
-
-        <div class="image-box-primary">
-          <img
-            src="https://sincerelyjules.com/wp-content/themes/sincerely/assets/img/pages/sj_about_image_01.png"
-            alt="Seaside photo"
-            class="image-primary object-cover"
-          />
-        </div>
-
-        <div class="intro-box">
-          <div class="intro-text text-neutral-700 leading-relaxed mb-4 text-sm sm:text-base">
-            HOLA <br>Somos Camino Valiente, una comunidad apasionada por descubrir los rincones más hermosos del mundo.
-            Este espacio es nuestro diario de viajes donde compartimos experiencias únicas, consejos útiles,
-            fotografías inspiradoras y rutas inolvidables. Aquí podrás conocer lugares mágicos, culturas fascinantes,
-            y encontrar motivación para planear tu próxima aventura. Creemos que viajar no solo abre la mente,
-            sino también el corazón. Nuestra misión es contagiarte esa chispa viajera y animarte a vivir la vida
-            con una mochila de sueños y una cámara llena de recuerdos. ¡Bienvenido a bordo, este es tu punto de partida!
-          </div>
-          <div class="intro-signature text-neutral-700 leading-relaxed mb-4 text-sm sm:text-base ">
-            Con pasion,<br />
-            Camino Valiente
-          </div>
-        </div>
-        <div class="image-box-secondary">
-          <img
-            src="https://sincerelyjules.com/wp-content/themes/sincerely/assets/img/pages/sj_about_image_02.png"
-            alt="Black and white photo"
-            class="image-secondary object-cover object-center"
-          />
-        </div>
-      </div>
-
-      <!-- Story section -->
-      <div class="story-section flex flex-wrap"> 
-        <div class="story-text text-neutral-700 leading-relaxed mb-4 text-sm sm:text-base">
-          <p class="story-paragraph">
-            I launched my blog in 2009 while attending FIDM where I studied
-            Visual Communications. At the time, I was also interning at VSGN,
-            assisting a few celebrity stylists, working a 9-5, and attending
-            college. It was a lot! I remember starting to feel overwhelmed with
-            everything on my plate and felt like I wasn't being as creative as I
-            wanted to be.
-          </p>
-          <p class="story-paragraph">
-            My sister suggested I start a fashion blog to help me fulfill this
-            void, so I went for it! I had no idea what I was doing but figured
-            it out as I went. It was hard to juggle everything all at once but
-            the blog gave me a sense of peace and freedom that I didn't get with
-            anything else so it kept me going. Being able to have my blog as a
-            creative outlet helped me stay inspired and grow creatively.
-          </p>
-          <p class="story-paragraph">
-            Now 12 years & over 5.7M+ followers later, I'm so humbled to have
-            this little blog here because it changed my life forever. This blog
-            will forever hold a special place in my heart! Since the beginning
-            of SJ, I've always stayed true to myself and do things I genuinely
-            love and believe in, but most importantly, I always follow my heart
-            no matter what.
-          </p>
-          <p class="story-paragraph">
-            If there's one thing I'd love for you to take away from visiting my
-            blog is that YOU CAN DO ANYTHING you set your mind to! Believe in
-            yourself and never give up even if it feels unreachable, trust the
-            process and be patient and you'll see results! As I always say
-            DREAM, BELIEVE, ACHIEVE!
-          </p>
-        </div>
-
-        <div class="image-box-tertiary">
-          <img
-            src="https://sincerelyjules.com/wp-content/themes/sincerely/assets/img/pages/sj_about_image_03.png"
-            alt="Jules on beach"
-            class="image-tertiary"
-          />
-        </div>
-
-        <div class="quote-section-bottom relative w-full"> 
-          <img
-            src="https://sincerelyjules.com/wp-content/themes/sincerely/assets/img/pages/sj_about_image_04.png"
-            alt="Jules in a field"
-            class="image-quaternary block"
-          />
-          <div class="quote-box-bottom text-2xl sm:text-4xl md:text-5xl font-playfair-display text-center mb-1 uppercase text-neutral-950">
-            "CUANDO VIAJAS <br />NO ES TRABAJO <br />ES PASION."
-          </div>
-        </div>
-      </div>
-    </div>
-<style>
-
-.about-container {
-  @apply w-full relative;
-  padding-left: 7%;
-  padding-top: 5%;
-}
-
-.about-header {
-  @apply pt-4 pb-4 border-b border-gray-200 mb-8;
-}
-
-.about-title {
-  @apply text-center font-serif text-3xl tracking-wider font-normal;
-  margin-right: 8%;
-}
-
-.collage-section {
-  @apply relative h-auto mb-12; 
-}
-
-.quote-box-top {
-  @apply absolute z-10;
-  width: 35%;
-  top: 5%;
-  left: 0;
-}
-
-.quote-text-top {
-  @apply  text-left;
-  margin-left: 3rem;
-}
-
-.image-box-primary {
-  @apply absolute right-0 top-0 overflow-hidden z-[1];
-  width: 72%;
-  height: auto; 
-}
-
-.image-primary {
-  @apply w-full h-full;
-}
-
-.intro-box {
-  @apply absolute z-10;
-  width: 45%;
-  right: 2%;
-  bottom: 10%;
-  margin-right: 10%;
-}
-
-
-.intro-text {
-  @apply mb-4;
-  font-size: 15px;
-  line-height: 1.75;
-}
-
-.intro-signature {
-  @apply mt-5;
-  font-size: 0.75rem;
-}
-
-.image-box-secondary {
-  @apply relative left-0 bottom-0 z-[2] overflow-hidden;
-  width: 37%;
-  height: auto; 
-  padding-top: 25%;
-}
-
-.image-secondary {
-  @apply w-full h-auto; 
-}
-
-.story-section {
-  @apply relative pb-24;
-}
-
-.story-text {
-  @apply w-1/2;
-  margin-top: 6%;
-  padding-left: 10%;
-}
-
-.story-paragraph {
-  @apply mb-5;
-}
-
-.image-box-tertiary {
-  @apply mb-12;
-  width: 35%;
-  margin-left: 15%;
-}
-
-.image-tertiary {
-  width: 100%;
-  height: 110%;
-}
-
-.image-quaternary {
-  @apply h-auto;
-  width: 50%;
-  margin-left: 0;
-  margin-right: 12%;
-}
-
-.quote-box-bottom {
-  @apply absolute text-right z-[2];
-  right: 10%;
-  top: 50%;
-  line-height: 1.2;
-  margin-right: 25%;
-}
-
-
-
-/* Estilos para teléfonos móviles (hasta 768px) */
-@media (max-width: 768px) {
-  .about-container {
-    @apply px-[5%]; 
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 5%; 
-  }
-
-  .about-header {
-    @apply mb-16;
-  }
-
-  .about-title {
-    @apply text-lg text-left;
-    margin-right: 0;
-  }
-
-  .collage-section {
-    @apply static mb-8 flex flex-col items-center; 
-      position: relative; 
-  }
-
-  .quote-box-top {
-    @apply static w-[90%] mb-4 text-center; 
-     position: absolute; 
-     top: 7%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  z-index: 10; 
-  text-align: center; 
-   
-  }
-
-  .quote-text-top {
-    @apply text-2xl ml-0;
-  }
-
-  .image-box-primary {
-    @apply static w-full h-auto;
-
-  }
-
-  .image-primary {
-    @apply ml-auto mr-0; 
-    width: 72%; 
-    height: auto;
-  }
-
-  .intro-box {
-    @apply static w-[80%] ; 
-    padding-top: 50px
-  }
-
-  .intro-text {
-    @apply text-sm;
-    text-align: left
-  }
-
-  .intro-signature {
-   padding-bottom: 30px;
-  }
-
-  .image-box-secondary {
-    @apply static w-full pt-0; 
-    
-  }
-
-  .story-section {
-    @apply static pb-8 flex flex-col ;
-    margin-left: -10%
-  }
-
-  .story-text {
-    @apply w-full mt-0 ;
-    text-align: left;
-
-  }
-
-  .image-box-tertiary {
-    @apply static w-full mb-8 ml-0; 
-  }
-
-  .image-tertiary {
-    @apply ml-auto mr-0 ; 
-    width: 70%; 
-    height: auto; 
-  }
-
-  .quote-section-bottom {
-    @apply static flex flex-col items-center w-full; 
-  }
-
-  .image-quaternary {
-    @apply w-[90%] ml-0; 
-    margin-right: 10px; 
-  }
-
-  .quote-box-bottom {
-    @apply static w-[90%] mt-4 text-center mr-0; 
-  }
-}
-
-/*  ESTILOS PARA 769px - 1465px  */
-@media (min-width: 769px) and (max-width: 1465px) {
-  .about-container {
-    padding-left: 5%; 
-    padding-right: 5%; 
-    padding-top: 4%;
-  }
-
-  .about-title {
-    @apply text-2xl text-center; 
-    margin-right: 0; 
-  }
-
-
-  .collage-section {
-    @apply static flex flex-col items-center gap-8 mb-10; 
-  }
-
-  .quote-box-top {
-    @apply static w-full max-w-2xl text-center; 
-    order: 1; 
-  }
-
-  .quote-text-top {
-    @apply text-4xl; 
-    margin-left: 0; 
-  }
-
-  .image-box-primary {
-    @apply static w-full max-w-3xl mx-auto; 
-    order: 2;
-  }
-
-  .intro-box {
-    @apply static w-full max-w-2xl mx-auto text-left; 
-    margin-right: 0;
-    padding: 1rem; 
-    order: 3;
-  }
-
-  .intro-text {
-    @apply text-base;
-  }
-
-  .intro-signature {
-    @apply text-center mt-4;
-  }
-
-  .image-box-secondary {
-    @apply static w-full max-w-xl mx-auto pt-0;
-    order: 4;
-  }
-
-  .story-section {
-    @apply static flex flex-col items-center gap-8 pb-16; 
-  }
-
-  .story-text {
-    @apply w-full max-w-3xl text-left; 
-    margin-top: 0;
-    padding-left: 0;
-  }
-
-  .story-paragraph {
-    @apply text-base;
-  }
-
-  .image-box-tertiary {
-    @apply w-full max-w-2xl mx-auto mb-8; 
-    margin-left: 0;
-  }
-
-  .image-tertiary {
-    height: auto; 
-  }
-
-  .quote-section-bottom {
-    @apply static flex flex-col items-center gap-4 w-full;
-  }
-
-  .image-quaternary {
-    @apply w-full max-w-2xl mx-auto; 
-    margin-right: 0;
-  }
-
-  .quote-box-bottom {
-    @apply static w-full max-w-xl text-center text-2xl;
-    margin-right: 0;
-    top: auto; right: auto; 
-  }
-}
-</style>  
-    <Footer />
+  </div>
+
+  <div class="pt-16 md:pt-20">
+    <AboutHeader title="SOBRE NOSOTROS" />
+    <AboutContainer>
+      <CollageSection
+        quote='"SUEÑA <br /> EXPLORA<br /> DESCUBRE."'
+        primaryImageUrl="https://miradasnoticias.com/wp-content/uploads/2025/01/coverblog_dia-internacional-del-turismo.jpg"
+        primaryImageAlt="Seaside photo"
+        introSpan=""
+        introText={`Hola! <br />Somos Camino Valiente, una comunidad apasionada por descubrir los rincones más hermosos del mundo. Este espacio es nuestro diario de viajes donde compartimos experiencias únicas, consejos útiles, fotografías inspiradoras y rutas inolvidables. Aquí podrás conocer lugares mágicos, culturas fascinantes, y encontrar motivación para planear tu próxima aventura. Creemos que viajar no solo abre la mente, sino también el corazón. Nuestra misión es contagiarte esa chispa viajera y animarte a vivir la vida con una mochila de sueños y una cámara llena de recuerdos. ¡Bienvenido a bordo, este es tu punto de partida! <br /> Con Pasión, <br /> Camino Valiente.`}
+        signature=""
+        secondaryImageUrl="https://images.pexels.com/photos/17060366/pexels-photo-17060366/free-photo-of-blanco-y-negro-naturaleza-rocas-bosque.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        secondaryImageAlt="Black and white photo"
+      />
+
+      <StorySection
+        storyParagraphs={storyParagraphs}
+        tertiaryImageUrl="https://travelgrafia.co/wp-content/uploads/2023/04/Lugares-para-visitar-en-Peru-camino-a-Machu-Picchu.jpg"
+        tertiaryImageAlt="Jules on beach"
+        quaternaryImageUrl="https://incalake.com/blog/wp-content/uploads/2018/01/1.-Lago-titicaca.jpg"
+        quaternaryImageAlt="Jules in a field"
+        bottomQuote='"CUANDO VIAJAS <br />NO ES TRABAJO <br />ES PASION."'
+      />
+    </AboutContainer>
+  </div>
+  <Carousel />
+  <Footer />
 </Layout>

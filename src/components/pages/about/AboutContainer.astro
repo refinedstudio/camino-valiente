@@ -1,37 +1,132 @@
 ---
 interface Props {
-  children: any;
+  class?: string;
 }
 
-const { children } = Astro.props;
+const { class: className = "" } = Astro.props;
 ---
 
-<div class="about-container">
-  {children}
+<div class={`about-container ${className}`}>
+  <slot />
 </div>
 
 <style>
   .about-container {
     @apply w-full relative;
     padding-left: 7%;
-    padding-top: 5%;
-    min-height: 100vh; 
+    max-width: 2000px;
+    margin: 0 auto;
   }
 
-  @media (max-width: 768px) {
+  .about-container :global(.collage-section) {
+    margin-right: -8%;
+    width: 107%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-container :global(.story-section) {
+    position: relative;
+    z-index: 2;
+  }
+
+  .about-container :global(.image-box-primary) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Estilos para teléfonos móviles (642px y menos) */
+  @media (max-width: 642px) {
     .about-container {
-      @apply px-[5%];
-      padding-left: 5%;
-      padding-right: 5%;
-      padding-top: 5%;
+      @apply px-[3%];
+      padding-left: 3%;
+      padding-right: 3%;
+      padding-top: 3%;
+    }
+
+    .about-container :global(.collage-section) {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+    }
+
+    .about-container :global(.story-wrapper) {
+      margin-top: 2rem;
+      width: 100%;
+    }
+
+    .about-container :global(.image-box-secondary),
+    .about-container :global(.story-text),
+    .about-container :global(.image-box-tertiary) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .about-container :global(.image-box-primary) {
+      margin-left: 34%;
+      margin-bottom: 5%;
     }
   }
 
-  @media (min-width: 769px) and (max-width: 1465px) {
+  /* Tablets pequeñas (641px - 768px) */
+  @media (min-width: 641px) and (max-width: 768px) {
     .about-container {
       padding-left: 5%;
       padding-right: 5%;
       padding-top: 4%;
     }
+
+    .about-container :global(.collage-section) {
+      margin-left: -5%;
+      width: 110%;
+    }
+
+    .about-container :global(.story-text) {
+      max-width: 45%;
+    }
   }
-</style> 
+
+  /* Tablets medianas (769px - 1024px) */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .about-container {
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-top: 4%;
+    }
+
+    .about-container :global(.collage-section) {
+      margin-left: -5%;
+      width: 110%;
+    }
+  }
+
+  /*  ESTILOS PARA 1025px - 1465px  */
+  @media (min-width: 1025px) and (max-width: 1465px) {
+    .about-container {
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-top: 3%;
+    }
+
+    .about-container :global(.collage-section) {
+      margin-left: -5%;
+      width: 110%;
+    }
+  }
+
+  /* Pantallas grandes */
+  @media (min-width: 1466px) {
+    .about-container {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+
+    .about-container :global(.collage-section) {
+      margin-left: -5%;
+      width: 110%;
+      max-width: 1920px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+</style>
