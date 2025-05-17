@@ -44,11 +44,11 @@ export default function Navigation() {
     };
   }, []);
 
-  // Detectar si estamos en la página about y quita su transaparencia
   useEffect(() => {
     const isAboutOrPolicies =
-      window.location.pathname.includes("/about") ||
-      window.location.pathname.includes("/policies");
+      window.location.pathname.includes("/acerca") ||
+      window.location.pathname.includes("/politicas") ||
+      window.location.pathname.includes("/contacto");
     setIsAboutPage(isAboutOrPolicies);
   }, []);
 

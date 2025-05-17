@@ -54,7 +54,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               <li>
                 <a
                   href="/"
-                  className="block text-xs font-black tracking-wider font-lato hover:text-neutral-900 transition-colors text-neutral-800"
+                  className="block text-xs font-bold tracking-wider font-lato hover:text-neutral-900 transition-colors text-neutral-800"
                 >
                   INICIO
                 </a>
@@ -62,7 +62,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               <li>
                 <a
                   href="/about"
-                  className="block text-xs font-black tracking-wider hover:text-neutral-500 transition-colors"
+                  className="block text-xs font-bold tracking-wider hover:text-neutral-500 transition-colors"
                 >
                   SOBRE NOSOTROS
                 </a>
@@ -70,7 +70,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               <li>
                 <a
                   href="#"
-                  className="block text-xs font-black tracking-wider hover:text-neutral-500 transition-colors"
+                  className="block text-xs font-bold tracking-wider hover:text-neutral-500 transition-colors"
                 >
                   LOOKBOOK
                 </a>
@@ -78,7 +78,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               <li>
                 <a
                   href="#"
-                  className="block text-xs font-black tracking-wider hover:text-neutral-500 transition-colors"
+                  className="block text-xs font-bold tracking-wider hover:text-neutral-500 transition-colors"
                 >
                   BLOG
                 </a>
@@ -86,7 +86,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               <li>
                 <a
                   href="#"
-                  className="block text-xs font-black tracking-wider hover:text-neutral-500 transition-colors"
+                  className="block text-xs font-bold tracking-wider hover:text-neutral-500 transition-colors"
                 >
                   CONTACTO
                 </a>
@@ -94,7 +94,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               <li>
                 <a
                   href="policies"
-                  className="block text-xs font-black tracking-wider hover:text-neutral-500 transition-colors"
+                  className="block text-xs font-bold tracking-wider hover:text-neutral-500 transition-colors"
                 >
                   POLÍTICA
                 </a>

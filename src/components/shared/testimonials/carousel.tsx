@@ -98,14 +98,14 @@ export const Carousel: React.FC<CarouselProps> = ({ testimonials }) => {
             {testimonials.map((testimonial) => (
               <SwiperSlide key={testimonial.id}>
                 <div className="flex flex-col items-center justify-center min-h-[clamp(350px,50vh,500px)] text-center px-[clamp(1.5rem,5vw,4rem)]">
-                  <p className="text-[clamp(1.125rem,2.5vw,1.5rem)]text-neutral-700 leading-relaxed  text-sm sm:text-base mb-[clamp(1.5rem,6vw,3rem)]">
+                  <p className="text-[clamp(1.125rem,2.5vw,1.5rem)]text-neutral-700 leading-relaxed  text-sm sm:text-base mb-[clamp(1.5rem,6vw,3rem)] font-light">
                     "{testimonial.quote}"
                   </p>
 
                   <img
                     src={testimonial.logo}
                     alt={`${testimonial.company} logo`}
-                    className="h-[clamp(2.5rem,8vh,4rem)] w-auto object-contain mx-auto"
+                    className="h-[clamp(2.5rem,8vh,3rem)] w-auto object-contain mx-auto"
                   />
                 </div>
               </SwiperSlide>

@@ -27,7 +27,7 @@ const {
     <!-- Contenedor principal para mantener proporciones -->
     <div class="quote-box-top">
       <div
-        class="font-playfair-display text-left mb-1 uppercase text-neutral-950 lg:text-6xl md:text-5xl sm:text-4xl text-2xl"
+        class="font-playfair-display text-left mb-1 uppercase text-neutral-950 lg:text-7xl md:text-5xl sm:text-4xl text-2xl"
         set:html={quote}
       />
     </div>
@@ -47,7 +47,10 @@ const {
           set:html={introSpan}
         />
 
-        <div class="intro-text-content text-justify" set:html={introText} />
+        <div
+          class="intro-text-content text-justify font-light text-lg"
+          set:html={introText}
+        />
 
         <div class="intro-signature-wrapper clear-both">
           <div class="m-0" set:html={signature} />

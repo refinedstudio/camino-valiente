@@ -41,7 +41,7 @@ export const NavHeader = ({
       </div>
       <div className="absolute left-1/2 transform -translate-x-1/2">
         <h1
-          className={`text-sm sm:text-xl md:text-2xl font-light tracking-[0.25em] text-center ${
+          className={`text-sm sm:text-xl md:text-2xl tracking-[0.25em] text-center ${
             hasScrolled ? "text-neutral-900" : "text-white"
           }`}
         >

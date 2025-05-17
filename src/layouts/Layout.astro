@@ -1,7 +1,12 @@
 ---
-import "@fontsource/lato";
-import "@fontsource-variable/playfair-display";
 import "../styles/global.css";
+import "@fontsource-variable/playfair-display";
+import "@fontsource/lato";
+import "@fontsource/lato/100.css";
+import "@fontsource/lato/300.css";
+import "@fontsource/lato/400.css";
+import "@fontsource/lato/700.css";
+import "@fontsource/lato/900.css";
 ---
 
 <!doctype html>
@@ -20,12 +25,11 @@ import "../styles/global.css";
       </div>
     </div>
     <script>
-      import { initScrollAnimations } from "../scripts/scrollAnimations"; // Sin extensión .ts
-      
-      // GSAP y ScrollSmoother funcionan mejor cuando el DOM está listo
-      if (document.readyState === 'loading') { // Aún cargando
-        document.addEventListener('DOMContentLoaded', initScrollAnimations);
-      } else { // Ya cargado
+      import { initScrollAnimations } from "../scripts/scrollAnimations";
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initScrollAnimations);
+      } else {
         initScrollAnimations();
       }
     </script>

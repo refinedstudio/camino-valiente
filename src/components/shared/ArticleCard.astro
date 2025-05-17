@@ -17,26 +17,27 @@ const { imageUrl, title, category, subtitle, isVisible = true } = Astro.props;
     transition: "opacity 0.8s ease-in-out",
   }}
 >
-  <!-- Imagen de fondo con overlay -->
-  <div class="absolute inset-0 w-full h-full">
+  <div class="absolute inset-0 w-full h-full overflow-hidden">
     <div class="absolute inset-0 bg-black/40 z-10"></div>
     <div
-      class="w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
+      class="absolute inset-0 w-full h-[120%] bg-cover bg-center bg-no-repeat transform-gpu scale-110 transition-transform duration-500"
       style={{
         backgroundImage: `url(${imageUrl})`,
+        transform: "translateY(0)",
+        willChange: "transform",
       }}
+      data-parallax="true"
     >
     </div>
   </div>
 
-  <!-- Contenido del artículo -->
   <div
     class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4"
   >
     <div
       class="max-w-4xl transform translate-y-0 transition-transform duration-500 group-hover:translate-y-[-10px]"
     >
-      <p class="text-sm text-white/80 mb-4 font-semibold">
+      <p class="text-sm text-white/80 mb-4 font-semibold tracking-widest">
         {category}
       </p>
 
@@ -48,7 +49,7 @@ const { imageUrl, title, category, subtitle, isVisible = true } = Astro.props;
 
       {
         subtitle && (
-          <h2 class="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white font-light mb-12 uppercase">
+          <h2 class="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white font-bold mb-12 uppercase">
             {subtitle}
           </h2>
         )
@@ -64,3 +65,31 @@ const { imageUrl, title, category, subtitle, isVisible = true } = Astro.props;
     </div>
   </div>
 </article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const parallaxElements = document.querySelectorAll(
+      '[data-parallax="true"]'
+    );
+
+    function handleScroll() {
+      parallaxElements.forEach((element) => {
+        const parent = element.closest("article");
+        if (!parent) return;
+
+        const parentRect = parent.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        if (parentRect.top < viewportHeight && parentRect.bottom > 0) {
+          const scrollPosition = parentRect.top;
+          const translateY = Math.max(0, Math.min(100, scrollPosition * 0.1));
+          (element as HTMLElement).style.transform =
+            `translateY(${translateY}px) scale(1.2)`;
+        }
+      });
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+  });
+</script>

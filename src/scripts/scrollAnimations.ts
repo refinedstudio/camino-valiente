@@ -6,7 +6,6 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin);
 
 export function initScrollAnimations() {
-  // Reactivar ScrollSmoother
   const smoother = ScrollSmoother.create({
     smooth: 1.2,
     effects: true,
@@ -16,41 +15,47 @@ export function initScrollAnimations() {
   });
   console.log("GSAP y ScrollSmoother inicializados");
 
-  // Animaciones para DestinationCard
   const destinationCards = gsap.utils.toArray(
     ".animated-card"
   ) as HTMLElement[];
   destinationCards.forEach((card) => {
     const image = card.querySelector(".card-image");
-    const textContentContainer = card.querySelector(".card-text-content");
+    const imageContainer = image?.closest("[data-reversed]") as HTMLElement;
 
-    if (image && textContentContainer) {
+    if (image && imageContainer) {
+      const isReversed =
+        imageContainer.getAttribute("data-reversed") === "true";
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: card,
-          start: "top 85%",
-          end: "bottom 15%",
+          start: "top 60%",
+          end: "bottom 50%",
           toggleActions: "play none none none",
         },
       });
+
       tl.fromTo(
         image,
-        { scale: 1.15, opacity: 0, transformOrigin: "center center" },
-        { scale: 1, opacity: 1, duration: 1, ease: "power2.out" }
-      );
-      const textElements = gsap.utils.toArray(textContentContainer.children);
-      tl.fromTo(
-        textElements,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: "power2.out", stagger: 0.1 },
-        "-=0.7"
+        {
+          x: isReversed ? 100 : -100,
+          opacity: 0,
+          transformOrigin: "center center",
+        },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power2.out",
+        }
       );
     }
+
     card.addEventListener("mouseenter", () => {
-      gsap.to(card, { scale: 1.03, duration: 0.3, ease: "power1.out" });
+      gsap.to(card, { duration: 0.3, ease: "power1.out" });
     });
     card.addEventListener("mouseleave", () => {
-      gsap.to(card, { scale: 1, duration: 0.3, ease: "power1.out" });
+      gsap.to(card, { duration: 0.3, ease: "power1.out" });
     });
   });
 
