@@ -1,16 +1,14 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
-// Importamos Swiper y sus módulos
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { Navigation } from "swiper/modules"; // Eliminado Pagination
+import { Navigation, Mousewheel } from "swiper/modules";
 import type { NavigationOptions } from "swiper/types";
-// Importamos los estilos de Swiper
+
 import "swiper/css";
 import "swiper/css/navigation";
-// Eliminado import "swiper/css/pagination"
+import "swiper/css/mousewheel";
 
-// Definimos la interfaz para los datos de cada outfit
 interface OutfitData {
   id: number;
   imageUrl: string;
@@ -19,7 +17,6 @@ interface OutfitData {
   description: string;
 }
 
-// Componente para cada slide de outfit
 const OutfitSlide: React.FC<{
   outfit: OutfitData;
   isFirstVisible: boolean;
@@ -49,7 +46,7 @@ const OutfitSlide: React.FC<{
           <h3 className="text-2xl sm:text-4xl md:text-5xl font-bold text-stone-800 mb-4">
             {subtitle}
           </h3>
-          <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto font-light">
             {description}
           </p>
         </div>
@@ -58,9 +55,7 @@ const OutfitSlide: React.FC<{
   );
 };
 
-// Componente principal del carrusel
 const ArticleCarouselTwo: React.FC = () => {
-  // Datos de ejemplo para los outfits
   const outfits: OutfitData[] = [
     {
       id: 1,
@@ -118,7 +113,6 @@ const ArticleCarouselTwo: React.FC = () => {
     },
   ];
 
-  // Referencias para los botones de navegación
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const swiperRef = useRef<SwiperType>(null);
@@ -135,32 +129,19 @@ const ArticleCarouselTwo: React.FC = () => {
     }
   }, []);
 
-  // Función para determinar si un slide es el primero visible
-  const isFirstVisible = (index: number) => {
-    // En vista móvil (un slide a la vez)
-    if (window.innerWidth < 768) {
-      return index === activeIndex;
-    }
-    // En vista desktop (dos slides a la vez)
-    return index === activeIndex;
-  };
-
   useEffect(() => {
-    // Actualizar el índice activo cuando cambia el slide
     const handleSlideChange = () => {
       if (swiperRef.current) {
         setActiveIndex(swiperRef.current.realIndex);
       }
     };
 
-    // Inicializar el evento después de que el componente se monte
     const swiperInstance = swiperRef.current;
     if (swiperInstance) {
       swiperInstance.on("slideChange", handleSlideChange);
     }
 
     return () => {
-      // Limpiar el evento cuando el componente se desmonte
       if (swiperInstance) {
         swiperInstance.off("slideChange", handleSlideChange);
       }
@@ -185,10 +166,11 @@ const ArticleCarouselTwo: React.FC = () => {
             prevEl: prevRef.current,
             nextEl: nextRef.current,
           }}
+          mousewheel={true}
           slidesPerView={2}
           spaceBetween={20}
           loop={true}
-          autoplay={true}
+          rewind={true}
           className="fashion-swiper"
           breakpoints={{
             0: {

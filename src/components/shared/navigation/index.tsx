@@ -12,6 +12,7 @@ export default function Navigation() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [previousScrollY, setPreviousScrollY] = useState(0);
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const [isAboutPage, setIsAboutPage] = useState(false);
   const {
     position: { y: currentScrollY },
   } = useScroll();
@@ -43,14 +44,22 @@ export default function Navigation() {
     };
   }, []);
 
+  useEffect(() => {
+    const isAboutOrPolicies =
+      window.location.pathname.includes("/acerca") ||
+      window.location.pathname.includes("/politicas") ||
+      window.location.pathname.includes("/contacto");
+    setIsAboutPage(isAboutOrPolicies);
+  }, []);
+
   return (
     <>
       <div
         className={`fixed w-full z-50 transition-all ease-linear duration-300 ${
           isHeaderVisible ? "-top-[500px]" : "top-0"
         } ${
-          currentScrollY > 0
-            ? "bg-white border-b border-neutral-100"
+          currentScrollY > 0 || isAboutPage
+            ? "bg-white border-b border-neutral-200"
             : "bg-transparent border-0 border-transparent"
         }`}
       >
@@ -59,7 +68,7 @@ export default function Navigation() {
           isSearchOpen={isSearchOpen}
           onSearchClick={() => setIsSearchOpen(!isSearchOpen)}
           isMobile={isMobile}
-          hasScrolled={currentScrollY > 0}
+          hasScrolled={currentScrollY > 0 || isAboutPage}
         />
       </div>
       <div className="fixed top-2 right-6 z-50">

@@ -1,7 +1,12 @@
 ---
-import "@fontsource/lato";
-import "@fontsource-variable/playfair-display";
 import "../styles/global.css";
+import "@fontsource-variable/playfair-display";
+import "@fontsource/lato";
+import "@fontsource/lato/100.css";
+import "@fontsource/lato/300.css";
+import "@fontsource/lato/400.css";
+import "@fontsource/lato/700.css";
+import "@fontsource/lato/900.css";
 ---
 
 <!doctype html>
@@ -14,7 +19,20 @@ import "../styles/global.css";
     <title>Camino Valiente</title>
   </head>
   <body>
-    <slot />
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <slot />
+      </div>
+    </div>
+    <script>
+      import { initScrollAnimations } from "../scripts/scrollAnimations";
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initScrollAnimations);
+      } else {
+        initScrollAnimations();
+      }
+    </script>
   </body>
 </html>
 
@@ -24,6 +42,22 @@ import "../styles/global.css";
     margin: 0;
     width: 100%;
     height: 100%;
+    /* Evitar que el body por defecto tenga scroll, ScrollSmoother lo maneja */
+    /* overflow-x: hidden; */
+  }
+
+  #smooth-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Oculta el scrollbar del wrapper */
+  }
+
+  #smooth-content {
+    overflow: visible; /* Permite que el contenido se desborde y sea scrolleable por ScrollSmoother */
+    width: 100%; /* Asegura que ocupe todo el ancho */
   }
 
   @font-face {

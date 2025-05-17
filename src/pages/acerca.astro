@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Navigation } from "../components/shared";
+import Footer from "../components/shared/footer/index.astro";
+import AboutHeader from "../components/shared/title_page/index.astro";
+import CollageSection from "../components/pages/about/CollageSection.astro";
+import StorySection from "../components/pages/about/StorySection.astro";
+import AboutContainer from "../components/pages/about/AboutContainer.astro";
+import Carousel from "../components/shared/testimonials/index.astro";
+const storyParagraphs = [
+  "Inicié mi blog de viajes en 2009, mientras estudiaba Turismo y Gestión Cultural. En ese entonces, también trabajaba medio tiempo, colaboraba con una agencia de experiencias turísticas y trataba de equilibrar mi vida académica y profesional. ¡Era una locura! Recuerdo sentirme saturado, con la creatividad estancada y sin un espacio donde expresar mi pasión por explorar el mundo.",
+  "Fue mi hermana quien me animó a abrir un blog para compartir mis experiencias viajando, y no lo dudé. No tenía idea de cómo empezar, pero lo fui descubriendo paso a paso. Aunque no fue fácil organizar todo, el blog se convirtió en mi refugio, un espacio que me dio libertad, motivación y me devolvió la inspiración que sentía haber perdido.",
+  "Hoy, después de más de 12 años, miles de kilómetros recorridos y una comunidad increíble que me acompaña en cada aventura, puedo decir con el corazón lleno que este blog cambió mi vida. Aquí comparto lo que amo: culturas, paisajes, historias y aprendizajes que nacen del camino. Siempre he sido fiel a mi esencia y a lo que realmente me mueve: viajar con propósito y compartirlo desde el alma.",
+  "Si hay algo que quiero que te lleves de aquí es que TÚ PUEDES LOGRARLO. Sueña en grande, cree en ti, y da ese primer paso hacia lo desconocido. Cada viaje comienza con una decisión, y cada experiencia suma. Como siempre digo: SUEÑA, VIAJA, VIVE.",
+];
+---
+
+<Layout>
+  <div class="fixed top-0 left-0 w-full z-50">
+    <Navigation client:load />
+  </div>
+
+  <div class="pt-16 md:pt-20">
+    <AboutHeader title="SOBRE NOSOTROS" />
+    <AboutContainer>
+      <CollageSection
+        quote='"SUEÑA <br /> EXPLORA<br /> DESCUBRE."'
+        primaryImageUrl="https://miradasnoticias.com/wp-content/uploads/2025/01/coverblog_dia-internacional-del-turismo.jpg"
+        primaryImageAlt="Seaside photo"
+        introSpan=""
+        introText={`Hola! <br />Somos Camino Valiente, una comunidad apasionada por descubrir los rincones más hermosos del mundo. Este espacio es nuestro diario de viajes donde compartimos experiencias únicas, consejos útiles, fotografías inspiradoras y rutas inolvidables. Aquí podrás conocer lugares mágicos, culturas fascinantes, y encontrar motivación para planear tu próxima aventura. Creemos que viajar no solo abre la mente, sino también el corazón. Nuestra misión es contagiarte esa chispa viajera y animarte a vivir la vida con una mochila de sueños y una cámara llena de recuerdos. ¡Bienvenido a bordo, este es tu punto de partida! <br /> Con Pasión, <br /> Camino Valiente.`}
+        signature=""
+        secondaryImageUrl="https://images.pexels.com/photos/17060366/pexels-photo-17060366/free-photo-of-blanco-y-negro-naturaleza-rocas-bosque.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        secondaryImageAlt="Black and white photo"
+      />
+
+      <StorySection
+        storyParagraphs={storyParagraphs}
+        tertiaryImageUrl="https://travelgrafia.co/wp-content/uploads/2023/04/Lugares-para-visitar-en-Peru-camino-a-Machu-Picchu.jpg"
+        tertiaryImageAlt="Jules on beach"
+        quaternaryImageUrl="https://incalake.com/blog/wp-content/uploads/2018/01/1.-Lago-titicaca.jpg"
+        quaternaryImageAlt="Jules in a field"
+        bottomQuote='"CUANDO VIAJAS <br />NO ES TRABAJO <br />ES PASION."'
+      />
+    </AboutContainer>
+  </div>
+  <Carousel />
+  <Footer />
+</Layout>
