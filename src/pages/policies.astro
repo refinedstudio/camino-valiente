@@ -1,0 +1,138 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Navigation } from "../components/shared";
+import AboutHeader from "../components/shared/title_page/index.astro";
+import Footer from "../components/shared/footer/index.astro";
+---
+
+<Layout>
+  <div class="fixed top-0 left-0 w-full z-50">
+    <Navigation client:load />
+  </div>
+
+  <div class="container mx-auto px-12 py-12 max-w-3xl pt-16">
+    <AboutHeader title="Políticas del Blog" />
+
+    <p
+      class="text-sm text-center leading-relaxed mb-4 text-neutral-700 sm:text-base"
+    >
+      Este blog es un espacio compartido para todo lo relacionado con viajes,
+      cultura y aventuras por el mundo. Es mi rincón feliz donde comparto lo que
+      amo, lo que me inspira y donde espero también inspirarte a ti. ¡Gracias
+      por formar parte de esta comunidad viajera!
+    </p>
+
+    <p
+      class="text-sm text-center leading-relaxed mb-10 text-neutral-700 sm:text-base"
+    >
+      Siempre busco ser lo más transparente posible, así que a continuación
+      encontrarás información importante a tener en cuenta al visitar este blog.
+    </p>
+
+    <section class="mb-10">
+      <h2 class="text-lg font-bold uppercase text-neutral-950 mb-4 text-center">
+        Publicaciones y Colaboraciones
+      </h2>
+      <p
+        class="text-sm text-center leading-relaxed text-neutral-700 sm:text-base"
+      >
+        Soy muy selectiva con las marcas y proyectos con los que colaboro. Solo
+        trabajo con empresas que compartan mis valores, pasión por los viajes
+        responsables y que realmente me inspiren. Las publicaciones patrocinadas
+        o colaboraciones especiales estarán siempre indicadas claramente en el
+        contenido. Me esfuerzo por mantener este blog auténtico, útil y
+        positivo.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-lg font-bold uppercase text-neutral-950 mb-4 text-center">
+        Enlaces de Afiliados
+      </h2>
+      <p
+        class="text-sm text-center leading-relaxed text-neutral-700 sm:text-base"
+      >
+        Utilizo enlaces de afiliados para recomendar productos, experiencias o
+        alojamientos que he probado y recomiendo sinceramente. Si haces una
+        compra a través de estos enlaces, recibiré una pequeña comisión sin
+        costo adicional para ti.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-lg font-bold uppercase text-neutral-950 mb-4 text-center">
+        Regalos y Contenido Patrocinado
+      </h2>
+      <p
+        class="text-sm text-center leading-relaxed mb-4 text-neutral-700 sm:text-base"
+      >
+        Nunca publicaré nada que no me encante o en lo que no crea, ya sea
+        contenido patrocinado o productos recibidos como regalo. Amo descubrir
+        nuevas propuestas de viaje, emprendimientos locales o herramientas
+        útiles para viajeros y compartirlas contigo. Mis opiniones siempre serán
+        sinceras y personales.
+      </p>
+      <p
+        class="text-sm text-center leading-relaxed mb-2 text-neutral-700 sm:text-base"
+      >
+        Para consultas sobre regalos o colaboraciones, puedes escribir a:
+        contacto@viajaconalma.com
+      </p>
+      <p class="text-xs text-center italic text-neutral-700">
+        * Aunque se agradecen los obsequios, no se garantiza su publicación en
+        el blog o redes.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-lg font-bold uppercase text-neutral-950 mb-4 text-center">
+        Reservas y Alianzas
+      </h2>
+      <p
+        class="text-sm text-center leading-relaxed mb-6 text-neutral-700 sm:text-base"
+      >
+        Me encanta colaborar con marcas o destinos con los que me sienta
+        identificada. Si crees que compartimos visión y podemos construir algo
+        inspirador juntos, estaré feliz de conocerte. Las alianzas que realizo
+        son seleccionadas cuidadosamente para aportar valor tanto a mi comunidad
+        como a las marcas involucradas.
+      </p>
+      <p
+        class="text-sm text-center leading-relaxed mb-2 text-neutral-700 sm:text-base"
+      >
+        Para propuestas de colaboración o alianzas estratégicas, por favor
+        escribe a:
+      </p>
+      <p
+        class="text-sm text-center leading-relaxed text-neutral-700 sm:text-base"
+      >
+        Cesar lorem – caminovaliente@gmail.com
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-lg font-bold uppercase text-neutral-950 mb-4 text-center">
+        Preguntas Frecuentes y Contacto
+      </h2>
+      <p
+        class="text-sm text-center leading-relaxed mb-4 text-neutral-700 sm:text-base"
+      >
+        Me encanta leer sus mensajes y sugerencias. Si tienes alguna duda,
+        propuesta o simplemente quieres saludar, no dudes en escribirme:
+      </p>
+      <p
+        class="text-sm text-center leading-relaxed text-neutral-700 sm:text-base"
+      >
+        caminovaliente@gmail.com
+      </p>
+    </section>
+
+    <p
+      class="text-sm text-center italic leading-relaxed mt-10 text-neutral-700 sm:text-base"
+    >
+      ¡Gracias por visitar mi blog y ser parte de esta aventura!
+    </p>
+  </div>
+
+  <Footer />
+</Layout>
