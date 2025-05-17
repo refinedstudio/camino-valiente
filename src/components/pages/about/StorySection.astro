@@ -258,21 +258,39 @@ const {
     }
 
     .quote-section-bottom {
-      @apply aspect-auto h-auto mt-6 overflow-visible relative py-8 rounded-lg;
+      @apply aspect-auto h-[55vw] mt-6 overflow-visible relative rounded-lg;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .quote-container {
-      @apply static h-auto flex flex-col items-center gap-6 px-4;
-    }
-
     .image-quaternary-img {
-      @apply relative w-[85%] h-[60vw] top-auto overflow-hidden -rotate-1 mx-auto;
+      width: 85% !important;
+      height: 50vw !important;
+      max-width: none !important;
+      max-height: none !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      right: 12% !important;
+      bottom: auto !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      object-fit: cover !important;
+      display: block !important;
     }
-
     .quote-box-bottom-text {
-      @apply relative w-full top-auto right-auto mx-auto p-4 text-center backdrop-blur-sm;
+      @apply relative w-full mx-auto p-4 text-center backdrop-blur-sm;
       max-width: 350px;
       font-size: clamp(1.2rem, 5vw, 2rem);
       line-height: clamp(1.3, 2vw, 1.5);
+      top: auto !important;
+      right: auto !important;
+      margin-top: 1rem;
+      position: relative !important;
     }
   }
 </style>
