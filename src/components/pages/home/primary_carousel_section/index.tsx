@@ -1,46 +1,13 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectFade, Autoplay } from "swiper/modules";
-import CarouselSlide from "./components/ArticleCard";
-
-// Import Swiper styles
+import { CarouselSlide } from "./components";
+import { slides } from "./data";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 
-const slides = [
-  {
-    imageUrl:
-      "https://centromallqui.pe/wp-content/uploads/2024/08/Cuales-son-los-valles-que-hay-en-el-Peru.jpg",
-    title: "VALLE DEL MANTARO",
-    subtitle: "CORAZÓN AGRÍCOLA DE LOS ANDES",
-  },
-  {
-    imageUrl:
-      "https://s3.us-east-1.amazonaws.com/ca-webprod/media/hoteles-chachapoyas.webp",
-    title: "CHACHAPOYAS MÍSTICA",
-    subtitle: "HOGAR DE LA CULTURA DE LAS NUBES",
-  },
-  {
-    imageUrl:
-      "https://denomades.s3.us-west-2.amazonaws.com/blog/wp-content/uploads/2020/01/28162747/tarapoto.jpg",
-    title: "TARAPOTO NATURAL",
-    subtitle: "LA CIUDAD DE LAS PALMERAS",
-  },
-  {
-    imageUrl:
-      "https://elcomercio.pe/resizer/CYTDfzoDgRaKQqgh6usU7kEfU90=/3000x2000/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/VT2KZIQO2RBSHBNQC4UMLEOQBE.jpg",
-    title: "MARCAHUASI MÁGICO",
-    subtitle: "ESCULTURAS NATURALES EN LOS ANDES",
-  },
-  {
-    imageUrl: "https://s2.wklcdn.com/image_169/5093307/183147252/113710766.jpg",
-    title: "CATARATA TIUNISH",
-    subtitle: "TESORO ESCONDIDO EN JUNÍN",
-  },
-];
-
-const ArticlesCarousel: React.FC = () => {
+const PrimaryCarouselSection: React.FC = () => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const swiperRef = useRef<any>(null);
@@ -55,7 +22,7 @@ const ArticlesCarousel: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full relative bg-[#F1E5D7] py-8 sm:py-8 md:py-12 overflow-hidden px-4 sm:px-12 ">
+    <section className="w-full relative bg-[#F1E5D7] py-8 sm:py-8 md:py-12 overflow-hidden px-4 sm:px-12 ">
       <div className="flex flex-col mx-auto px-4">
         <div className="flex items-center mb-12">
           <h2 className="text-3xl md:text-5xl font-light italic text-[#2d2d2d] font-brittany-signature pr-4">
@@ -143,8 +110,8 @@ const ArticlesCarousel: React.FC = () => {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default ArticlesCarousel;
+export default PrimaryCarouselSection;

@@ -10,7 +10,7 @@ interface Props {
 const { imageUrl, title, category, subtitle, isVisible = true } = Astro.props;
 ---
 
-<article
+<section
   class="relative w-full h-[70vh] overflow-hidden group cursor-pointer"
   style={{
     opacity: isVisible ? 1 : 0,
@@ -64,7 +64,7 @@ const { imageUrl, title, category, subtitle, isVisible = true } = Astro.props;
       </div>
     </div>
   </div>
-</article>
+</section>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {

@@ -1,7 +1,4 @@
----
-import BlogCard from "./BlogCard.astro";
-
-const cards = [
+export const cards = [
   {
     category: "SAN MARTIN - PERU",
     title: "BOSQUE DE",
@@ -19,8 +16,3 @@ const cards = [
     altText: "Person wearing a faux fur coat on a street",
   },
 ];
----
-
-<div class="grid grid-cols-1 md:grid-cols-2">
-  {cards.map((card) => <BlogCard {...card} />)}
-</div>

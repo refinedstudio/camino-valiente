@@ -1,14 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Navigation } from "../components/shared";
-import HeroSection from "../components/pages/home/hero_section/hero_section.astro";
-import DestinationCard from "../components/shared/DestinationCard.astro";
-import ArticleCard from "../components/shared/ArticleCard.astro";
-import ArticlesCarousel from "../components/shared/articles_carousel";
-import ArticleCarouselTwo from "../components/shared/article_carousel_two";
-import BlogCards from "../components/shared/BlogCards.astro";
+import { Navigation, Footer } from "../components/shared";
+import {
+  HeroSection,
+  DestinationSection,
+  PrimaryCarouselSection,
+  ParallaxSection,
+  SecondaryCarouselSection,
+  TeaserSection,
+} from "../components/pages/home";
 import FashionCards from "../components/shared/FashionCards.astro";
-import Footer from "../components/shared/footer/index.astro";
+import {
+  primaryDestinations,
+  secondaryDestinations,
+  tertiaryDestinations,
+  quaternaryDestinations,
+  quinaryDestinations,
+} from "../data";
 ---
 
 <Layout>
@@ -16,116 +24,20 @@ import Footer from "../components/shared/footer/index.astro";
     <Navigation client:load />
     <HeroSection />
   </div>
-
-  <DestinationCard
-    location="HUANCAYO - PERU"
-    subtitle="EL NEVADO DE"
-    title="HUAYTAPALLANA"
-    description="El nevado de Huaytapallana, ubicado en la región Junín, Perú, es una imponente cadena montañosa de los Andes centrales. Sagrado para las comunidades locales, alcanza más de 5,500 metros de altitud. Sus glaciares alimentan ríos vitales y su belleza natural atrae a viajeros y devotos. Sin embargo, el cambio climático lo está reduciendo rápidamente, convirtiéndolo en símbolo de la urgencia por proteger nuestros ecosistemas."
-    imageUrl="https://consultasenlinea.mincetur.gob.pe/fichaInventario/foto.aspx?cod=562141"
-    imageAlt="Nevado de Huaytapallana"
-  />
-
-  <DestinationCard
-    location="CUZCO - PERU"
-    subtitle="Santuario Histórico"
-    title="Machu Picchu"
-    description="Machu Picchu, antigua ciudad inca ubicada en los Andes peruanos, es una de las maravillas del mundo moderno. Construida en el siglo XV, destaca por su arquitectura de piedra perfectamente ensamblada y su entorno natural espectacular. Fue redescubierta en 1911 por Hiram Bingham y desde entonces ha sido símbolo del ingenio inca y un destino turístico emblemático. Su misterio y belleza la convierten en un tesoro cultural invaluable."
-    imageUrl="https://cuscoperu.b-cdn.net/wp-content/uploads/2023/09/Mirador-de-machu-Picchu-vista-panoramica.webp"
-    imageAlt="Machu Picchu"
-    isReversed={true}
-  />
-
-  <ArticlesCarousel client:load />
-
-  <DestinationCard
-    location="AYACUCHO - PERU"
-    subtitle="VIÑEDOS Y CERROS DE"
-    title="VILCASHUAMAN"
-    description="Vilcashuamán, antigua ciudad inca ubicada en Ayacucho, guarda impresionantes restos arqueológicos como el Templo del Sol y la pirámide Ushno. Aquí conviven el legado inca con la arquitectura colonial, creando una atmósfera única. Rodeada de naturaleza y paisajes serranos, es un lugar perfecto para quienes buscan historia, misticismo y tranquilidad lejos del turismo masivo."
-    imageUrl="https://arqueologiadelperu.com/wp-content/uploads/2013/10/vilcashuaman_a1.jpg"
-    imageAlt="Vilcashuamán"
-  />
-
-  <DestinationCard
-    location="PIURA - PERU"
-    subtitle="PLAYA DE"
-    title="MANCORA"
-    description="Máncora es el paraíso costero del norte peruano: sol casi todo el año, aguas cálidas y olas ideales para surfear. Su ambiente relajado y vibrante atrae tanto a mochileros como a quienes buscan escapar de la rutina. Desde ceviches al borde del mar hasta atardeceres que parecen pintados, Máncora tiene el mood perfecto para vacacionar y desconectar."
-    imageUrl="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/91/2b/4f/photo0jpg.jpg?w=1400&h=1400&s=1"
-    imageAlt="Playa de Máncora"
-    isReversed={true}
-  />
-
-  <ArticleCard
+  <DestinationSection destinations={primaryDestinations} />
+  <PrimaryCarouselSection client:load />
+  <DestinationSection destinations={secondaryDestinations} />
+  <ParallaxSection
     imageUrl="https://www.peru.travel/Contenido/Atractivo/Imagen/es/522/1.1/Principal/huacachina-laguna.jpg"
     subtitle="Laguna Huacachina"
     category="ICA - PERU"
     title="Oasis en el desierto"
   />
-
-  <DestinationCard
-    location="AMAZONAS - PERU"
-    subtitle="CATARATA DE"
-    title="GOCTA"
-    description="Escondida entre la selva del Amazonas, la catarata Gocta se impone con más de 770 metros de altura, siendo una de las más altas del mundo. Rodeada de vegetación exuberante y aves exóticas, su acceso implica una caminata que vale cada paso. Su mística presencia ha inspirado leyendas locales y atrae a aventureros que buscan naturaleza pura y emoción al borde del abismo verde."
-    imageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Catarata_de_Gocta%2C_2023_%2803%29.jpg/1200px-Catarata_de_Gocta%2C_2023_%2803%29.jpg"
-    imageAlt="Catarata de Gocta"
-  />
-
-  <DestinationCard
-    location="PUNO - PERU"
-    subtitle="LAGO SAGRADO"
-    title="TITICACA"
-    description="El lago Titicaca, ubicado a más de 3,800 m s. n. m., es el lago navegable más alto del mundo y un ícono de la cultura andina. En sus aguas azules flotan las islas de los Uros, hechas de totora, donde vive un pueblo ancestral. Con paisajes majestuosos y una historia que se entrelaza con leyendas, el Titicaca es un destino que mezcla espiritualidad, tradición viva y belleza natural."
-    imageUrl="https://portal.andina.pe/EDPfotografia2/Thumbnail/2011/05/18/000155875W.jpg"
-    imageAlt="Lago Titicaca"
-    isReversed={true}
-  />
-
-  <ArticleCarouselTwo client:load />
-
-  <DestinationCard
-    location="AMAZONAS - PERU"
-    subtitle="RESERVA NACIONAL DE"
-    title="TAMBOPATA"
-    description="Escondida entre la selva del Amazonas, la catarata Gocta se impone con más de 770 metros de altura, siendo una de las más altas del mundo. Rodeada de vegetación exuberante y aves exóticas, su acceso implica una caminata que vale cada paso. Su mística presencia ha inspirado leyendas locales y atrae a aventureros que buscan naturaleza pura y emoción al borde del abismo verde."
-    imageUrl="https://www.peru.travel/Contenido/Destino/Imagen/es/10/1.1/Principal/Tambopata.jpg"
-    imageAlt="Catarata de Gocta"
-  />
-
-  <DestinationCard
-    location="AMAZONAS - PERU"
-    subtitle="PARQUE NACIONAL DE"
-    title="MANU"
-    description="El lago Titicaca, ubicado a más de 3,800 m s. n. m., es el lago navegable más alto del mundo y un ícono de la cultura andina. En sus aguas azules flotan las islas de los Uros, hechas de totora, donde vive un pueblo ancestral. Con paisajes majestuosos y una historia que se entrelaza con leyendas, el Titicaca es un destino que mezcla espiritualidad, tradición viva y belleza natural."
-    imageUrl="https://upload.wikimedia.org/wikipedia/commons/d/d6/Manu_National_Park-71.jpg"
-    imageAlt="Lago Titicaca"
-    isReversed={true}
-  />
-
-  <BlogCards />
-
-  <DestinationCard
-    location="AMAZONAS - PERU"
-    subtitle="LAGO SAGRADO"
-    title="SANDOVAL"
-    description="Escondida entre la selva del Amazonas, la catarata Gocta se impone con más de 770 metros de altura, siendo una de las más altas del mundo. Rodeada de vegetación exuberante y aves exóticas, su acceso implica una caminata que vale cada paso. Su mística presencia ha inspirado leyendas locales y atrae a aventureros que buscan naturaleza pura y emoción al borde del abismo verde."
-    imageUrl="https://gotambopata.com/wp-content/uploads/slider/cache/5a8488261d1dba5be4bfa69f6253fd57/Atardecer-en-el-Lago-Sandoval.jpg"
-    imageAlt="Catarata de Gocta"
-  />
-
-  <DestinationCard
-    location="IQUITOS - PERU"
-    subtitle="IQUITOS Y EL"
-    title="RIO AMAZONAS"
-    description="El lago Titicaca, ubicado a más de 3,800 m s. n. m., es el lago navegable más alto del mundo y un ícono de la cultura andina. En sus aguas azules flotan las islas de los Uros, hechas de totora, donde vive un pueblo ancestral. Con paisajes majestuosos y una historia que se entrelaza con leyendas, el Titicaca es un destino que mezcla espiritualidad, tradición viva y belleza natural."
-    imageUrl="https://www.raptravelperu.com/wp-content/uploads/portada-rio-amazonas-iquitos.webp"
-    imageAlt="Lago Titicaca"
-    isReversed={true}
-  />
-
+  <DestinationSection destinations={tertiaryDestinations} />
+  <SecondaryCarouselSection client:load />
+  <DestinationSection destinations={quaternaryDestinations} />
+  <TeaserSection />
+  <DestinationSection destinations={quinaryDestinations} />
   <FashionCards />
-
   <Footer />
 </Layout>

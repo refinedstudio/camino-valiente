@@ -1,0 +1,31 @@
+---
+import { DestinationCard } from "./components";
+interface Props {
+  destinations: {
+    location: string;
+    subtitle: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    imageAlt: string;
+    isReversed?: boolean;
+  }[];
+}
+const { destinations } = Astro.props;
+---
+
+<section>
+  {
+    destinations.map((destination) => (
+      <DestinationCard
+        location={destination.location}
+        subtitle={destination.subtitle}
+        title={destination.title}
+        description={destination.description}
+        imageUrl={destination.imageUrl}
+        imageAlt={destination.imageAlt}
+        isReversed={destination.isReversed}
+      />
+    ))
+  }
+</section>

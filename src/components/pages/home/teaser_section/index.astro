@@ -1,0 +1,8 @@
+---
+import { TeaserCard } from "./components";
+import { cards } from "./data";
+---
+
+<section class="grid grid-cols-1 md:grid-cols-2">
+  {cards.map((card) => <TeaserCard {...card} />)}
+</section>
