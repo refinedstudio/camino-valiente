@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import "@fontsource-variable/playfair-display";
-import "@fontsource/lato";
 import "@fontsource/lato/100.css";
 import "@fontsource/lato/300.css";
 import "@fontsource/lato/400.css";
@@ -21,40 +20,32 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="robots" content={robots} />
-
-    <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content={type} />
     <meta property="og:locale" content="es" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
-
     <link rel="canonical" href={canonical} />
-
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
     {structuredData && <script type="application/ld+json">{JSON.stringify(structuredData)}</script>}
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-
     <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
   </head>
   <body>
     <div id="smooth-wrapper">
@@ -74,33 +65,3 @@ const {
   </body>
 </html>
 
-<style is:global>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  #smooth-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  #smooth-content {
-    overflow: visible;
-    width: 100%;
-  }
-
-  @font-face {
-    font-family: "BrittanySignature";
-    src: url("/fonts/BrittanySignature.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-</style>
