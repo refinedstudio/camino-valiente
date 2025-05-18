@@ -13,9 +13,59 @@ const storyParagraphs = [
   "Hoy, después de más de 12 años, miles de kilómetros recorridos y una comunidad increíble que me acompaña en cada aventura, puedo decir con el corazón lleno que este blog cambió mi vida. Aquí comparto lo que amo: culturas, paisajes, historias y aprendizajes que nacen del camino. Siempre he sido fiel a mi esencia y a lo que realmente me mueve: viajar con propósito y compartirlo desde el alma.",
   "Si hay algo que quiero que te lleves de aquí es que TÚ PUEDES LOGRARLO. Sueña en grande, cree en ti, y da ese primer paso hacia lo desconocido. Cada viaje comienza con una decisión, y cada experiencia suma. Como siempre digo: SUEÑA, VIAJA, VIVE.",
 ];
+
+const title = "Sobre mí - Camino Valiente";
+const description =
+  "Conoce la historia y misión de Camino Valiente: nuestro compromiso con los viajes conscientes, la exploración de la naturaleza y la espiritualidad en Perú.";
+const keywords =
+  "sobre Camino Valiente, quiénes somos, misión, visión, historia, autor blog de viajes, equipo, espiritualidad, naturaleza, Perú, viajes conscientes";
+const canonical = Astro.url.pathname;
+const image = "/images/camino-valiente-portada-social.jpg";
+const type = "website";
+const robots = "index, follow";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.caminovaliente.com/#website",
+      name: "Camino Valiente",
+      url: "https://www.caminovaliente.com/",
+      description: "Información sobre el blog de viajes Camino Valiente.",
+      inLanguage: "es-PE",
+    },
+    {
+      "@type": "AboutPage",
+      name: "Sobre Camino Valiente",
+      url: "https://www.caminovaliente.com/sobre-mi",
+      description:
+        "Conoce al equipo detrás de Camino Valiente y su filosofía de viajes y espiritualidad.",
+      about: { "@id": "https://www.caminovaliente.com/#website" },
+      // mainEntity: {
+      //   "@type": "Person",
+      //   name: "Tu Nombre o Nombre del Creador",
+      //   url: "https://www.caminovaliente.com/sobre-mi", // URL a la bio de la persona
+      //   image: "https://www.caminovaliente.com/images/tu-foto.jpg", // REEMPLAZA
+      //   sameAs: [
+      //     "https://twitter.com/tu_usuario_x", // REEMPLAZA
+      //     "https://instagram.com/tu_usuario_ig", // REEMPLAZA
+      //   ],
+      // },
+    },
+  ],
+};
 ---
 
-<Layout>
+<Layout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonical={canonical}
+  image={image}
+  type={type}
+  robots={robots}
+  structuredData={structuredData}
+>
   <div class="fixed top-0 left-0 w-full z-50">
     <Navigation client:load />
   </div>

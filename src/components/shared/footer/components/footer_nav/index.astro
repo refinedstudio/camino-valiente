@@ -1,4 +1,6 @@
 ---
+import { Routes } from "../../../../../routes";
+
 const socialLinks = [
   {
     platform: "Twitter",
@@ -18,13 +20,13 @@ const socialLinks = [
 ];
 
 const navLinks = [
-  { name: "Acerca de", url: "/about" },
-  { name: "Políticas", url: "/policies" },
-  { name: "Contacto", url: "/contact" },
+  { name: "Acerca de", url: Routes.ABOUT },
+  { name: "Políticas", url: Routes.POLICIES },
+  { name: "Contacto", url: Routes.CONTACT },
 ];
 ---
 
-<footer class="py-8 px-12">
+<div class="py-8 px-12">
   <div class="flex flex-col md:flex-row items-center justify-between">
     <div class="flex space-x-6 mb-6 md:mb-0">
       {
@@ -63,5 +65,4 @@ const navLinks = [
       }
     </div>
   </div>
-</footer>
-
+</div>

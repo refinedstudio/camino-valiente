@@ -3,9 +3,40 @@ import Layout from "../../layouts/Layout.astro";
 import { Navigation } from "../../components/shared";
 import AboutHeader from "../../components/shared/title_page/index.astro";
 import Footer from "../../components/shared/footer/index.astro";
+const title = "Política - Camino Valiente";
+const description =
+  "Lee la política de privacidad de Camino Valiente para entender cómo manejamos tus datos personales, cookies y protecciones en nuestro sitio web.";
+const keywords =
+  "política de privacidad Camino Valiente, privacidad de datos, protección de datos, uso de cookies, datos personales, términos de servicio";
+const canonical = Astro.url.pathname;
+const image = "/images/camino-valiente-portada-social.jpg";
+const type = "website";
+const robots = "index, follow";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.caminovaliente.com/#website",
+      name: "Camino Valiente",
+      url: "https://www.caminovaliente.com/",
+      description: "Política de privacidad del blog de viajes Camino Valiente.",
+      inLanguage: "es-PE",
+    },
+  ],
+};
 ---
 
-<Layout>
+<Layout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonical={canonical}
+  image={image}
+  type={type}
+  robots={robots}
+  structuredData={structuredData}
+>
   <div class="fixed top-0 left-0 w-full z-50">
     <Navigation client:load />
   </div>

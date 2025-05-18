@@ -3,9 +3,55 @@ import Layout from "../../layouts/Layout.astro";
 import { Navigation } from "../../components/shared";
 import AboutHeader from "../../components/shared/title_page/index.astro";
 import Footer from "../../components/shared/footer/index.astro";
+
+const title = "Contacto - Camino Valiente";
+const description =
+  "Contáctanos en Camino Valiente para consultas, colaboraciones o soporte sobre viajes, naturaleza y espiritualidad en Perú.";
+const keywords =
+  "contacto Camino Valiente, contactar blog de viajes, ayuda viajes Perú, colaboración, soporte, email Camino Valiente";
+const canonical = Astro.url.pathname;
+const image = "/images/camino-valiente-portada-social.jpg";
+const type = "website";
+const robots = "index, follow";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.caminovaliente.com/#website",
+      name: "Camino Valiente",
+      url: "https://www.caminovaliente.com/",
+      description: "Blog de viajes, naturaleza y espiritualidad en Perú.",
+      inLanguage: "es-PE",
+    },
+    {
+      "@type": "ContactPage",
+      name: "Página de Contacto de Camino Valiente",
+      url: "https://www.caminovaliente.com/contacto",
+      description:
+        "Formulario de contacto y detalles para comunicarse con Camino Valiente.",
+      about: { "@id": "https://www.caminovaliente.com/#website" },
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+51-987-654-321",
+        contactType: "customer service",
+        email: "contacto@caminovaliente.com",
+      },
+    },
+  ],
+};
 ---
 
-<Layout>
+<Layout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonical={canonical}
+  image={image}
+  type={type}
+  robots={robots}
+  structuredData={structuredData}
+>
   <div class="fixed top-0 left-0 w-full z-50">
     <Navigation client:load />
   </div>
@@ -86,7 +132,7 @@ import Footer from "../../components/shared/footer/index.astro";
             type="submit"
             class="bg-black text-white px-6 py-3 font-medium tracking-wider text-sm"
           >
-            SEND MESSAGE
+            ENVIAR MENSAJE
           </button>
         </div>
       </div>

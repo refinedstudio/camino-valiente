@@ -1,3 +1,5 @@
+import { Routes } from "../../../../../routes";
+
 interface DrawerMenuProps {
   showDrawer: boolean;
   onClose: () => void;
@@ -12,14 +14,12 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
         opacity: showDrawer ? 1 : 0,
       }}
     >
-      {/* Overlay */}
       <div
         className="absolute inset-0 bg-black transition-opacity duration-300 ease-in-out"
         style={{ opacity: showDrawer ? 0.5 : 0 }}
         onClick={onClose}
       />
 
-      {/* Drawer */}
       <div
         className="absolute top-0 left-0 w-64 max-w-xs h-full bg-white shadow-xl transform transition-all duration-300 ease-in-out"
         style={{
@@ -53,7 +53,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="/"
+                  href={Routes.HOME}
                   className="block text-xs font-bold tracking-wider font-lato hover:text-neutral-900 transition-colors text-neutral-800"
                 >
                   INICIO
@@ -61,7 +61,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               </li>
               <li>
                 <a
-                  href="/about"
+                  href={Routes.ABOUT}
                   className="block text-xs font-bold tracking-wider hover:text-neutral-500 transition-colors"
                 >
                   SOBRE NOSOTROS
@@ -85,7 +85,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href={Routes.CONTACT}
                   className="block text-xs font-bold tracking-wider hover:text-neutral-500 transition-colors"
                 >
                   CONTACTO
@@ -93,7 +93,7 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
               </li>
               <li>
                 <a
-                  href="policies"
+                  href={Routes.POLICIES}
                   className="block text-xs font-bold tracking-wider hover:text-neutral-500 transition-colors"
                 >
                   POLÍTICA
