@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Navigation, Footer } from "../components/shared";
 import {
   HeroSection,
   DestinationSection,
@@ -8,8 +7,8 @@ import {
   ParallaxSection,
   SecondaryCarouselSection,
   TeaserSection,
+  DiscoverySection,
 } from "../components/pages/home";
-import FashionCards from "../components/shared/FashionCards.astro";
 import {
   primaryDestinations,
   secondaryDestinations,
@@ -17,64 +16,20 @@ import {
   quaternaryDestinations,
   quinaryDestinations,
 } from "../data";
-
-const title = "Inicio - Camino Valiente";
-const description =
-  "Descubre Perú con Camino Valiente. Explora la naturaleza, encuentra rutas desde Huancayo y vive experiencias espirituales. Tu guía para viajes conscientes y conexión con la energía andina.";
-const keywords =
-  "Camino Valiente, viajes Perú, naturaleza Perú, espiritualidad, turismo Perú, blog de viajes, rutas Huancayo, épocas para visitar Perú, tips de viaje, energía andina, aventura Perú, lugares sagrados Perú, bienestar, exploración, rutina espiritual, conexión con la naturaleza";
-const canonical = Astro.url.pathname;
-const image = "/images/camino-valiente-portada-social.jpg";
-const type = "website";
-const robots = "index, follow";
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://www.caminovaliente.com/#website",
-      name: "Camino Valiente",
-      url: "https://www.caminovaliente.com/",
-      description:
-        "Tu blog de viajes, naturaleza y espiritualidad en Perú. Guías de rutas desde Huancayo y conexión con la energía andina.",
-      publisher: {
-        "@id": "https://www.caminovaliente.com/#organization",
-      },
-      inLanguage: "es-PE",
-    },
-    {
-      "@type": "Blog",
-      "@id": "https://www.caminovaliente.com/#blog",
-      name: "Blog Camino Valiente: Viajes y Espiritualidad",
-      description:
-        "Descubre guías de viaje, consejos espirituales y rutas por la naturaleza de Perú, enfocadas en Huancayo y la conexión con la energía de los Andes.",
-      url: "https://www.caminovaliente.com/",
-      about: {
-        "@id": "https://www.caminovaliente.com/#website",
-      },
-      mainEntityOfPage: {
-        "@id": "https://www.caminovaliente.com/",
-      },
-      blogPost: [],
-    },
-  ],
-};
+import { meta } from "../config";
 ---
 
 <Layout
-  title={title}
-  description={description}
-  keywords={keywords}
-  canonical={canonical}
-  image={image}
-  type={type}
-  robots={robots}
-  structuredData={structuredData}
+  title={meta.home.title}
+  description={meta.home.description}
+  keywords={meta.home.keywords}
+  canonical={meta.home.canonical}
+  image={meta.home.image}
+  type={meta.home.type}
+  robots={meta.home.robots}
+  structuredData={meta.home.structuredData}
 >
-  <div class="relative min-h-screen bg-neutral-100">
-    <Navigation client:load />
-    <HeroSection />
-  </div>
+  <HeroSection />
   <DestinationSection destinations={primaryDestinations} />
   <PrimaryCarouselSection client:load />
   <DestinationSection destinations={secondaryDestinations} />
@@ -89,6 +44,5 @@ const structuredData = {
   <DestinationSection destinations={quaternaryDestinations} />
   <TeaserSection />
   <DestinationSection destinations={quinaryDestinations} />
-  <FashionCards />
-  <Footer />
+  <DiscoverySection />
 </Layout>

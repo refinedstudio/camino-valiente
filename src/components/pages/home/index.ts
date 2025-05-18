@@ -4,3 +4,4 @@ export { default as PrimaryCarouselSection } from "./primary_carousel_section/in
 export { default as SecondaryCarouselSection } from "./secondary_carousel_section/index.tsx";
 export { default as ParallaxSection } from "./parallax_section/index.astro";
 export { default as TeaserSection } from "./teaser_section/index.astro";
+export { default as DiscoverySection } from "./discovery_section/index.astro";

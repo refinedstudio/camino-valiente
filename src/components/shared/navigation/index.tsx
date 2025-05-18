@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useScroll } from "../../../hooks";
 import { SearchBar, NavHeader, DrawerMenu, ScrollToTop } from "./components";
+import { Routes } from "../../../routes";
 
 export default function Navigation() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -43,9 +44,9 @@ export default function Navigation() {
 
   useEffect(() => {
     const isAboutOrPolicies =
-      window.location.pathname.includes("/acerca") ||
-      window.location.pathname.includes("/politicas") ||
-      window.location.pathname.includes("/contacto");
+      window.location.pathname.includes(Routes.ABOUT) ||
+      window.location.pathname.includes(Routes.POLICIES) ||
+      window.location.pathname.includes(Routes.CONTACT);
     setIsAboutPage(isAboutOrPolicies);
   }, []);
 

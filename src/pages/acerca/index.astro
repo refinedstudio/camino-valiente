@@ -1,75 +1,29 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Navigation } from "../../components/shared";
-import Footer from "../../components/shared/footer/index.astro";
 import AboutHeader from "../../components/shared/title_page/index.astro";
 import CollageSection from "../../components/pages/about/CollageSection.astro";
 import StorySection from "../../components/pages/about/StorySection.astro";
 import AboutContainer from "../../components/pages/about/AboutContainer.astro";
 import Carousel from "../../components/shared/testimonials/index.astro";
+import { meta } from "../../config";
 const storyParagraphs = [
   "Inicié mi blog de viajes en 2009, mientras estudiaba Turismo y Gestión Cultural. En ese entonces, también trabajaba medio tiempo, colaboraba con una agencia de experiencias turísticas y trataba de equilibrar mi vida académica y profesional. ¡Era una locura! Recuerdo sentirme saturado, con la creatividad estancada y sin un espacio donde expresar mi pasión por explorar el mundo.",
   "Fue mi hermana quien me animó a abrir un blog para compartir mis experiencias viajando, y no lo dudé. No tenía idea de cómo empezar, pero lo fui descubriendo paso a paso. Aunque no fue fácil organizar todo, el blog se convirtió en mi refugio, un espacio que me dio libertad, motivación y me devolvió la inspiración que sentía haber perdido.",
   "Hoy, después de más de 12 años, miles de kilómetros recorridos y una comunidad increíble que me acompaña en cada aventura, puedo decir con el corazón lleno que este blog cambió mi vida. Aquí comparto lo que amo: culturas, paisajes, historias y aprendizajes que nacen del camino. Siempre he sido fiel a mi esencia y a lo que realmente me mueve: viajar con propósito y compartirlo desde el alma.",
   "Si hay algo que quiero que te lleves de aquí es que TÚ PUEDES LOGRARLO. Sueña en grande, cree en ti, y da ese primer paso hacia lo desconocido. Cada viaje comienza con una decisión, y cada experiencia suma. Como siempre digo: SUEÑA, VIAJA, VIVE.",
 ];
-
-const title = "Sobre mí - Camino Valiente";
-const description =
-  "Conoce la historia y misión de Camino Valiente: nuestro compromiso con los viajes conscientes, la exploración de la naturaleza y la espiritualidad en Perú.";
-const keywords =
-  "sobre Camino Valiente, quiénes somos, misión, visión, historia, autor blog de viajes, equipo, espiritualidad, naturaleza, Perú, viajes conscientes";
-const canonical = Astro.url.pathname;
-const image = "/images/camino-valiente-portada-social.jpg";
-const type = "website";
-const robots = "index, follow";
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://www.caminovaliente.com/#website",
-      name: "Camino Valiente",
-      url: "https://www.caminovaliente.com/",
-      description: "Información sobre el blog de viajes Camino Valiente.",
-      inLanguage: "es-PE",
-    },
-    {
-      "@type": "AboutPage",
-      name: "Sobre Camino Valiente",
-      url: "https://www.caminovaliente.com/sobre-mi",
-      description:
-        "Conoce al equipo detrás de Camino Valiente y su filosofía de viajes y espiritualidad.",
-      about: { "@id": "https://www.caminovaliente.com/#website" },
-      // mainEntity: {
-      //   "@type": "Person",
-      //   name: "Tu Nombre o Nombre del Creador",
-      //   url: "https://www.caminovaliente.com/sobre-mi", // URL a la bio de la persona
-      //   image: "https://www.caminovaliente.com/images/tu-foto.jpg", // REEMPLAZA
-      //   sameAs: [
-      //     "https://twitter.com/tu_usuario_x", // REEMPLAZA
-      //     "https://instagram.com/tu_usuario_ig", // REEMPLAZA
-      //   ],
-      // },
-    },
-  ],
-};
 ---
 
 <Layout
-  title={title}
-  description={description}
-  keywords={keywords}
-  canonical={canonical}
-  image={image}
-  type={type}
-  robots={robots}
-  structuredData={structuredData}
+  title={meta.about.title}
+  description={meta.about.description}
+  keywords={meta.about.keywords}
+  canonical={meta.about.canonical}
+  image={meta.about.image}
+  type={meta.about.type}
+  robots={meta.about.robots}
+  structuredData={meta.about.structuredData}
 >
-  <div class="fixed top-0 left-0 w-full z-50">
-    <Navigation client:load />
-  </div>
-
   <div class="pt-16 md:pt-20">
     <AboutHeader title="SOBRE NOSOTROS" />
     <AboutContainer>
@@ -95,5 +49,4 @@ const structuredData = {
     </AboutContainer>
   </div>
   <Carousel />
-  <Footer />
 </Layout>
