@@ -46,7 +46,8 @@ export default function Navigation() {
     const isAboutOrPolicies =
       window.location.pathname.includes(Routes.ABOUT) ||
       window.location.pathname.includes(Routes.POLICIES) ||
-      window.location.pathname.includes(Routes.CONTACT);
+      window.location.pathname.includes(Routes.CONTACT) ||
+      window.location.pathname.includes(Routes.LOGIN);
     setIsAboutPage(isAboutOrPolicies);
   }, []);
 
