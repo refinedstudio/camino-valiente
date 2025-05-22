@@ -3,295 +3,202 @@ interface Props {
   storyParagraphs: string[];
   tertiaryImageUrl: string;
   tertiaryImageAlt: string;
-  quaternaryImageUrl: string;
-  quaternaryImageAlt: string;
-  bottomQuote: string;
 }
 
-const {
-  storyParagraphs,
-  tertiaryImageUrl,
-  tertiaryImageAlt,
-  quaternaryImageUrl,
-  quaternaryImageAlt,
-  bottomQuote,
-} = Astro.props;
+const { storyParagraphs, tertiaryImageUrl, tertiaryImageAlt } = Astro.props;
 ---
 
 <!-- Contenedor general -->
 <div class="story-wrapper">
   <!-- Primera sección -->
-  <div class="story-section">
-    <div class="story-container">
-      <div class="story-text-content text-neutral-700">
-        {
-          storyParagraphs.map((paragraph) => (
-            <p class="story-paragraph-item">{paragraph}</p>
-          ))
-        }
-      </div>
+  <div class="story-section" id="storySection">
+    <div class="story-container" id="storyContainer">
+      <div class="story-content-fixed">
+        <div class="story-text-content text-neutral-700">
+          {
+            storyParagraphs.map((paragraph) => (
+              <p class="story-paragraph-item">{paragraph}</p>
+            ))
+          }
+        </div>
 
-      <div class="image-box-tertiary">
-        <img
-          src={tertiaryImageUrl}
-          alt={tertiaryImageAlt}
-          class="w-full h-full object-cover"
-        />
+        <div class="image-box-tertiary">
+          <img
+            src={tertiaryImageUrl}
+            alt={tertiaryImageAlt}
+            class="w-full h-full object-cover"
+          />
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Sección quote -->
-  <div class="quote-section-bottom">
-    <div class="quote-container">
-      <img
-        src={quaternaryImageUrl}
-        alt={quaternaryImageAlt}
-        class="image-quaternary-img object-cover"
-      />
-      <div
-        class="quote-box-bottom-text font-playfair-display uppercase text-neutral-950 text-left leading-[1.2]"
-        set:html={bottomQuote}
-      />
     </div>
   </div>
 </div>
 
+<script>
+  function initProportionalScaling() {
+    const storySection = document.getElementById("storySection");
+    const storyContainer = document.getElementById("storyContainer");
+
+    if (!storySection || !storyContainer) return;
+
+    // Dimensiones fijas de referencia (diseño base)
+    const BASE_WIDTH = 1920;
+    const BASE_HEIGHT = 1080;
+
+    function updateScale() {
+      if (!storySection || !storyContainer) return;
+
+      // Verificar si estamos en viewport móvil (la media query coincide con la del CSS)
+      const isMobile = window.matchMedia("(max-width: 642px)").matches;
+
+      // No aplicar escalado en móvil, dejando que el CSS tome el control
+      if (isMobile) {
+        storyContainer.style.transform = "none";
+        return;
+      }
+
+      // Obtener dimensiones disponibles del contenedor
+      const availableWidth = storySection.clientWidth;
+      const availableHeight = storySection.clientHeight;
+
+      // Calcular factor de escala manteniendo proporciones
+      const scaleX = availableWidth / BASE_WIDTH;
+      const scaleY = availableHeight / BASE_HEIGHT;
+      const scale = Math.min(scaleX, scaleY);
+
+      // Ajustar el contenedor para centrar el contenido escalado
+      const scaledWidth = BASE_WIDTH * scale;
+      const scaledHeight = BASE_HEIGHT * scale;
+
+      // Centrar perfectamente
+      const offsetX = (availableWidth - scaledWidth) / 2;
+      const offsetY = (availableHeight - scaledHeight) / 2;
+
+      storyContainer.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+      storyContainer.style.transformOrigin = "top left";
+    }
+
+    // Aplicar escala inicial
+    updateScale();
+
+    // Actualizar en resize con debounce para mejor rendimiento
+    let resizeTimeout: ReturnType<typeof setTimeout> | undefined;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateScale, 100);
+    });
+
+    // También actualizar cuando cambien las imágenes (para asegurar escalado correcto cuando todo esté cargado)
+    window.addEventListener("load", updateScale);
+
+    // Observar cambios en el DOM que puedan afectar dimensiones
+    const resizeObserver = new ResizeObserver((entries) => {
+      updateScale();
+    });
+
+    resizeObserver.observe(storySection);
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener("DOMContentLoaded", initProportionalScaling);
+</script>
+
 <style>
   .story-wrapper {
-    @apply w-full mx-auto mb-32;
+    @apply w-full mx-auto;
     max-width: 1920px;
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 1;
   }
 
   .story-section {
-    @apply relative w-full aspect-video p-0 overflow-visible;
+    @apply relative w-full overflow-hidden;
+    aspect-ratio: 16/9;
     max-height: 1080px;
+    min-height: 400px;
   }
 
   .story-container {
-    @apply relative w-full h-full min-h-full;
+    @apply relative;
+    width: 1920px;
+    height: 1080px;
+    transform-origin: top left;
+  }
+
+  .story-content-fixed {
+    @apply relative w-full h-full;
+    width: 1920px;
+    height: 1080px;
+    padding-left: 5px;
   }
 
   .story-text-content {
     @apply absolute z-10;
-    top: 30%;
-    left: 5%;
-    width: 40%;
-    max-width: 600px;
-    font-size: clamp(1.2rem, 1vw, 1.2rem);
-    line-height: clamp(1.5, 1.5vw, 1.75);
+    top: 210px;
+    left: 350px;
+    width: 768px;
+    max-width: 800px;
+    font-size: 24px;
+    line-height: 1.2;
     font-weight: 300;
   }
 
   .story-paragraph-item {
-    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+    margin-bottom: 20px;
   }
 
   .image-box-tertiary {
     @apply absolute overflow-hidden z-[1];
-    width: 37%;
-    height: 95%;
-    right: -6%;
-    top: 5%;
+    width: 710px;
+    height: 1026px;
+    right: -115px;
+    top: 54px;
   }
 
-  .quote-section-bottom {
-    @apply relative w-full aspect-[16/5] overflow-hidden mt-8;
-    .image-quaternary-img {
-      @apply absolute object-cover z-10;
-      top: 10%;
-      left: 5%;
-      width: 49.5%;
-      height: auto;
-      max-height: 80%;
-    }
-
-    .quote-box-bottom-text {
-      @apply absolute z-20;
-      top: 40%;
-      right: 10%;
-      width: 40%;
-      font-size: clamp(1rem, 2.5vw, 3.75rem);
-    }
-  }
-
-  @media (min-width: 1201px) {
-    .quote-section-bottom {
-      margin-top: -10rem;
-    }
-  }
-
-  .quote-container {
-    @apply relative w-full h-full;
-  }
-
-  .image-quaternary-img {
-    @apply absolute object-cover z-10;
-    top: 10%;
-    left: 5%;
-    width: 49.5%;
-    height: auto;
-    max-height: 80%;
-  }
-
-  .quote-box-bottom-text {
-    @apply absolute z-20;
-    top: 20%;
-    right: 10%;
-    width: 40%;
-    font-size: clamp(1rem, 2.5vw, 3.75rem);
-  }
-
-  /* BREAKPOINTS */
-  /* Los breakpoints ajustan el layout general o refinan el escalado para rangos específicos. */
-  /* El texto dentro de estos rangos seguirá escalando proporcionalmente con clamp(). */
-
-  @media (min-width: 1466px) {
-    .story-wrapper {
-      @apply mb-40;
-    }
-  }
-
-  @media (max-width: 1465px) and (min-width: 1201px) {
-    .story-section {
-      @apply aspect-[16/10];
-    }
-    .quote-section-bottom {
-      @apply aspect-[16/6];
-    }
-  }
-
-  @media (max-width: 1200px) and (min-width: 769px) {
-    .story-section {
-      @apply aspect-[4/3];
-    }
-    .quote-section-bottom {
-      @apply aspect-[4/1.2] mt-12;
-    }
-    .quote-box-bottom-text {
-      font-size: clamp(1rem, 2.2vw, 2.5rem);
-    }
-  }
-
-  @media (max-width: 965px) and (min-width: 769px) {
-    .story-text-content {
-      margin-top: -14%;
-    }
-    .quote-section-bottom {
-      @apply aspect-[4/2];
-      margin-top: 20%;
-    }
-    .image-quaternary-img {
-      width: 55%;
-      left: 0;
-    }
-    .quote-box-bottom-text {
-      width: 45%;
-      right: 0;
-
-      font-size: clamp(0.9rem, 2vw, 2rem);
-    }
-  }
-
-  @media (max-width: 768px) and (min-width: 641px) {
-    .story-wrapper {
-      @apply mb-24;
-    }
-    .story-section {
-      @apply aspect-square overflow-visible;
-    }
-    .story-text-content {
-      width: 45%;
-      top: 20%;
-      left: 5%;
-      max-width: 400px;
-      font-size: clamp(0.8rem, 1.8vw, 0.9rem);
-      line-height: clamp(1.4, 1.6vw, 1.7);
-    }
-    .image-box-tertiary {
-      width: 45%;
-      height: 85%;
-      top: 10%;
-      right: 0;
-    }
-    .quote-section-bottom {
-      @apply aspect-[4/2] mt-20;
-    }
-    .image-quaternary-img {
-      width: 55%;
-      left: 0;
-    }
-    .quote-box-bottom-text {
-      width: 45%;
-      right: 0;
-      font-size: clamp(0.9rem, 2.2vw, 2rem);
-    }
-  }
-
-  /* Breakpoint para móviles (642px y menos) */
+  /* móviles */
   @media (max-width: 642px) {
     .story-wrapper {
-      @apply mb-14;
+      @apply mb-8;
     }
+
     .story-section {
       @apply aspect-auto h-auto max-h-none overflow-visible pb-4 mb-6;
     }
+
     .story-container {
-      @apply static h-auto flex flex-col gap-6;
+      @apply static h-auto;
+      width: auto;
+      height: auto;
+      transform: none !important;
+    }
+
+    .story-content-fixed {
+      @apply flex flex-col gap-6;
+      width: auto;
+      height: auto;
     }
 
     .story-text-content {
       @apply relative w-[85%] max-w-full top-auto left-auto order-1 rounded-lg shadow-sm p-4;
       font-size: clamp(0.85rem, 2.8vw, 1.1rem);
       line-height: clamp(1.5, 2.5vw, 1.8);
-      background-color: rgba(250, 250, 250, 0.8);
+      width: 85%;
+      max-width: 100%;
     }
 
     .story-paragraph-item {
       margin-bottom: clamp(0.75rem, 2vw, 1rem);
     }
+
     .story-paragraph-item:last-child {
       @apply mb-0;
     }
 
     .image-box-tertiary {
       @apply relative w-[75%] h-[95vw] left-auto right-auto top-auto mx-auto order-2 overflow-hidden rotate-1;
-    }
-
-    .quote-section-bottom {
-      @apply aspect-auto h-[55vw] mt-6 overflow-visible relative rounded-lg;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .image-quaternary-img {
-      width: 85% !important;
-      height: 50vw !important;
-      max-width: none !important;
-      max-height: none !important;
-      min-width: 0 !important;
-      min-height: 0 !important;
-      position: relative !important;
-      left: auto !important;
-      top: auto !important;
-      right: 12% !important;
-      bottom: auto !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      object-fit: cover !important;
-      display: block !important;
-    }
-    .quote-box-bottom-text {
-      @apply relative w-full mx-auto p-4 text-center backdrop-blur-sm;
-      max-width: 350px;
-      font-size: clamp(1.2rem, 5vw, 2rem);
-      line-height: clamp(1.3, 2vw, 1.5);
-      top: auto !important;
-      right: auto !important;
-      margin-top: 1rem;
-      position: relative !important;
+      width: 75%;
+      height: 95vw;
     }
   }
 </style>
