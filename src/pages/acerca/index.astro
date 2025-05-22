@@ -4,6 +4,7 @@ import AboutHeader from "../../components/shared/title_page/index.astro";
 import CollageSection from "../../components/pages/about/CollageSection.astro";
 import StorySection from "../../components/pages/about/StorySection.astro";
 import AboutContainer from "../../components/pages/about/AboutContainer.astro";
+import BanerSection from "../../components/pages/about/banerSection.astro";
 import Carousel from "../../components/shared/testimonials/index.astro";
 import { meta } from "../../config";
 const storyParagraphs = [
@@ -42,6 +43,8 @@ const storyParagraphs = [
         storyParagraphs={storyParagraphs}
         tertiaryImageUrl="https://travelgrafia.co/wp-content/uploads/2023/04/Lugares-para-visitar-en-Peru-camino-a-Machu-Picchu.jpg"
         tertiaryImageAlt="Jules on beach"
+      />
+      <BanerSection
         quaternaryImageUrl="https://incalake.com/blog/wp-content/uploads/2018/01/1.-Lago-titicaca.jpg"
         quaternaryImageAlt="Jules in a field"
         bottomQuote='"CUANDO VIAJAS <br />NO ES TRABAJO <br />ES PASION."'
