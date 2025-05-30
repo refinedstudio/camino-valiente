@@ -14,16 +14,18 @@ import {
   galleryImagesTwo,
 } from "../../components/pages/view_article/article_gallery/data/index";
 import { cardsArticleView } from "../../components/pages/home/teaser_section/data/index";
+import { meta } from "../../config/meta/index";
 ---
 
 <Layout
-  title="Ver Artículo - Camino Valiente"
-  description="Articulo de viajes - Escapadas"
-  keywords="verano,viajes, escapadas, destinos, turismo, aventura, cultura, gastronomía"
-  canonical="/"
-  image="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=800"
-  type="article"
-  robots="index, follow"
+  title={meta.viewArticle.title}
+  description={meta.viewArticle.description}
+  keywords={meta.viewArticle.keywords}
+  canonical={meta.viewArticle.canonical}
+  image={meta.viewArticle.image}
+  type={meta.viewArticle.type}
+  robots={meta.viewArticle.robots}
+  structuredData={meta.viewArticle.structuredData}
 >
   <HeroArticle />
   <ArticleSection />

@@ -137,4 +137,33 @@ export const meta = {
       ],
     },
   },
+  viewArticle: {
+    title: "Artículo - Camino Valiente",
+    description:
+      "Lee este artículo sobre viajes conscientes, naturaleza y espiritualidad andina. Explora experiencias únicas desde Huancayo y más allá.",
+    keywords:
+      "viajes Perú, espiritualidad andina, naturaleza, Camino Valiente, blog de viajes, artículos de viaje, conexión con la naturaleza, Huancayo",
+    canonical: "/blog/articulo-ejemplo",
+    image: "/images/camino-valiente-portada-social.jpg",
+    type: "article",
+    robots: "index, follow",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://www.caminovaliente.com/#website",
+          name: "Camino Valiente",
+          url: "https://www.caminovaliente.com/",
+          description:
+            "Blog de viajes, naturaleza y espiritualidad en Perú.",
+          about: { "@id": "https://www.caminovaliente.com/#website" },
+          inLanguage: "es-PE",
+        },
+
+      ],
+    },
+  },
 };
+
+
