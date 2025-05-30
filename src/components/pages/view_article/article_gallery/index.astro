@@ -1,0 +1,110 @@
+---
+interface GalleryImage {
+  id: string;
+  imageUrl: string;
+  alt: string;
+  featured?: boolean;
+}
+
+interface Props {
+  images: GalleryImage[];
+}
+
+const { images } = Astro.props;
+---
+
+<section class="gallery-section-wrapper">
+  <!-- Galería de imágenes -->
+  <div class="space-y-4 px-4 sm:px-16 lg:px-16">
+    <!-- Fila 1 -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="gallery-item">
+        <img
+          src={images[0]?.imageUrl}
+          alt={images[0]?.alt}
+          class="gallery-image"
+        />
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src={images[1]?.imageUrl}
+          alt={images[1]?.alt}
+          class="gallery-image"
+        />
+        <div class="gallery-overlay"></div>
+      </div>
+    </div>
+
+    <!-- Fila 2 -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="gallery-item">
+        <img
+          src={images[2]?.imageUrl}
+          alt={images[2]?.alt}
+          class="gallery-image"
+        />
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src={images[3]?.imageUrl}
+          alt={images[3]?.alt}
+          class="gallery-image"
+        />
+        <div class="gallery-overlay"></div>
+      </div>
+    </div>
+
+    <!-- Fila 3: Imagen centrada -->
+    <div class="flex justify-center">
+      <div class="gallery-item max-w-7xl aspect-[3/4] w-full">
+        <img
+          src={images[4]?.imageUrl}
+          alt={images[4]?.alt}
+          class="gallery-image"
+        />
+        <div class="gallery-overlay"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery-section-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2vw 1vw;
+  }
+
+  .gallery-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-image {
+    transform: scale(1.03);
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-overlay {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+</style>

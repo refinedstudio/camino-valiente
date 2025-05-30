@@ -1,0 +1,86 @@
+---
+const category = "Viajes";
+const title = "Escapada a la Selva Amazónica";
+const subtitle = "Destino con encanto en Perú";
+const imageUrl =
+  "https://images.pexels.com/photos/30525160/pexels-photo-30525160.jpeg?auto=compress&cs=tinysrgb&w=800";
+const imageAlt = "Paisaje";
+const authorSignature = "Camino Valiente";
+
+const content = [
+  "Si estás buscando una escapada encantadora para este verano, Reims, en el corazón de la región de Champaña, es un destino que no puedes pasar por alto. Famosa por sus vinos espumosos y su impresionante arquitectura gótica, esta ciudad francesa combina historia, cultura y tranquilidad.",
+  "Caminar por las calles adoquinadas de Reims es como viajar en el tiempo. La Catedral de Notre-Dame, declarada Patrimonio de la Humanidad por la UNESCO, impone con su belleza, mientras que los cafés al aire libre y las plazas tranquilas invitan a detenerse y disfrutar del ambiente local.",
+  "Para una jornada perfecta, comienza con un desayuno tradicional en una panadería local, seguido de una visita a alguna de las casas de champán. Al atardecer, nada mejor que un paseo relajado por los viñedos cercanos, cerrando el día con una cena típica francesa. Reims ofrece la mezcla ideal de descanso, descubrimiento y sabor.",
+];
+---
+
+<section class="w-full py-8">
+  <div class="px-4 sm:px-16 lg:px-16">
+    <!-- Header -->
+    <div class="max-w-5xl mx-auto text-center mb-12">
+      {
+        category && (
+          <p class="text-xs tracking-[0.2em] text-gray-600 uppercase mb-4">
+            {category}
+          </p>
+        )
+      }
+
+      <h1
+        class="font-playfair-display text-3xl md:text-4xl lg:text-5xl text-gray-900 font-normal tracking-wide leading-tight mb-2 uppercase"
+      >
+        {title}
+      </h1>
+
+      {
+        subtitle && (
+          <h2 class="font-playfair-display text-2xl md:text-3xl lg:text-4xl text-gray-900 font-bold uppercase">
+            {subtitle}
+          </h2>
+        )
+      }
+    </div>
+
+    <!-- Imagen -->
+    <div class="max-w-4xl mx-auto pb-4">
+      <img
+        src={imageUrl}
+        alt={imageAlt}
+        class="w-full h-auto object-cover aspect-[3/4]"
+      />
+    </div>
+
+    <!-- Contenido -->
+    <div class="max-w-3xl mx-auto prose prose-lg px-4 md:px-0 py-2">
+      {
+        content.map((paragraph) => (
+          <p class="text-gray-700 leading-relaxed mb-6 text-center font-light">
+            {paragraph}
+          </p>
+        ))
+      }
+
+      {
+        authorSignature && (
+          <div class="text-center mt-8">
+            <p class="font-script text-lg text-gray-600 italic">
+              {authorSignature}
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  <style>
+    .font-script {
+      font-family: "Satisfy", cursive, system-ui;
+    }
+
+    @media (max-width: 768px) {
+      .prose {
+        font-size: 95%;
+      }
+    }
+  </style>
+</section>

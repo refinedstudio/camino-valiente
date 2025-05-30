@@ -1,0 +1,156 @@
+---
+interface Props {
+  textRight: string;
+  primaryImageUrl: string;
+  primaryImageAlt: string;
+  secondaryImageUrl: string;
+  secondaryImageAlt: string;
+}
+
+const {
+  textRight,
+  primaryImageUrl,
+  primaryImageAlt,
+  secondaryImageUrl,
+  secondaryImageAlt,
+} = Astro.props;
+---
+
+<div class="denim-collage-section">
+  <div class="denim-collage-container">
+    <!-- Imagen principal izquierda -->
+    <div class="image-main">
+      <img
+        src={primaryImageUrl}
+        alt={primaryImageAlt}
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <!-- Imagen secundaria derecha -->
+    <div class="image-secondary">
+      <img
+        src={secondaryImageUrl}
+        alt={secondaryImageAlt}
+        class="w-full h-full object-cover"
+      />
+    </div>
+    <!-- Textoo superior derecha -->
+    <div class="quote-box">
+      <p class="quote-text" set:html={textRight} />
+    </div>
+  </div>
+</div>
+
+<style>
+  .denim-collage-section {
+    width: 100%;
+    max-width: 1500px;
+    margin: 3rem auto 8rem;
+    aspect-ratio: 1500 / 1450;
+    position: relative;
+  }
+
+  .denim-collage-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .quote-box {
+    position: absolute;
+    z-index: 0;
+    top: 150px;
+    right: 5%;
+    max-width: 35%;
+    padding: 30px;
+  }
+
+  .quote-text {
+    font-size: 28px;
+    line-height: 1.4;
+    color: #2c2c2c;
+    font-style: italic;
+    text-align: left;
+    margin: 0;
+    font-family: "Playfair Display", serif;
+    word-wrap: break-word;
+  }
+
+  .image-main {
+    position: absolute;
+    overflow: hidden;
+    left: 9%;
+    top: 0;
+    width: 50%;
+    height: 64.8%;
+    z-index: 2;
+  }
+
+  .image-main img {
+    transition: transform 0.3s ease;
+  }
+
+  .image-main:hover img {
+    transform: scale(1.05);
+  }
+
+  .image-secondary {
+    position: absolute;
+    overflow: hidden;
+    right: 9%;
+    top: 45%;
+    width: 50%;
+    height: 64.8%;
+    z-index: 3;
+  }
+
+  .image-secondary img {
+    transition: transform 0.3s ease;
+  }
+
+  .image-secondary:hover img {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 1024px) {
+    .quote-text {
+      font-size: 22px;
+      padding: 20px;
+    }
+
+    .denim-collage-section {
+      aspect-ratio: 1500 / 1500;
+    }
+  }
+
+  @media (max-width: 840px) {
+    .quote-box {
+      top: 0;
+      padding: 0;
+      padding-left: 20px;
+    }
+  }
+
+  @media (max-width: 570px) {
+    .denim-collage-section {
+      margin-bottom: 40%;
+    }
+
+    .quote-box {
+      position: absolute;
+      top: 105%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: none;
+      max-width: 100%;
+      padding: 30px 20px;
+      background-color: transparent;
+      backdrop-filter: none;
+      text-align: center;
+      z-index: 4;
+    }
+  }
+</style>

@@ -1,5 +1,17 @@
 ---
-import { items } from "./data";
+import { items as defaultItems } from "./data";
+
+interface Props {
+  items?: Array<{
+    id: string;
+    imageUrl: string;
+    title: string;
+    category: string;
+    subtitle?: string;
+  }>;
+}
+
+const { items = defaultItems } = Astro.props;
 ---
 
 <div class="px-4 py-24">

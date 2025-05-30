@@ -1,0 +1,289 @@
+---
+import { items } from "./data/index";
+---
+
+<section class="carousel-root">
+  <div class="carousel-container">
+    <button class="carousel-btn left" aria-label="Anterior">
+      <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+
+    <button class="carousel-btn right" aria-label="Siguiente">
+      <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        {
+          items.map((item) => (
+            <div class="carousel-slide">
+              <div class="slide-content">
+                <div class="image-wrapper">
+                  <img src={item.imageUrl} alt={item.title} loading="lazy" />
+                  <div class="overlay" />
+                </div>
+                <div class="slide-text">
+                  {item.category && <p class="category">{item.category}</p>}
+                  <h4 class="title">{item.title}</h4>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .carousel-root {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 0rem 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .carousel-title {
+    text-align: center;
+  }
+
+  .carousel-title h3 {
+    font-family: cursive;
+    font-size: 1.75rem;
+    color: #4b5563;
+    font-style: italic;
+  }
+
+  .carousel-container {
+    position: relative;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .carousel-btn:hover {
+    background-color: white;
+  }
+
+  .carousel-btn.left {
+    left: 0;
+  }
+
+  .carousel-btn.right {
+    right: 0;
+  }
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #4b5563;
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+    margin: 0 3rem;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .carousel-slide {
+    flex: 0 0 20%;
+    padding: 0 0.5rem;
+  }
+
+  .slide-content {
+    cursor: pointer;
+  }
+
+  .image-wrapper {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    background-color: #f3f4f6;
+    overflow: hidden;
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .slide-content:hover img {
+    transform: scale(1.05);
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.3s;
+  }
+
+  .slide-content:hover .overlay {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .slide-text {
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+
+  .category {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+
+  .title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #1f2937;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .carousel-root {
+      font-size: 95%;
+    }
+
+    .carousel-slide {
+      flex: 0 0 33.333%;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const track = document.querySelector(".carousel-track") as HTMLElement;
+    const originalSlides = Array.from(track?.children || []) as HTMLElement[];
+    const prevButton = document.querySelector(
+      ".carousel-btn.left",
+    ) as HTMLButtonElement;
+    const nextButton = document.querySelector(
+      ".carousel-btn.right",
+    ) as HTMLButtonElement;
+
+    if (!track || !originalSlides.length || !prevButton || !nextButton) return;
+
+    const slidesToShow = window.innerWidth > 640 ? 5 : 3;
+    const slideWidth = 100 / slidesToShow;
+
+    const totalOriginalSlides = originalSlides.length;
+
+    for (let i = 0; i < slidesToShow; i++) {
+      const cloneIndex = totalOriginalSlides - slidesToShow + i;
+      const clone = originalSlides[cloneIndex].cloneNode(true) as HTMLElement;
+      clone.classList.add("clone");
+      track.insertBefore(clone, track.firstChild);
+    }
+
+    for (let i = 0; i < slidesToShow; i++) {
+      const clone = originalSlides[i].cloneNode(true) as HTMLElement;
+      clone.classList.add("clone");
+      track.appendChild(clone);
+    }
+
+    const allSlides = Array.from(track.children) as HTMLElement[];
+    const totalSlides = allSlides.length;
+
+    allSlides.forEach((slide: HTMLElement) => {
+      slide.style.flex = `0 0 ${slideWidth}%`;
+    });
+
+    let currentIndex = slidesToShow;
+
+    function moveToSlide(index: number, withTransition = true) {
+      if (withTransition) {
+        track.style.transition = "transform 0.3s ease-in-out";
+      } else {
+        track.style.transition = "none";
+      }
+
+      const amountToMove = index * slideWidth;
+      track.style.transform = `translateX(-${amountToMove}%)`;
+      currentIndex = index;
+    }
+
+    // Función para manejar el loop infinito
+    function handleInfiniteLoop() {
+      if (currentIndex >= totalOriginalSlides + slidesToShow) {
+        setTimeout(() => {
+          moveToSlide(slidesToShow, false);
+        }, 300);
+      } else if (currentIndex < slidesToShow) {
+        setTimeout(() => {
+          moveToSlide(totalOriginalSlides, false);
+        }, 300);
+      }
+    }
+
+    // Posición inicial
+    moveToSlide(currentIndex, false);
+
+    // Botón siguiente
+    nextButton.addEventListener("click", function () {
+      currentIndex++;
+      moveToSlide(currentIndex);
+      handleInfiniteLoop();
+    });
+
+    // Botón anterior
+    prevButton.addEventListener("click", function () {
+      currentIndex--;
+      moveToSlide(currentIndex);
+      handleInfiniteLoop();
+    });
+
+    // Manejar redimensionamiento
+    window.addEventListener("resize", function () {
+      const newSlidesToShow = window.innerWidth > 640 ? 5 : 3;
+      const newSlideWidth = 100 / newSlidesToShow;
+
+      allSlides.forEach((slide: HTMLElement) => {
+        slide.style.flex = `0 0 ${newSlideWidth}%`;
+      });
+
+      moveToSlide(currentIndex, false);
+    });
+
+    // Automatico unos 3 segundos
+    setInterval(function () {
+      nextButton.click();
+    }, 3000);
+  });
+</script>

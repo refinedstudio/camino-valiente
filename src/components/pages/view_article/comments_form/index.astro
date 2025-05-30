@@ -1,0 +1,187 @@
+---
+// Valores hardcodeados para los comentarios
+const showCommentsCount = true;
+const commentsCount = 0;
+---
+
+<section class="comments-section">
+  <div class="comments-container sm:px-16">
+    <!-- Encabezado de comentarios -->
+    {
+      showCommentsCount && (
+        <div class="comments-header">
+          <div class="comments-status">
+            {commentsCount === 0
+              ? "AÚN NO HAY COMENTARIOS"
+              : `${commentsCount} COMENTARIOS`}
+          </div>
+          <div class="comments-divider">|</div>
+          <div class="show-all-btn">VER TODOS</div>
+        </div>
+      )
+    }
+
+    <!-- Formulario de respuesta -->
+    <div class="reply-section">
+      <h3 class="reply-title">DEJA UN COMENTARIO SOBRE TU VIAJE</h3>
+
+      <p class="email-notice">Tu dirección de correo no será publicada.</p>
+
+      <form class="comment-form">
+        <!-- Área de texto para comentario -->
+        <div class="form-group">
+          <textarea
+            name="comment"
+            placeholder="Comparte tu experiencia de viaje"
+            class="comment-textarea"
+            rows="8"></textarea>
+        </div>
+
+        <!-- Nombre y correo -->
+        <div class="form-row">
+          <div class="form-group">
+            <input
+              type="text"
+              name="name"
+              placeholder="Nombre"
+              class="form-input"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              name="email"
+              placeholder="Correo electrónico"
+              class="form-input"
+            />
+          </div>
+        </div>
+
+        <!-- Campo sitio web -->
+        <div class="form-group">
+          <input
+            type="url"
+            name="website"
+            placeholder="Sitio web"
+            class="form-input"
+          />
+        </div>
+
+        <!-- Botón enviar -->
+        <div class="form-submit">
+          <button type="submit" class="submit-btn"> ENVIAR MENSAJE </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<style>
+  .comments-section {
+    @apply w-full max-w-4xl mx-auto px-4 pb-12 pt-6;
+  }
+
+  .comments-container {
+    @apply w-full;
+  }
+
+  /* Comments Header */
+  .comments-header {
+    @apply flex items-center justify-center gap-4 mb-8 pb-4;
+    border-bottom: 1px solid #e5e7eb;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1rem;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+
+  .comments-status,
+  .show-all-btn {
+    @apply text-gray-600 uppercase tracking-wide font-medium;
+    font-size: clamp(12px, 1vw, 14px);
+    letter-spacing: 0.1em;
+  }
+
+  .comments-divider {
+    @apply text-gray-400;
+    font-size: clamp(13px, 1vw, 14px);
+  }
+
+  /* Reply Section */
+  .reply-title {
+    @apply text-center text-gray-900 uppercase font-medium mb-4;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(16px, 2vw, 20px);
+    letter-spacing: 0.1em;
+  }
+
+  .email-notice {
+    @apply text-center text-gray-600 mb-8;
+    font-size: clamp(13px, 1.5vw, 15px);
+    line-height: 1.5;
+  }
+
+  /* Form */
+  .comment-form {
+    @apply w-full space-y-6;
+  }
+
+  .form-row {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .comment-textarea {
+    @apply w-full px-4 py-3 border border-gray-200;
+    @apply focus:outline-none focus:border-gray-400 transition-colors duration-200;
+    @apply text-gray-700 placeholder-gray-500;
+    font-size: clamp(13px, 1.4vw, 15px);
+    line-height: 1.6;
+    min-height: 180px;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  .form-input {
+    @apply w-full px-4 py-3 border border-gray-200;
+    @apply focus:outline-none focus:border-gray-400 transition-colors duration-200;
+    @apply text-gray-700 placeholder-gray-500;
+    font-size: clamp(13px, 1.4vw, 15px);
+    line-height: 1.5;
+    height: 48px;
+  }
+
+  .comment-textarea::placeholder,
+  .form-input::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
+  }
+
+  /* Submit */
+  .form-submit {
+    @apply flex justify-center pt-4;
+  }
+
+  .submit-btn {
+    @apply bg-black text-white uppercase tracking-wide font-medium;
+    @apply hover:bg-gray-800 transition-colors duration-200;
+    font-size: clamp(12px, 1.2vw, 14px);
+    letter-spacing: 0.1em;
+    padding: 0.75rem 2rem;
+    min-width: 160px;
+    height: 45px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+</style>
