@@ -1,0 +1,45 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import HeroArticle from "../../components/pages/view_article/hero_section/index.astro";
+import ArticleSection from "../../components/pages/view_article/article_section/index.astro";
+import CarouselArticle from "../../components/pages/view_article/carousel_article/index.astro";
+import ArticleGallery from "../../components/pages/view_article/article_gallery/index.astro";
+import TeaserCard from "../../components/pages/home/teaser_section/components/teaser_card/index.astro";
+import CollageTwo from "../../components/pages/view_article/collage_two/index.astro";
+import CommentsForm from "../../components/pages/view_article/comments_form/index.astro";
+import { DiscoverySection } from "../../components/pages/home";
+import { itemsArticleView } from "../../components/pages/home/discovery_section/data/index";
+import {
+  galleryImages,
+  galleryImagesTwo,
+} from "../../components/pages/view_article/article_gallery/data/index";
+import { cardsArticleView } from "../../components/pages/home/teaser_section/data/index";
+---
+
+<Layout
+  title="Ver Artículo - Camino Valiente"
+  description="Articulo de viajes - Escapadas"
+  keywords="verano,viajes, escapadas, destinos, turismo, aventura, cultura, gastronomía"
+  canonical="/"
+  image="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=800"
+  type="article"
+  robots="index, follow"
+>
+  <HeroArticle />
+  <ArticleSection />
+  <CarouselArticle />
+  <ArticleGallery images={galleryImages} />
+  <section class="grid grid-cols-1 md:grid-cols-2">
+    {cardsArticleView.map((card) => <TeaserCard {...card} />)}
+  </section>
+  <CollageTwo
+    textRight="“Viajar es una forma de expresión del alma, una manera de descubrir el mundo y a uno mismo.”"
+    primaryImageUrl="https://media.tacdn.com/media/attractions-splice-spp-674x446/06/75/a7/88.jpg"
+    primaryImageAlt="Mini vestido de mezclilla outfit idea"
+    secondaryImageUrl="https://img.freepik.com/foto-gratis/hombre-equipo-senderismo-caminando-bosque-mouton_1253-1490.jpg?semt=ais_hybrid&w=740"
+    secondaryImageAlt="Mini vestido de mezclilla outfit idea"
+  />
+  <ArticleGallery images={galleryImagesTwo} />
+  <CommentsForm />
+  <DiscoverySection items={itemsArticleView} />
+</Layout>
