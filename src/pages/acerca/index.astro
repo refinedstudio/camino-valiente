@@ -2,9 +2,10 @@
 import Layout from "../../layouts/Layout.astro";
 import AboutHeader from "../../components/shared/title_page/index.astro";
 import CollageSection from "../../components/pages/about/CollageSection.astro";
-import StorySection from "../../components/pages/about/StorySection.astro";
 import AboutContainer from "../../components/pages/about/AboutContainer.astro";
 import Carousel from "../../components/shared/testimonials/index.astro";
+import StorySection from "../../components/pages/about/StorySection.astro";
+import BannerSection from "../../components/pages/about/BannerSection.astro";
 import { meta } from "../../config";
 const storyParagraphs = [
   "Inicié mi blog de viajes en 2009, mientras estudiaba Turismo y Gestión Cultural. En ese entonces, también trabajaba medio tiempo, colaboraba con una agencia de experiencias turísticas y trataba de equilibrar mi vida académica y profesional. ¡Era una locura! Recuerdo sentirme saturado, con la creatividad estancada y sin un espacio donde expresar mi pasión por explorar el mundo.",
@@ -42,6 +43,8 @@ const storyParagraphs = [
         storyParagraphs={storyParagraphs}
         tertiaryImageUrl="https://travelgrafia.co/wp-content/uploads/2023/04/Lugares-para-visitar-en-Peru-camino-a-Machu-Picchu.jpg"
         tertiaryImageAlt="Jules on beach"
+      />
+      <BannerSection
         quaternaryImageUrl="https://incalake.com/blog/wp-content/uploads/2018/01/1.-Lago-titicaca.jpg"
         quaternaryImageAlt="Jules in a field"
         bottomQuote='"CUANDO VIAJAS <br />NO ES TRABAJO <br />ES PASION."'
