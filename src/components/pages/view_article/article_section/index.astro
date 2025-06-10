@@ -15,26 +15,26 @@ const content = [
 ---
 
 <section class="w-full py-8">
-  <div class="px-4 sm:px-16 lg:px-16">
+  <div class="px-4 sm:px-16 lg:px-16 mt-8">
     <!-- Header -->
     <div class="max-w-5xl mx-auto text-center mb-12">
       {
         category && (
-          <p class="text-xs tracking-[0.2em] text-gray-600 uppercase mb-4">
+          <p class="text-xs font-semibold text-gray-600 uppercase mb-8">
             {category}
           </p>
         )
       }
 
       <h1
-        class="font-playfair-display text-3xl md:text-4xl lg:text-5xl text-gray-900 font-normal tracking-wide leading-tight mb-2 uppercase"
+        class="font-playfair-display text-3xl md:text-4xl lg:text-5xl text-gray-900 font-normal tracking-tighter leading-tight mb-2 uppercase"
       >
         {title}
       </h1>
 
       {
         subtitle && (
-          <h2 class="font-playfair-display text-2xl md:text-3xl lg:text-4xl text-gray-900 font-bold uppercase">
+          <h2 class=" text-3xl md:text-4xl lg:text-5xl text-gray-900 font-bold uppercase ">
             {subtitle}
           </h2>
         )
@@ -42,7 +42,7 @@ const content = [
     </div>
 
     <!-- Imagen -->
-    <div class="max-w-4xl mx-auto pb-4">
+    <div class="max-w-4xl mx-auto pb-4 mt-16 block">
       <img
         src={imageUrl}
         alt={imageAlt}
@@ -51,10 +51,10 @@ const content = [
     </div>
 
     <!-- Contenido -->
-    <div class="max-w-3xl mx-auto prose prose-lg px-4 md:px-0 py-2">
+    <div class="max-w-4xl mx-auto px-4 md:px-0 py-2 mt-8">
       {
         content.map((paragraph) => (
-          <p class="text-gray-700 leading-relaxed mb-6 text-center font-light">
+          <p class="text-gray-700 leading-relaxed mb-6 text-center font-light text-lg font-playfair-display">
             {paragraph}
           </p>
         ))

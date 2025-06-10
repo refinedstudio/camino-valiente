@@ -29,10 +29,34 @@ import { meta } from "../../config/meta/index";
 >
   <HeroArticle />
   <ArticleSection />
-  <CarouselArticle />
   <ArticleGallery images={galleryImages} />
   <section class="grid grid-cols-1 md:grid-cols-2">
-    {cardsArticleView.map((card) => <TeaserCard {...card} />)}
+    <button class="relative overflow-hidden group cursor-pointer block">
+      <div class="relative h-screen overflow-hidden">
+        <img
+          src="https://images.pexels.com/photos/2539417/pexels-photo-2539417.jpeg"
+          alt=""
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div
+          class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300"
+        >
+        </div>
+      </div>
+    </button>
+    <button class="relative overflow-hidden group cursor-pointer block">
+      <div class="relative h-screen overflow-hidden">
+        <img
+          src="https://images.pexels.com/photos/32499277/pexels-photo-32499277/free-photo-of-primer-plano-de-flores-de-alstroemerias-de-color-rosa-vibrante-en-flor.png"
+          alt=""
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div
+          class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300"
+        >
+        </div>
+      </div>
+    </button>
   </section>
   <CollageTwo
     textRight="“Viajar es una forma de expresión del alma, una manera de descubrir el mundo y a uno mismo.”"
@@ -42,6 +66,5 @@ import { meta } from "../../config/meta/index";
     secondaryImageAlt="Mini vestido de mezclilla outfit idea"
   />
   <ArticleGallery images={galleryImagesTwo} />
-  <CommentsForm />
   <DiscoverySection items={itemsArticleView} />
 </Layout>
