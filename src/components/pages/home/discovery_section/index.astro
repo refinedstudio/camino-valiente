@@ -15,16 +15,18 @@ const { items = defaultItems } = Astro.props;
 ---
 
 <div class="px-4 py-24">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-16" id="items-grid">
     {
-      items.map((item) => (
-        <div
-          class:list={["space-y-12", "fashion-card-item", "transition-shadow"]}
+      items.map((item, index) => (
+        <a
+          href={`/${item.id}`}
+          class:list={["space-y-12", "fashion-card-item", "transition-shadow", "block", index >= 3 ? "hidden" : ""]}
+          data-item-index={index}
         >
-          <img
+          <img loading="lazy"
             src={item.imageUrl}
             alt={item.title}
-            class="w-full aspect-[3/4] object-cover"
+            class="w-full h-[720px] object-cover"
           />
           <div class="space-y-2">
             <p class="uppercase text-xs tracking-widest text-center ">
@@ -41,14 +43,49 @@ const { items = defaultItems } = Astro.props;
               )}
             </div>
           </div>
-        </div>
+        </a>
       ))
     }
   </div>
   <div class="flex justify-center my-24 flex-col items-center gap-4">
-    <button class="uppercase text-sm tracking-widest font-semibold">
+    <button 
+      id="load-more-btn" 
+      class="uppercase text-sm tracking-widest font-semibold cursor-pointer hover:opacity-75 transition-opacity"
+    >
       cargar más
     </button>
     <div class="w-[1px] h-24 bg-neutral-900"></div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const itemsGrid = document.getElementById('items-grid');
+    let showingAll = false;
+
+    loadMoreBtn?.addEventListener('click', function() {
+      const items = itemsGrid?.querySelectorAll('[data-item-index]');
+      
+      if (!showingAll) {
+        // Mostrar todos los items (cambiar de 3 a 6 o más)
+        items?.forEach((item, index) => {
+          if (index >= 3) {
+            item.classList.remove('hidden');
+          }
+        });
+        loadMoreBtn.textContent = 'cargar menos';
+        showingAll = true;
+      } else {
+        // Mostrar solo los primeros 3 items
+        items?.forEach((item, index) => {
+          if (index >= 3) {
+            item.classList.add('hidden');
+          }
+        });
+        loadMoreBtn.textContent = 'cargar más';
+        showingAll = false;
+      }
+    });
+  });
+</script>

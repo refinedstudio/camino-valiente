@@ -1,5 +1,6 @@
 ---
 interface Props {
+  id: string;
   location: string;
   subtitle: string;
   title: string;
@@ -7,9 +8,11 @@ interface Props {
   imageUrl: string;
   imageAlt: string;
   isReversed?: boolean;
+  isCarousel?: boolean;
 }
 
 const {
+  id,
   location,
   subtitle,
   title,
@@ -17,6 +20,7 @@ const {
   imageUrl,
   imageAlt,
   isReversed = false,
+  carousel = false,
 } = Astro.props;
 ---
 
@@ -40,7 +44,7 @@ const {
         class="w-full md:w-1/2 h-[500px] sm:h-[720px] md:h-screen relative"
         data-reversed="false"
       >
-        <img
+        <img loading="lazy"
           src={imageUrl}
           alt={imageAlt}
           class:list={["object-cover", "h-full", "w-full", "card-image"]}
@@ -88,11 +92,13 @@ const {
       </div>
 
       <div class="flex justify-center mt-8">
-        <button
+        <a
+        target="_blank"
+        href={`/${id}`}
           class="bg-neutral-950 text-white px-10 py-3 text-sm tracking-tight cursor-pointer font-playfair-display font-medium sm:text-base"
         >
           LEER MÁS
-        </button>
+      </a>
       </div>
     </div>
   </div>
@@ -103,7 +109,7 @@ const {
         class="w-full md:w-1/2 h-[500px] sm:h-[720px] md:h-screen relative order-first md:order-last"
         data-reversed="true"
       >
-        <img
+        <img loading="lazy"
           src={imageUrl}
           alt={imageAlt}
           class:list={["object-cover", "h-full", "w-full", "card-image"]}

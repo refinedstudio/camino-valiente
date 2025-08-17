@@ -6,7 +6,7 @@ import "@fontsource/lato/300.css";
 import "@fontsource/lato/400.css";
 import "@fontsource/lato/700.css";
 import "@fontsource/lato/900.css";
-import { Footer, Navigation } from "../components/shared";
+import { Navigation } from "../components/shared";
 
 const {
   title = "",
@@ -16,7 +16,8 @@ const {
   image = "",
   type = "",
   robots = "",
-  structuredData
+  structuredData,
+  isConfigured = true
 } = Astro.props;
 ---
 
@@ -51,9 +52,8 @@ const {
   <body>
     <div id="smooth-wrapper">
       <div id="smooth-content">
-        <Navigation client:load />
+        {isConfigured ? <Navigation client:load /> : null}
         <slot />
-        <Footer  />
       </div>
     </div>
   </body>

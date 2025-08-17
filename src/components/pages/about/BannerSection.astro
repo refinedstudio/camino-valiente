@@ -8,167 +8,19 @@ interface Props {
 const { quaternaryImageUrl, quaternaryImageAlt, bottomQuote } = Astro.props;
 ---
 
-<!-- Sección bottom -->
-<div class="quote-section-bottom" id="quoteSection">
-  <div class="quote-container" id="quoteContainer">
+<div class="mt-24 lg:mt-0">
+  <div class="grid md:grid-cols-2">
     <img
+      loading="lazy"
       src={quaternaryImageUrl}
       alt={quaternaryImageAlt}
-      class="image-quaternary-img object-cover"
+      class="object-cover w-full h-[500px]"
     />
     <div
-      class="quote-box-bottom-text font-playfair-display uppercase text-neutral-950 text-left leading-[1.2]"
+      class="font-playfair-display uppercase text-neutral-950 text-left leading-[1.2] relative md:-left-[100px] text-5xl top-0 bottom-0 my-auto"
       set:html={bottomQuote}
     />
   </div>
 </div>
 
-<script>
-  function initProportionalScaling() {
-    const quoteSection = document.getElementById("quoteSection");
-    const quoteContainer = document.getElementById("quoteContainer");
 
-    if (!quoteSection || !quoteContainer) return;
-
-    // Dimensiones fijas de referencia (diseño base)
-    const BASE_WIDTH = 1920;
-    const BASE_HEIGHT = 600; // Proporción 16:5 (para aspect-[16/5])
-
-    function updateScale() {
-      if (!quoteSection || !quoteContainer) return;
-
-      // Verificar si estamos en viewport móvil (la media query coincide con la del CSS)
-      const isMobile = window.matchMedia("(max-width: 642px)").matches;
-
-      // No aplicar escalado en móvil, dejando que el CSS tome el control
-      if (isMobile) {
-        // Restaurar cualquier estilo que pudiera haber sido aplicado previamente
-        quoteSection.style.height = "";
-        quoteContainer.style.transform = "none";
-        return;
-      }
-
-      // Obtener dimensiones disponibles del contenedor
-      const availableWidth = quoteSection.clientWidth;
-
-      // Calcular el alto adecuado basado en el ancho disponible y mantener la proporción 16:5
-      const idealHeight = availableWidth * (5 / 16);
-
-      // Solo ajustamos la altura para reducir el padding vertical excesivo
-      quoteSection.style.height = `${idealHeight}px`;
-
-      // Calcular factor de escala basado en el ancho disponible
-      const scale = availableWidth / BASE_WIDTH;
-
-      // Centrar horizontalmente, alinear a la parte superior
-      const offsetX = (availableWidth - BASE_WIDTH * scale) / 2;
-
-      quoteContainer.style.transform = `translate(${offsetX}px, 0) scale(${scale})`;
-      quoteContainer.style.transformOrigin = "top left";
-    }
-
-    // Aplicar escala inicial
-    updateScale();
-
-    // Actualizar en resize con debounce para mejor rendimiento
-    let resizeTimeout: ReturnType<typeof setTimeout> | undefined;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(updateScale, 100);
-    });
-
-    // También actualizar cuando cambien las imágenes
-    window.addEventListener("load", updateScale);
-
-    // Observar cambios en el DOM que puedan afectar dimensiones
-    const resizeObserver = new ResizeObserver(() => {
-      updateScale();
-    });
-
-    resizeObserver.observe(quoteSection);
-  }
-
-  // Inicializar cuando el DOM esté listo
-  document.addEventListener("DOMContentLoaded", initProportionalScaling);
-</script>
-
-<style>
-  .quote-section-bottom {
-    @apply relative w-full overflow-hidden;
-    max-width: 1920px;
-    aspect-ratio: 16/5;
-    margin-top: -150px;
-    z-index: 10;
-  }
-
-  .quote-container {
-    @apply relative;
-    width: 1920px;
-    height: 600px;
-    transform-origin: top left;
-  }
-
-  .image-quaternary-img {
-    @apply absolute object-cover z-10;
-    top: 10%;
-    left: 5%;
-    width: 49.5%;
-    height: auto;
-    max-height: 80%;
-  }
-
-  .quote-box-bottom-text {
-    @apply absolute z-20;
-    top: 50%;
-    right: 10%;
-    width: 40%;
-    font-size: clamp(1rem, 2.5vw, 3.75rem);
-  }
-
-  /* Breakpoint para móviles (642px y menos) */
-  @media (max-width: 642px) {
-    .quote-section-bottom {
-      @apply aspect-auto h-[55vw] mt-0 overflow-visible relative rounded-lg;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
-
-    .quote-container {
-      @apply static h-auto;
-      width: auto;
-      height: auto;
-      transform: none !important;
-    }
-
-    .image-quaternary-img {
-      width: 85% !important;
-      height: 50vw !important;
-      max-width: none !important;
-      max-height: none !important;
-      min-width: 0 !important;
-      min-height: 0 !important;
-      position: relative !important;
-      left: auto !important;
-      top: auto !important;
-      right: 12% !important;
-      bottom: auto !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      object-fit: cover !important;
-      display: block !important;
-    }
-    .quote-box-bottom-text {
-      @apply relative w-full mx-auto p-4 text-center backdrop-blur-sm;
-      max-width: 350px;
-      font-size: clamp(1.2rem, 5vw, 2rem);
-      line-height: clamp(1.3, 2vw, 1.5);
-      top: auto !important;
-      right: auto !important;
-      position: relative !important;
-    }
-  }
-</style>

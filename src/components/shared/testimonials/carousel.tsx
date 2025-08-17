@@ -102,7 +102,7 @@ export const Carousel: React.FC<CarouselProps> = ({ testimonials }) => {
                     "{testimonial.quote}"
                   </p>
 
-                  <img
+                  <img loading="lazy"
                     src={testimonial.logo}
                     alt={`${testimonial.company} logo`}
                     className="h-[clamp(2.5rem,8vh,3rem)] w-auto object-contain mx-auto"

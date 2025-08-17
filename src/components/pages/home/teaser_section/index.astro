@@ -1,8 +1,20 @@
 ---
 import { TeaserCard } from "./components";
-import { cards } from "./data";
+
+interface Props {
+  cards: {
+    category: string;
+    title: string;
+    subtitle: string;
+    imageUrl: string;
+    altText: string;
+    id: string;
+  }[];
+}
+
+const { cards } = Astro.props;
 ---
 
 <section class="grid grid-cols-1 md:grid-cols-2">
-  {cards.map((card) => <TeaserCard {...card} />)}
+  {cards.map((card) => <TeaserCard id={card.id} {...card} />)}
 </section>

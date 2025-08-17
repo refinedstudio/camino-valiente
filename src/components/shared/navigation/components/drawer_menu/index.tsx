@@ -67,22 +67,8 @@ export const DrawerMenu = ({ showDrawer, onClose }: DrawerMenuProps) => {
                   SOBRE NOSOTROS
                 </a>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="block text-xs font-bold tracking-wider hover:text-neutral-500 transition-colors"
-                >
-                  LOOKBOOK
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block text-xs font-bold tracking-wider hover:text-neutral-500 transition-colors"
-                >
-                  BLOG
-                </a>
-              </li>
+           
+       
               <li>
                 <a
                   href={Routes.CONTACT}

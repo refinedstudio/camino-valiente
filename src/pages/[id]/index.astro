@@ -1,0 +1,234 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import HeroArticle from "../../components/pages/view_article/hero_section/index.astro";
+import ArticleSection from "../../components/pages/view_article/article_section/index.astro";
+import CarouselArticle from "../../components/pages/view_article/carousel_article/index.astro";
+import ArticleGallery from "../../components/pages/view_article/article_gallery/index.astro";
+import TeaserCard from "../../components/pages/home/teaser_section/components/teaser_card/index.astro";
+import CollageTwo from "../../components/pages/view_article/collage_two/index.astro";
+import CommentsForm from "../../components/pages/view_article/comments_form/index.astro";
+import { DiscoverySection } from "../../components/pages/home";
+import { itemsArticleView } from "../../components/pages/home/discovery_section/data/index";
+import {
+  galleryImages,
+  galleryImagesTwo,
+} from "../../components/pages/view_article/article_gallery/data/index";
+import { cardsArticleView } from "../../components/pages/home/teaser_section/data/index";
+import { meta } from "../../config/meta/index";
+import { obtenerConfiguracionSitio } from "../../utils/common";
+import { ConfigurationError } from "../../components/shared";
+import { obtenerYValidarDatos } from "../../utils/api";
+import Footer from "../../components/shared/footer/index.astro";
+ 
+export async function getStaticPaths() {
+  const allArticles = [];
+  let nextPage = 1;
+
+  while (nextPage !== null) {
+    const res = await fetch(`http://localhost:3000/api/articulos?page=${nextPage}`);
+    const data = await res.json();
+    
+    allArticles.push(...data.docs);
+
+    nextPage = data.nextPage;
+  }
+
+  return allArticles.map((articulo) => {
+    return ({
+      params: { id: articulo.id},
+    })
+  });
+}
+
+const { id } = Astro.params;
+
+const res = await fetch(`http://localhost:3000/api/articulos/${id}?depth=2&draft=false&locale=undefined`);
+const articulo = await res.json();
+
+const { isConfigured } = await obtenerConfiguracionSitio();
+const { data, isValid: datosValidos } = await obtenerYValidarDatos();
+---
+
+{
+  isConfigured ? (
+    <Layout
+      title={meta.viewArticle.title}
+      description={meta.viewArticle.description}
+      keywords={meta.viewArticle.keywords}
+      canonical={meta.viewArticle.canonical}
+      image={meta.viewArticle.image}
+      type={meta.viewArticle.type}
+      robots={meta.viewArticle.robots}
+      structuredData={meta.viewArticle.structuredData}
+    >
+      <HeroArticle image={articulo.imagenes[0].imagen.url} />
+      <ArticleSection 
+        category={articulo.category.title}
+        title={articulo.title}
+        subtitle={articulo.subtitle}
+        imageUrl={articulo.imagenes[1].imagen.url}
+        content={articulo.content} 
+      />
+
+      <section class="grid grid-cols-1 md:grid-cols-2">
+        <button class="relative overflow-hidden group cursor-pointer block">
+          <div class="relative h-screen overflow-hidden">
+            <img loading="lazy"
+              src={articulo.imagenes[2].imagen.url}
+              alt="image"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div
+              class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300"
+            >
+            </div>
+          </div>
+        </button>
+        <button class="relative overflow-hidden group cursor-pointer block">
+          <div class="relative h-screen overflow-hidden">
+            <img loading="lazy"
+              src={articulo.imagenes[3].imagen.url}
+              alt="imagen"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div
+              class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300"
+            >
+            </div>
+          </div>
+        </button>
+      </section>
+
+
+
+      {articulo.imagenes[4] !== undefined &&  articulo.imagenes[5] !== undefined && (
+
+        <CollageTwo
+        textRight={"Viajar es una forma de expresión del alma, una manera de descubrir el mundo y a uno mismo."}
+          primaryImageUrl={articulo.imagenes[4].imagen.url}
+          primaryImageAlt="Mini vestido de mezclilla outfit idea"
+          secondaryImageUrl={articulo.imagenes[5].imagen.url}
+          secondaryImageAlt="Mini vestido de mezclilla outfit idea"
+        />
+
+      )}
+
+      {
+      articulo.imagenes[6] !== undefined &&  
+      articulo.imagenes[7] !== undefined && 
+      articulo.imagenes[8] !== undefined && 
+      articulo.imagenes[9] !== undefined && 
+      articulo.imagenes[10] !== undefined && 
+      (
+
+        <ArticleGallery images={[
+          {
+      id: "articulo1",
+      imageUrl: articulo.imagenes[6].imagen.url,
+      alt: articulo.imagenes[6].imagen.alt,
+    },
+    {
+      id: "articulo2",
+      imageUrl: articulo.imagenes[7].imagen.url,
+      alt: articulo.imagenes[7].imagen.alt,
+    },
+    {
+      id: "articulo3",
+      imageUrl: articulo.imagenes[8].imagen.url,
+      alt: articulo.imagenes[8].imagen.alt,
+    },
+    {
+      id: "articulo4",
+      imageUrl: articulo.imagenes[9].imagen.url,
+      alt: articulo.imagenes[9].imagen.alt,
+    },
+    {
+      id: "articulo5",
+      imageUrl: articulo.imagenes[10].imagen.url,
+      alt: articulo.imagenes[10].imagen.alt,
+    },
+        ]} />
+
+      )}
+
+      {data.inicio.contenido.map((item: Content, idx: number) => (
+        <div>
+          {item.blockType === "exploreBlock" && (
+            <DiscoverySection
+              items={[
+                {
+                  id: item.articulo[0].post.id,
+                  imageUrl: item.articulo[0].post.imagenes[0].imagen.url,
+                  title: item.articulo[0].post.title,
+                  category: item.articulo[0].post.category.title,
+                  subtitle: item.articulo[0].post.subtitle,
+                },
+                {
+                  id: item.articulo[1].post.id,
+                  imageUrl: item.articulo[1].post.imagenes[0].imagen.url,
+                  title: item.articulo[1].post.title,
+                  category: item.articulo[1].post.category.title,
+                  subtitle: item.articulo[1].post.subtitle,
+                },
+                {
+                  id: item.articulo[2].post.id,
+                  imageUrl: item.articulo[2].post.imagenes[0].imagen.url,
+                  title: item.articulo[2].post.title,
+                  category: item.articulo[2].post.category.title,
+                  subtitle: item.articulo[2].post.subtitle,
+                },
+              ]}
+            />
+          )}
+        </div>
+      ))}
+
+      <Footer
+           facebook={data.acerca.social.facebook}
+        youtube={data.acerca.social.youtube}
+        tiktok={data.acerca.social.tiktok}
+        twitter={data.acerca.social.twitter}
+        content={[
+          {
+            id: data.inicio.cierre[0].articulo[0].post.id,
+            title: data.inicio.cierre[0].articulo[0].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[0].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[1].post.id,
+            title: data.inicio.cierre[0].articulo[1].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[1].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[2].post.id,
+            title: data.inicio.cierre[0].articulo[2].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[2].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[3].post.id,
+            title: data.inicio.cierre[0].articulo[3].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[3].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[4].post.id,
+            title: data.inicio.cierre[0].articulo[4].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[4].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[5].post.id,
+            title: data.inicio.cierre[0].articulo[5].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[5].post.imagenes[0].imagen.url,
+          },
+        ]}
+      />
+    </Layout>
+  ) : (
+    <ConfigurationError />
+  )
+}

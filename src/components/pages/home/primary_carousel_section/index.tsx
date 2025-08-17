@@ -2,12 +2,19 @@ import { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectFade, Autoplay } from "swiper/modules";
 import { CarouselSlide } from "./components";
-import { slides } from "./data";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 
-const PrimaryCarouselSection: React.FC = () => {
+interface Props {
+  slides: {
+    id: string;
+    imageUrl: string;
+    title: string;
+    subtitle: string;
+  }[];
+}
+const PrimaryCarouselSection: React.FC<Props> = ({ slides }) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const swiperRef = useRef<any>(null);
@@ -59,6 +66,7 @@ const PrimaryCarouselSection: React.FC = () => {
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
                 <CarouselSlide
+                  id={slide.id}
                   imageUrl={slide.imageUrl}
                   title={slide.title}
                   subtitle={slide.subtitle}

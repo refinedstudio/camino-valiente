@@ -17,32 +17,286 @@ import {
   quinaryDestinations,
 } from "../data";
 import { meta } from "../config";
+import type { Content } from "../types";
+import { Footer, ConfigurationError } from "../components/shared";
+import { obtenerYValidarDatos } from "../utils/api";
+
+const { data, isValid: datosValidos } = await obtenerYValidarDatos();
 ---
 
-<Layout
-  title={meta.home.title}
-  description={meta.home.description}
-  keywords={meta.home.keywords}
-  canonical={meta.home.canonical}
-  image={meta.home.image}
-  type={meta.home.type}
-  robots={meta.home.robots}
-  structuredData={meta.home.structuredData}
->
-  <HeroSection />
-  <DestinationSection destinations={primaryDestinations} />
-  <PrimaryCarouselSection client:load />
-  <DestinationSection destinations={secondaryDestinations} />
-  <ParallaxSection
-    imageUrl="https://www.peru.travel/Contenido/Atractivo/Imagen/es/522/1.1/Principal/huacachina-laguna.jpg"
-    subtitle="Laguna Huacachina"
-    category="ICA - PERU"
-    title="Oasis en el desierto"
-  />
-  <DestinationSection destinations={tertiaryDestinations} />
-  <SecondaryCarouselSection client:load />
-  <DestinationSection destinations={quaternaryDestinations} />
-  <TeaserSection />
-  <DestinationSection destinations={quinaryDestinations} />
-  <DiscoverySection />
-</Layout>
+{
+  datosValidos ? (
+    <Layout
+      title={meta.home.title}
+      description={meta.home.description}
+      keywords={meta.home.keywords}
+      canonical={meta.home.canonical}
+      image={meta.home.image}
+      type={meta.home.type}
+      robots={meta.home.robots}
+    >
+      <HeroSection
+        image={data.inicio.inicio[0].articulo[0].post.imagenes[0].imagen.url}
+        titlePage={data.inicio.inicio[0].title}
+        subtitleArticle={data.inicio.inicio[0].articulo[0].post.subtitle}
+        facebook={data.acerca.social.facebook}
+        youtube={data.acerca.social.youtube}
+        tiktok={data.acerca.social.tiktok}
+        twitter={data.acerca.social.twitter}
+        id={data.inicio.inicio[0].articulo[0].post.id}
+      />
+
+      {data.inicio.contenido.map((item: Content, idx: number) => (
+        <div>
+          {item.blockType === "detailSideMediaBlock" && (
+            <DestinationSection
+              destinations={[
+                {
+                  id: item.articulo[0].post.id,
+                  location: item.articulo[0].post.category.title,
+                  subtitle: item.articulo[0].post.subtitle,
+                  title: item.articulo[0].post.title,
+                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  imageUrl: item.articulo[0].post.imagenes[0].imagen.url,
+                  imageAlt: item.articulo[0].post.imagenes[0].imagen.filename,
+                  isReversed: false,
+                },
+                {
+                  id: item.articulo[1].post.id,
+                  location: item.articulo[1].post.category.title,
+                  subtitle: item.articulo[1].post.subtitle,
+                  title: item.articulo[1].post.title,
+                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  imageUrl: item.articulo[1].post.imagenes[0].imagen.url,
+                  imageAlt: item.articulo[1].post.imagenes[0].imagen.filename,
+                  isReversed: true,
+                },
+              ]}
+            />
+          )}
+          {item.blockType === "bannerBlock" && (
+            <ParallaxSection
+              id={item.articulo[0].post.id}
+              imageUrl={item.articulo[0].post.imagenes[0].imagen.url}
+              subtitle={item.articulo[0].post.subtitle}
+              category={item.articulo[0].post.category.title}
+              title={item.articulo[0].post.title}
+            />
+          )}
+          {item.blockType === "exploreBlock" && (
+            <DiscoverySection
+              items={[
+                {
+                  id: item.articulo[0].post.id,
+                  imageUrl: item.articulo[0].post.imagenes[0].imagen.url,
+                  title: item.articulo[0].post.title,
+                  category: item.articulo[0].post.category.title,
+                  subtitle: item.articulo[0].post.subtitle,
+                },
+                {
+                  id: item.articulo[1].post.id,
+                  imageUrl: item.articulo[1].post.imagenes[0].imagen.url,
+                  title: item.articulo[1].post.title,
+                  category: item.articulo[1].post.category.title,
+                  subtitle: item.articulo[1].post.subtitle,
+                },
+                {
+                  id: item.articulo[2].post.id,
+                  imageUrl: item.articulo[2].post.imagenes[0].imagen.url,
+                  title: item.articulo[2].post.title,
+                  category: item.articulo[2].post.category.title,
+                  subtitle: item.articulo[2].post.subtitle,
+                },
+
+                {
+                  id: item.articulo[3].post.id,
+                  imageUrl: item.articulo[3].post.imagenes[0].imagen.url,
+                  title: item.articulo[3].post.title,
+                  category: item.articulo[3].post.category.title,
+                  subtitle: item.articulo[3].post.subtitle,
+                },
+                {
+                  id: item.articulo[4].post.id,
+                  imageUrl: item.articulo[4].post.imagenes[0].imagen.url,
+                  title: item.articulo[4].post.title,
+                  category: item.articulo[4].post.category.title,
+                  subtitle: item.articulo[4].post.subtitle,
+                },
+                {
+                  id: item.articulo[5].post.id,
+                  imageUrl: item.articulo[5].post.imagenes[0].imagen.url,
+                  title: item.articulo[5].post.title,
+                  category: item.articulo[5].post.category.title,
+                  subtitle: item.articulo[5].post.subtitle,
+                },
+
+              ]}
+            />
+          )}
+          {item.blockType === "carouselThreeColumns" && (
+            <PrimaryCarouselSection
+              slides={[
+                {
+                  id: item.articulo[0].post.id,
+                  imageUrl: item.articulo[0].post.imagenes[0].imagen.url,
+                  title: item.articulo[0].post.title,
+                  subtitle: item.articulo[0].post.subtitle,
+                },
+                {
+                  id: item.articulo[1].post.id,
+                  imageUrl: item.articulo[1].post.imagenes[0].imagen.url,
+                  title: item.articulo[1].post.title,
+                  subtitle: item.articulo[1].post.subtitle,
+                },
+                {
+                  id: item.articulo[2].post.id,
+                  imageUrl: item.articulo[2].post.imagenes[0].imagen.url,
+                  title: item.articulo[2].post.title,
+                  subtitle: item.articulo[2].post.subtitle,
+                },
+                {
+                  id: item.articulo[3].post.id,
+                  imageUrl: item.articulo[3].post.imagenes[0].imagen.url,
+                  title: item.articulo[3].post.title,
+                  subtitle: item.articulo[3].post.subtitle,
+                },
+                {
+                  id: item.articulo[4].post.id,
+                  imageUrl: item.articulo[4].post.imagenes[0].imagen.url,
+                  title: item.articulo[4].post.title,
+                  subtitle: item.articulo[4].post.subtitle,
+                },
+                {
+                  id: item.articulo[5].post.id,
+                  imageUrl: item.articulo[5].post.imagenes[0].imagen.url,
+                  title: item.articulo[5].post.title,
+                  subtitle: item.articulo[5].post.subtitle,
+                },
+              ]}
+              client:load
+            />
+          )}
+          {item.blockType === "carouselTwoColumns" && (
+            <SecondaryCarouselSection
+              title="Destacados"
+              cards={[
+                {
+                  id: item.articulo[0].post.id,
+                  imageUrl: item.articulo[0].post.imagenes[0].imagen.url,
+                  title: item.articulo[0].post.title,
+                  subtitle: item.articulo[0].post.subtitle,
+                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                },
+                {
+                  id: item.articulo[1].post.id,
+                  imageUrl: item.articulo[1].post.imagenes[0].imagen.url,
+                  title: item.articulo[1].post.title,
+                  subtitle: item.articulo[1].post.subtitle,
+                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                },
+                {
+                  id: item.articulo[2].post.id,
+                  imageUrl: item.articulo[2].post.imagenes[0].imagen.url,
+                  title: item.articulo[2].post.title,
+                  subtitle: item.articulo[2].post.subtitle,
+                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                },
+                {
+                  id: item.articulo[3].post.id,
+                  imageUrl: item.articulo[3].post.imagenes[0].imagen.url,
+                  title: item.articulo[3].post.title,
+                  subtitle: item.articulo[3].post.subtitle,
+                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                },
+                {
+                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  id: item.articulo[4].post.id,
+                  imageUrl: item.articulo[4].post.imagenes[0].imagen.url,
+                  title: item.articulo[4].post.title,
+                  subtitle: item.articulo[4].post.subtitle,
+                },
+                {
+                  id: item.articulo[5].post.id,
+                  imageUrl: item.articulo[5].post.imagenes[0].imagen.url,
+                  title: item.articulo[5].post.title,
+                  subtitle: item.articulo[5].post.subtitle,
+                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                },
+              ]}
+              client:load
+            />
+          )}
+          {item.blockType === "TwoColumns" && (
+            <TeaserSection
+              cards={[
+                {
+                  id: item.articulo[0].post.id,
+                  category: item.articulo[0].post.category.title,
+                  title: item.articulo[0].post.title,
+                  subtitle: item.articulo[0].post.subtitle,
+                  imageUrl: item.articulo[0].post.imagenes[0].imagen.url,
+                  altText: item.articulo[0].post.imagenes[0].imagen.filename,
+                },
+                {
+                  id: item.articulo[1].post.id,
+                  category: item.articulo[1].post.category.title,
+                  title: item.articulo[1].post.title,
+                  subtitle: item.articulo[1].post.subtitle,
+                  imageUrl: item.articulo[1].post.imagenes[0].imagen.url,
+                  altText: item.articulo[1].post.imagenes[0].imagen.filename,
+                },
+              ]}
+            />
+          )}
+        </div>
+      ))}
+
+      <Footer
+          facebook={data.acerca.social.facebook}
+        youtube={data.acerca.social.youtube}
+        tiktok={data.acerca.social.tiktok}
+        twitter={data.acerca.social.twitter}
+        content={[
+          {
+            id: data.inicio.cierre[0].articulo[0].post.id,
+            title: data.inicio.cierre[0].articulo[0].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[0].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[1].post.id,
+            title: data.inicio.cierre[0].articulo[1].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[1].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[2].post.id,
+            title: data.inicio.cierre[0].articulo[2].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[2].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[3].post.id,
+            title: data.inicio.cierre[0].articulo[3].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[3].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[4].post.id,
+            title: data.inicio.cierre[0].articulo[4].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[4].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[5].post.id,
+            title: data.inicio.cierre[0].articulo[5].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[5].post.imagenes[0].imagen.url,
+          },
+        ]}
+      />
+    </Layout>
+  ) : (
+    <ConfigurationError />
+  )
+}

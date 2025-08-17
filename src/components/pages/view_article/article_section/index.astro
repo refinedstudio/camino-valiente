@@ -1,17 +1,8 @@
 ---
-const category = "Viajes";
-const title = "Escapada a la Selva Amazónica";
-const subtitle = "Destino con encanto en Perú";
-const imageUrl =
-  "https://images.pexels.com/photos/30525160/pexels-photo-30525160.jpeg?auto=compress&cs=tinysrgb&w=800";
 const imageAlt = "Paisaje";
 const authorSignature = "Camino Valiente";
 
-const content = [
-  "Si estás buscando una escapada encantadora para este verano, Reims, en el corazón de la región de Champaña, es un destino que no puedes pasar por alto. Famosa por sus vinos espumosos y su impresionante arquitectura gótica, esta ciudad francesa combina historia, cultura y tranquilidad.",
-  "Caminar por las calles adoquinadas de Reims es como viajar en el tiempo. La Catedral de Notre-Dame, declarada Patrimonio de la Humanidad por la UNESCO, impone con su belleza, mientras que los cafés al aire libre y las plazas tranquilas invitan a detenerse y disfrutar del ambiente local.",
-  "Para una jornada perfecta, comienza con un desayuno tradicional en una panadería local, seguido de una visita a alguna de las casas de champán. Al atardecer, nada mejor que un paseo relajado por los viñedos cercanos, cerrando el día con una cena típica francesa. Reims ofrece la mezcla ideal de descanso, descubrimiento y sabor.",
-];
+const {category, title, subtitle, imageUrl, content } = Astro.props
 ---
 
 <section class="w-full py-8">
@@ -43,7 +34,7 @@ const content = [
 
     <!-- Imagen -->
     <div class="max-w-4xl mx-auto pb-4 mt-16 block">
-      <img
+      <img loading="lazy"
         src={imageUrl}
         alt={imageAlt}
         class="w-full h-auto object-cover aspect-[3/4]"
@@ -52,13 +43,9 @@ const content = [
 
     <!-- Contenido -->
     <div class="max-w-4xl mx-auto px-4 md:px-0 py-2 mt-8">
-      {
-        content.map((paragraph) => (
-          <p class="text-gray-700 leading-relaxed mb-6 text-center font-light text-lg font-playfair-display">
-            {paragraph}
-          </p>
-        ))
-      }
+      <p class="text-gray-700 leading-relaxed mb-6 text-center font-light text-lg font-playfair-display">
+        {content}
+      </p>
 
       {
         authorSignature && (

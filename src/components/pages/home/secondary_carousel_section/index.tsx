@@ -4,12 +4,22 @@ import type { Swiper as SwiperType } from "swiper";
 import { Navigation } from "swiper/modules";
 import type { NavigationOptions } from "swiper/types";
 import { OutfitSlide } from "./components";
-import { outfits } from "./data";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
-const SecondaryCarouselSection: React.FC = () => {
+interface Props {
+  title: string;
+  cards: {
+    id: string;
+    imageUrl: string;
+    title: string;
+    subtitle: string;
+    description: string;
+  }[];
+}
+
+const SecondaryCarouselSection: React.FC<Props> = ({ cards, title }) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const swiperRef = useRef<SwiperType>(null);
@@ -49,7 +59,7 @@ const SecondaryCarouselSection: React.FC = () => {
     <section className="overflow-x-hidden w-full relative bg-[#F1E5D7] py-8 sm:py-8 md:py-12 overflow-hidden px-4 sm:px-12 ">
       <div className="flex items-center mb-12 px-4">
         <h2 className="text-3xl md:text-5xl font-light italic text-[#2d2d2d] font-brittany-signature pr-4">
-          Desiertos increibles
+          {title}
         </h2>
         <div className="flex-grow h-px bg-stone-500 max-w-md"></div>
       </div>
@@ -84,11 +94,11 @@ const SecondaryCarouselSection: React.FC = () => {
             setActiveIndex(swiper.realIndex);
           }}
         >
-          {outfits.map((outfit, index) => (
-            <SwiperSlide key={outfit.id}>
+          {cards.map((card, index) => (
+            <SwiperSlide key={card.id}>
               <OutfitSlide
-                outfit={outfit}
-                isFirstVisible={index % outfits.length === activeIndex}
+                outfit={card}
+                isFirstVisible={index % cards.length === activeIndex}
               />
             </SwiperSlide>
           ))}

@@ -5,14 +5,15 @@ interface Props {
   subtitle?: string;
   imageUrl: string;
   altText: string;
+  id: string;
 }
 
-const { category, title, subtitle, imageUrl, altText } = Astro.props;
+const { category, title, subtitle, imageUrl, altText, id } = Astro.props;
 ---
 
-<a href="#" class="relative overflow-hidden group cursor-pointer block">
+<a href={`/${id}`} target="_blank" class="relative overflow-hidden group cursor-pointer block">
   <div class="relative h-screen overflow-hidden">
-    <img
+    <img loading="lazy"
       src={imageUrl || "/placeholder.svg"}
       alt={altText}
       class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -28,13 +29,13 @@ const { category, title, subtitle, imageUrl, altText } = Astro.props;
   >
     <span class="uppercase text-sm tracking-widest mb-2">{category}</span>
     <h2
-      class="text-2xl sm:text-4xl md:text-5xl font-playfair-display leading-tight mb-2 text-center"
+      class="text-2xl sm:text-4xl md:text-5xl font-playfair-display leading-tight mb-2 text-center uppercase"
     >
       {title}
     </h2>
     {
       subtitle && (
-        <h3 class="text-2xl sm:text-4xl md:text-5xl mb-8 text-center font-bold">
+        <h3 class="text-2xl sm:text-4xl md:text-5xl mb-8 text-center font-bold uppercase">
           {subtitle}
         </h3>
       )

@@ -9,121 +9,47 @@ const { storyParagraphs, tertiaryImageUrl, tertiaryImageAlt } = Astro.props;
 ---
 
 <!-- Contenedor general -->
-<div class="story-wrapper">
+<div class="mt-24 lg:mt-0">
   <!-- Primera sección -->
-  <div class="story-section" id="storySection">
-    <div class="story-container" id="storyContainer">
-      <div class="story-content-fixed">
-        <div class="story-text-content text-neutral-700">
-          {
-            storyParagraphs.map((paragraph) => (
-              <p class="story-paragraph-item">{paragraph}</p>
-            ))
-          }
-        </div>
+  <div class="" >
+    <div class="grid lg:grid-cols-[60%_40%]">
+      <div
+        class="text-xl leading-9 font-light text-neutral-700 p-36"
+        
+      >
+        {storyParagraphs}
+      </div>
 
-        <div class="image-box-tertiary">
-          <img
-            src={tertiaryImageUrl}
-            alt={tertiaryImageAlt}
-            class="w-full h-full object-cover"
-          />
-        </div>
+      <div class="">
+        <img loading="lazy"
+          src={tertiaryImageUrl}
+          alt={tertiaryImageAlt}
+          class="w-full h-full object-cover"
+        />
       </div>
     </div>
+  
   </div>
 </div>
-
-<script>
-  function initProportionalScaling() {
-    const storySection = document.getElementById("storySection");
-    const storyContainer = document.getElementById("storyContainer");
-
-    if (!storySection || !storyContainer) return;
-
-    // Dimensiones fijas de referencia (diseño base)
-    const BASE_WIDTH = 1920;
-    const BASE_HEIGHT = 1080;
-
-    function updateScale() {
-      if (!storySection || !storyContainer) return;
-
-      // Verificar si estamos en viewport móvil (la media query coincide con la del CSS)
-      const isMobile = window.matchMedia("(max-width: 642px)").matches;
-
-      // No aplicar escalado en móvil, dejando que el CSS tome el control
-      if (isMobile) {
-        storyContainer.style.transform = "none";
-        return;
-      }
-
-      // Obtener dimensiones disponibles del contenedor
-      const availableWidth = storySection.clientWidth;
-      const availableHeight = storySection.clientHeight;
-
-      // Calcular factor de escala manteniendo proporciones
-      const scaleX = availableWidth / BASE_WIDTH;
-      const scaleY = availableHeight / BASE_HEIGHT;
-      const scale = Math.min(scaleX, scaleY);
-
-      // Ajustar el contenedor para centrar el contenido escalado
-      const scaledWidth = BASE_WIDTH * scale;
-      const scaledHeight = BASE_HEIGHT * scale;
-
-      // Centrar perfectamente
-      const offsetX = (availableWidth - scaledWidth) / 2;
-      const offsetY = (availableHeight - scaledHeight) / 2;
-
-      storyContainer.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
-      storyContainer.style.transformOrigin = "top left";
-    }
-
-    // Aplicar escala inicial
-    updateScale();
-
-    // Actualizar en resize con debounce para mejor rendimiento
-    let resizeTimeout: ReturnType<typeof setTimeout> | undefined;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(updateScale, 100);
-    });
-
-    // También actualizar cuando cambien las imágenes (para asegurar escalado correcto cuando todo esté cargado)
-    window.addEventListener("load", updateScale);
-
-    // Observar cambios en el DOM que puedan afectar dimensiones
-    const resizeObserver = new ResizeObserver((entries) => {
-      updateScale();
-    });
-
-    resizeObserver.observe(storySection);
-  }
-
-  // Inicializar cuando el DOM esté listo
-  document.addEventListener("DOMContentLoaded", initProportionalScaling);
-</script>
 
 <style>
   .story-wrapper {
     @apply w-full mx-auto;
     max-width: 1920px;
     margin-bottom: 100px;
+    margin-top: 200px;
     position: relative;
     z-index: 1;
   }
 
   .story-section {
     @apply relative w-full overflow-hidden;
-    aspect-ratio: 16/9;
-    max-height: 1080px;
-    min-height: 400px;
   }
 
   .story-container {
     @apply relative;
     width: 1920px;
     height: 1080px;
-    transform-origin: top left;
   }
 
   .story-content-fixed {
@@ -134,13 +60,10 @@ const { storyParagraphs, tertiaryImageUrl, tertiaryImageAlt } = Astro.props;
   }
 
   .story-text-content {
-    @apply absolute z-10;
-    top: 210px;
-    left: 350px;
     width: 768px;
     max-width: 800px;
-    font-size: 24px;
-    line-height: 1.2;
+    margin-top: 210px;
+    font-size: 18px;
     font-weight: 300;
   }
 
@@ -149,11 +72,9 @@ const { storyParagraphs, tertiaryImageUrl, tertiaryImageAlt } = Astro.props;
   }
 
   .image-box-tertiary {
-    @apply absolute overflow-hidden z-[1];
-    width: 710px;
+    swidth: 710px;
     height: 1026px;
-    right: -115px;
-    top: 54px;
+    margin-top: 180px;
   }
 
   /* móviles */
@@ -181,8 +102,6 @@ const { storyParagraphs, tertiaryImageUrl, tertiaryImageAlt } = Astro.props;
 
     .story-text-content {
       @apply relative w-[85%] max-w-full top-auto left-auto order-1 rounded-lg shadow-sm p-4;
-      font-size: clamp(0.85rem, 2.8vw, 1.1rem);
-      line-height: clamp(1.5, 2.5vw, 1.8);
       width: 85%;
       max-width: 100%;
     }

@@ -2,102 +2,150 @@
 import Layout from "../../layouts/Layout.astro";
 import AboutHeader from "../../components/shared/title_page/index.astro";
 import { meta } from "../../config";
+import { obtenerConfiguracionSitio } from "../../utils/common";
+import { ConfigurationError } from "../../components/shared";
+import { obtenerYValidarDatos } from "../../utils/api";
+import Footer from "../../components/shared/footer/index.astro";
+
+const { isConfigured } = await obtenerConfiguracionSitio();
+const { data, isValid: datosValidos } = await obtenerYValidarDatos();
 ---
 
-<Layout
-  title={meta.contact.title}
-  description={meta.contact.description}
-  keywords={meta.contact.keywords}
-  canonical={meta.contact.canonical}
-  image={meta.contact.image}
-  type={meta.contact.type}
-  robots={meta.contact.robots}
-  structuredData={meta.contact.structuredData}
->
-  <div class="pt-16 md:pt-20">
-    <AboutHeader title="CONTACTO" />
-    <div class="container mx-auto px-12 py-24 max-w-6xl">
-      <div class="text-center">
-        <img
-          src="https://images.pexels.com/photos/28435470/pexels-photo-28435470/free-photo-of-sin-salamanca-9.jpeg"
-          alt="Logo"
-          class="w-full h-[600px] mx-auto mb-8 filter grayscale object-cover"
-        />
-        <h2
-          class="text-5xl font-playfair-display text-stone-800 tracking-tighter mt-24"
-        >
-          RESERVAS <span class="italic font-light">con</span> COLABORACIONES
-        </h2>
-        <div class="mt-8">
-          <p class="text-lg mb-2 text-neutral-500 font-light">
-            Para consultas de reservas y colaboraciones, por favor contacta a
-            Cesar RV o John Doe:
-          </p>
-          <p class="text-lg font-semibold text-neutral-700">
-            cesar@cesarrivera.com / camino@caminovaliente.com
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-32 max-w-2xl mx-auto">
-        <h2
-          class="text-4xl font-light italic text-center mb-10 font-brittany-signature"
-        >
-          Saludame en este formulario!
-        </h2>
-
-        <form class="space-y-4">
-          <div>
-            <input
-              type="text"
-              placeholder="Name"
-              class="w-full border border-gray-300 p-3 text-neutral-700 font-light text-sm focus:border-neutral-900 focus:outline-none"
-              required
+{
+  isConfigured ? (
+    <Layout
+      title={meta.contact.title}
+      description={meta.contact.description}
+      keywords={meta.contact.keywords}
+      canonical={meta.contact.canonical}
+      image={meta.contact.image}
+      type={meta.contact.type}
+      robots={meta.contact.robots}
+      structuredData={meta.contact.structuredData}
+    >
+      <div class="pt-16 md:pt-20">
+        <AboutHeader title="CONTACTO" />
+        <div class="container mx-auto px-12 py-24 max-w-6xl">
+          <div class="text-center">
+            <img loading="lazy"
+              src="https://images.pexels.com/photos/28435470/pexels-photo-28435470/free-photo-of-sin-salamanca-9.jpeg"
+              alt="Logo"
+              class="w-full h-[600px] mx-auto mb-8 filter grayscale object-cover"
             />
-          </div>
-
-          <div>
-            <input
-              type="email"
-              placeholder="Email"
-              class="w-full border border-gray-300 p-3 text-neutral-700 font-light text-sm focus:border-neutral-900 focus:outline-none"
-              required
-            />
-          </div>
-
-          <div>
-            <textarea
-              placeholder="Comment"
-              rows="6"
-              class="w-full border border-gray-300 p-3 text-neutral-700 font-light text-sm focus:border-neutral-900 focus:outline-none"
-              required></textarea>
-          </div>
-
-          <div class="flex flex-col space-y-2">
-            <div
-              class="font-playfair-display italic font-bold text-3xl tracking-widest"
+            <h2
+              class="text-5xl font-playfair-display text-stone-800 tracking-tighter mt-24"
             >
-              39JKE
+              RESERVAS <span class="italic font-light">con</span> COLABORACIONES
+            </h2>
+            <div class="mt-8">
+              <p class="text-lg mb-2 text-neutral-500 font-light">
+                Para consultas de reservas y colaboraciones, por favor contacta con el adminitrador.
+              </p>
+              <p class="text-lg font-semibold text-neutral-700">
+                {data.acerca.social.email}
+              </p>
             </div>
-            <input
-              type="text"
-              class="w-full md:w-1/2 border border-gray-300 p-3 text-neutral-700 font-light text-sm focus:border-neutral-900 focus:outline-none"
-              required
-            />
           </div>
-        </form>
-        <div class="text-center mt-12">
-          <button
-            type="submit"
-            class="bg-black text-white px-6 py-3 font-medium tracking-wider text-sm"
-          >
-            ENVIAR MENSAJE
-          </button>
+
+          <div class="mt-32 max-w-2xl mx-auto">
+            <h2
+              class="text-4xl font-light italic text-center mb-10 font-brittany-signature"
+            >
+              Saludame en este formulario!
+            </h2>
+
+            <form class="space-y-4" method="POST" action={"https://formsubmit.co/yerik05vh@gmail.com"}>
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Nombre"
+                  class="w-full border border-gray-300 p-3 text-neutral-700 font-light text-sm focus:border-neutral-900 focus:outline-none"
+                  required
+                />
+              </div>
+
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Correo electrónico"
+                  class="w-full border border-gray-300 p-3 text-neutral-700 font-light text-sm focus:border-neutral-900 focus:outline-none"
+                  required
+                />
+              </div>
+
+              <div>
+                <textarea
+                  name="message"
+                  placeholder="Comentario"
+                  rows="6"
+                  class="w-full border border-gray-300 p-3 text-neutral-700 font-light text-sm focus:border-neutral-900 focus:outline-none"
+                  required></textarea>
+              </div>
+         
+            <div class="text-center mt-12">
+              <button
+                type="submit"
+                class="bg-black text-white px-6 py-3 font-medium tracking-wider text-sm"
+              >
+                ENVIAR MENSAJE
+              </button>
+            </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</Layout>
+
+      <Footer
+        facebook={data.acerca.social.facebook}
+        youtube={data.acerca.social.youtube}
+        tiktok={data.acerca.social.tiktok}
+        twitter={data.acerca.social.twitter}
+        content={[
+          {
+            id: data.inicio.cierre[0].articulo[0].post.id,
+            title: data.inicio.cierre[0].articulo[0].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[0].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[1].post.id,
+            title: data.inicio.cierre[0].articulo[1].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[1].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[2].post.id,
+            title: data.inicio.cierre[0].articulo[2].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[2].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[3].post.id,
+            title: data.inicio.cierre[0].articulo[3].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[3].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[4].post.id,
+            title: data.inicio.cierre[0].articulo[4].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[4].post.imagenes[0].imagen.url,
+          },
+          {
+            id: data.inicio.cierre[0].articulo[5].post.id,
+            title: data.inicio.cierre[0].articulo[5].post.title,
+            imageUrl:
+              data.inicio.cierre[0].articulo[5].post.imagenes[0].imagen.url,
+          },
+        ]}
+      />
+    </Layout>
+  ) : (
+    <ConfigurationError />
+  )
+}
 
 <style>
   .font-handwriting {

@@ -1,4 +1,9 @@
 {
-  "recommendations": ["astro-build.astro-vscode"],
-  "unwantedRecommendations": []
+  "astro.typescript.enabled": true,
+  "astro.language-server.runtime": "node",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "typescript.suggest.autoImports": true,
+  "files.associations": {
+    "*.astro": "astro"
+  }
 }

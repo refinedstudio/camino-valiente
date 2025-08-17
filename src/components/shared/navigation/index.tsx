@@ -72,11 +72,11 @@ export default function Navigation() {
         />
       </div>
       <div className="fixed top-2 right-6 z-50">
-        <SearchBar
+     {/*   <SearchBar
           isMobile={isMobile}
           isOpen={isSearchOpen}
           onClose={() => setIsSearchOpen(false)}
-        />
+        /> */}
       </div>
       <ScrollToTop show={showScrollTop} />
       <DrawerMenu

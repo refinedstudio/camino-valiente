@@ -1,7 +1,11 @@
+---
+const { image, titlePage, subtitleArticle, facebook, youtube, tiktok, twitter, id } = Astro.props;
+---
+
 <section class="relative w-full h-screen">
   <div
     class="absolute inset-0 bg-cover bg-center bg-no-repeat bg-attachment-fixed bg-fixed"
-    style="background-image: url('https://consultasenlinea.mincetur.gob.pe/fichaInventario/foto.aspx?cod=562112');"
+    style={`background-image: url('${image}');`}
   >
   </div>
 
@@ -12,15 +16,15 @@
       <h2
         class="font-brittany-signature text-4xl sm:text-6xl md:text-7xl font-light text-white mb-2"
       >
-        Lugares turísticos
+        {titlePage}
       </h2>
       <h3
-        class="text-3xl sm:text-5xl font-playfair-display md:text-6xl font-regular tracking-tight text-white mb-8 mt-8 sm:mt-10 md:mt-16 pl-0 sm:pl-4 md:pl-24"
+        class="text-3xl uppercase sm:text-5xl font-playfair-display md:text-6xl font-regular tracking-tight text-white mb-8 mt-8 sm:mt-10 md:mt-16 pl-0 sm:pl-4 md:pl-24"
       >
-        HUAYTAPALLANA
+        {subtitleArticle}
       </h3>
       <a
-        href="/huaytapallana"
+        href={`/${id}`}
         class="flex items-center mt-18 ml-4 sm:ml-24 md:ml-80 group w-fit px-4"
       >
         <div
@@ -40,8 +44,8 @@
     class="absolute bottom-0 top-0 my-auto h-fit transition-all right-4 md:right-6 md:bottom-20 md:top-auto flex flex-col gap-6"
   >
     <a
-      href="https://www.instagram.com/camino_valiente/"
-      class="text-white hover:opacity-80 transition-opacity"
+      href={youtube}
+      class="text-whi te hover:opacity-80 transition-opacity"
       target="_blank"
     >
       <svg
@@ -57,7 +61,7 @@
       </svg>
     </a>
     <a
-      href="https://www.instagram.com/camino_valiente/"
+      href={facebook}
       class="text-white hover:opacity-80 transition-opacity"
       target="_blank"
     >
@@ -74,7 +78,7 @@
       </svg>
     </a>
     <a
-      href="https://www.tiktok.com/@camino_valiente"
+      href={tiktok}
       class="text-white hover:opacity-80 transition-opacity"
       target="_blank"
     >
@@ -91,7 +95,7 @@
       </svg>
     </a>
     <a
-      href="https://www.tiktok.com/@camino_valiente"
+      href={twitter}
       class="text-white hover:opacity-80 transition-opacity"
       target="_blank"
     >

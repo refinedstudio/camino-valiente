@@ -78,6 +78,7 @@ export const NavHeader = ({
               />
             </div>
           )}
+          {/*
           <button
             className={`z-10 duration-300 ease-in-out cursor-pointer hover:bg-black/10 transition-colors p-2 ${
               hasScrolled ? "text-neutral-900" : "text-white"
@@ -99,6 +100,9 @@ export const NavHeader = ({
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
           </button>
+          
+          
+          */}
         </div>
       </div>
     </nav>
