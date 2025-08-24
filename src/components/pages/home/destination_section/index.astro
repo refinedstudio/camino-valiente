@@ -2,7 +2,7 @@
 import { DestinationCard } from "./components";
 interface Props {
   destinations: {
-    id: string
+    id: string;
     location: string;
     subtitle: string;
     title: string;
@@ -10,6 +10,10 @@ interface Props {
     imageUrl: string;
     imageAlt: string;
     isReversed?: boolean;
+    images?: {
+      url: string;
+      alt: string;
+    }[];
   }[];
 }
 const { destinations } = Astro.props;
@@ -17,7 +21,7 @@ const { destinations } = Astro.props;
 
 <section>
   {
-    destinations.map((destination) => (
+    destinations.map((destination, idx) => (
       <DestinationCard
         id={destination.id}
         location={destination.location}
@@ -27,7 +31,8 @@ const { destinations } = Astro.props;
         imageUrl={destination.imageUrl}
         imageAlt={destination.imageAlt}
         isReversed={destination.isReversed}
-        isCarousel={true}
+        images={destination.images}
+        isCarousel={idx === 0}
       />
     ))
   }

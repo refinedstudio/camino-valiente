@@ -1,4 +1,11 @@
 ---
+import ImageCarousel from "../../../../../shared/image_carousel/index.tsx";
+
+interface Image {
+  url: string;
+  alt: string;
+}
+
 interface Props {
   id: string;
   location: string;
@@ -9,6 +16,7 @@ interface Props {
   imageAlt: string;
   isReversed?: boolean;
   isCarousel?: boolean;
+  images?: Image[];
 }
 
 const {
@@ -20,8 +28,30 @@ const {
   imageUrl,
   imageAlt,
   isReversed = false,
-  carousel = false,
+  isCarousel = false,
+  images = [],
 } = Astro.props;
+
+const defaultCarouselImages: Image[] = [
+  {
+    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+    alt: "Paisaje montañoso",
+  },
+  {
+    url: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&h=600&fit=crop",
+    alt: "Sendero en el bosque",
+  },
+  {
+    url: "https://images.unsplash.com/photo-1464822759844-d150baec0494?w=800&h=600&fit=crop",
+    alt: "Vista panorámica",
+  },
+  {
+    url: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800&h=600&fit=crop",
+    alt: "Aventura en la naturaleza",
+  },
+];
+
+const finalImages = images.length > 0 ? images : defaultCarouselImages;
 ---
 
 <div
@@ -44,7 +74,8 @@ const {
         class="w-full md:w-1/2 h-[500px] sm:h-[720px] md:h-screen relative"
         data-reversed="false"
       >
-        <img loading="lazy"
+        <img
+          loading="lazy"
           src={imageUrl}
           alt={imageAlt}
           class:list={["object-cover", "h-full", "w-full", "card-image"]}
@@ -84,21 +115,33 @@ const {
       </h2>
 
       <div class="sm:px-8 text-center">
-        <p
-          class="text-neutral-600 leading-relaxed mb-4 text-sm sm:text-base font-light"
-        >
-          {description}
-        </p>
+        {
+          isCarousel && finalImages.length >= 3 ? (
+            <p class="text-neutral-600 leading-relaxed mb-4 text-sm sm:text-base font-light">
+              {description}
+            </p>
+          ) : (
+            <ImageCarousel
+              images={finalImages}
+              className="h-full w-full"
+              showNavigation={true}
+              showPagination={true}
+              autoplay={true}
+              autoplayDelay={4000}
+              client:load
+            />
+          )
+        }
       </div>
 
       <div class="flex justify-center mt-8">
         <a
-        target="_blank"
-        href={`/${id}`}
-          class="bg-neutral-950 text-white px-10 py-3 text-sm tracking-tight cursor-pointer font-playfair-display font-medium sm:text-base"
+          target="_blank"
+          href={`/${id}`}
+          class="bg-neutral-950 hover:bg-neutral-700 transition-colors duration-300 text-white px-10 py-3 text-sm tracking-tight cursor-pointer font-playfair-display font-medium sm:text-base"
         >
           LEER MÁS
-      </a>
+        </a>
       </div>
     </div>
   </div>
@@ -109,7 +152,8 @@ const {
         class="w-full md:w-1/2 h-[500px] sm:h-[720px] md:h-screen relative order-first md:order-last"
         data-reversed="true"
       >
-        <img loading="lazy"
+        <img
+          loading="lazy"
           src={imageUrl}
           alt={imageAlt}
           class:list={["object-cover", "h-full", "w-full", "card-image"]}

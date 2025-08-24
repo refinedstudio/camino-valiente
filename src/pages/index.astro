@@ -9,17 +9,22 @@ import {
   TeaserSection,
   DiscoverySection,
 } from "../components/pages/home";
-import {
-  primaryDestinations,
-  secondaryDestinations,
-  tertiaryDestinations,
-  quaternaryDestinations,
-  quinaryDestinations,
-} from "../data";
+
 import { meta } from "../config";
 import type { Content } from "../types";
 import { Footer, ConfigurationError } from "../components/shared";
 import { obtenerYValidarDatos } from "../utils/api";
+
+// Función auxiliar para extraer texto del contenido
+const extraerTexto = (content: any): string => {
+  if (typeof content === "string") {
+    return content;
+  }
+  if (content?.root?.children?.[0]?.children?.[0]?.text) {
+    return content.root.children[0].children[0].text;
+  }
+  return "";
+};
 
 const { data, isValid: datosValidos } = await obtenerYValidarDatos();
 ---
@@ -36,51 +41,78 @@ const { data, isValid: datosValidos } = await obtenerYValidarDatos();
       robots={meta.home.robots}
     >
       <HeroSection
-        image={data.inicio.inicio[0].articulo[0].post.imagenes[0].imagen.url}
-        titlePage={data.inicio.inicio[0].title}
-        subtitleArticle={data.inicio.inicio[0].articulo[0].post.subtitle}
-        facebook={data.acerca.social.facebook}
-        youtube={data.acerca.social.youtube}
-        tiktok={data.acerca.social.tiktok}
-        twitter={data.acerca.social.twitter}
-        id={data.inicio.inicio[0].articulo[0].post.id}
+        image={
+          data?.inicio?.inicio?.[0]?.articulo?.[0]?.post?.imagenes?.[0]?.imagen
+            ?.url || ""
+        }
+        titlePage={
+          data?.inicio?.inicio?.[0]?.articulo?.[0]?.post?.title ||
+          "Contenido cargando..."
+        }
+        subtitleArticle={
+          data?.inicio?.inicio?.[0]?.articulo?.[0]?.post?.subtitle ||
+          "Este contenido aún se está cargando"
+        }
+        facebook={data?.acerca?.social?.facebook || ""}
+        youtube={data?.acerca?.social?.youtube || ""}
+        tiktok={data?.acerca?.social?.tiktok || ""}
+        twitter={data?.acerca?.social?.twitter || ""}
+        id={data?.inicio?.inicio?.[0]?.articulo?.[0]?.post?.id || ""}
       />
 
-      {data.inicio.contenido.map((item: Content, idx: number) => (
+      {data?.inicio.contenido.map((item: Content, idx: number) => (
         <div>
           {item.blockType === "detailSideMediaBlock" && (
             <DestinationSection
               destinations={[
                 {
-                  id: item.articulo[0].post.id,
+                  id: item?.articulo[0].post.id,
                   location: item.articulo[0].post.category.title,
                   subtitle: item.articulo[0].post.subtitle,
                   title: item.articulo[0].post.title,
-                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  description: extraerTexto(item?.articulo?.[0]?.post?.content)
+                    ? extraerTexto(item.articulo[0].post.content).slice(
+                        0,
+                        300
+                      ) + "..."
+                    : "Este contenido aún se está cargando...",
                   imageUrl: item.articulo[0].post.imagenes[0].imagen.url,
                   imageAlt: item.articulo[0].post.imagenes[0].imagen.filename,
                   isReversed: false,
+                  images: item.articulo[0].post.imagenes.map((image: any) => ({
+                    url: image.imagen.url,
+                    alt: image.imagen.filename,
+                  })),
                 },
                 {
-                  id: item.articulo[1].post.id,
+                  id: item?.articulo[1].post.id,
                   location: item.articulo[1].post.category.title,
                   subtitle: item.articulo[1].post.subtitle,
                   title: item.articulo[1].post.title,
-                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  description: extraerTexto(item?.articulo?.[1]?.post?.content)
+                    ? extraerTexto(item.articulo[1].post.content).slice(
+                        0,
+                        300
+                      ) + "..."
+                    : "Este contenido aún se está cargando...",
                   imageUrl: item.articulo[1].post.imagenes[0].imagen.url,
                   imageAlt: item.articulo[1].post.imagenes[0].imagen.filename,
                   isReversed: true,
+                  images: item.articulo[1].post.imagenes.map((image: any) => ({
+                    url: image.imagen.url,
+                    alt: image.imagen.filename,
+                  })),
                 },
               ]}
             />
           )}
           {item.blockType === "bannerBlock" && (
             <ParallaxSection
-              id={item.articulo[0].post.id}
+              id={item?.articulo[0].post.id}
               imageUrl={item.articulo[0].post.imagenes[0].imagen.url}
-              subtitle={item.articulo[0].post.subtitle}
-              category={item.articulo[0].post.category.title}
-              title={item.articulo[0].post.title}
+              subtitle={item?.articulo[0].post.subtitle}
+              category={item?.articulo[0].post.category.title}
+              title={item?.articulo[0].post.title}
             />
           )}
           {item.blockType === "exploreBlock" && (
@@ -129,7 +161,6 @@ const { data, isValid: datosValidos } = await obtenerYValidarDatos();
                   category: item.articulo[5].post.category.title,
                   subtitle: item.articulo[5].post.subtitle,
                 },
-
               ]}
             />
           )}
@@ -185,31 +216,56 @@ const { data, isValid: datosValidos } = await obtenerYValidarDatos();
                   imageUrl: item.articulo[0].post.imagenes[0].imagen.url,
                   title: item.articulo[0].post.title,
                   subtitle: item.articulo[0].post.subtitle,
-                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  description: extraerTexto(item?.articulo?.[0]?.post?.content)
+                    ? extraerTexto(item.articulo[0].post.content).slice(
+                        0,
+                        300
+                      ) + "..."
+                    : "Este contenido aún se está cargando...",
                 },
                 {
                   id: item.articulo[1].post.id,
                   imageUrl: item.articulo[1].post.imagenes[0].imagen.url,
                   title: item.articulo[1].post.title,
                   subtitle: item.articulo[1].post.subtitle,
-                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  description: extraerTexto(item?.articulo?.[1]?.post?.content)
+                    ? extraerTexto(item.articulo[1].post.content).slice(
+                        0,
+                        300
+                      ) + "..."
+                    : "Este contenido aún se está cargando...",
                 },
                 {
                   id: item.articulo[2].post.id,
                   imageUrl: item.articulo[2].post.imagenes[0].imagen.url,
                   title: item.articulo[2].post.title,
                   subtitle: item.articulo[2].post.subtitle,
-                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  description: extraerTexto(item?.articulo?.[2]?.post?.content)
+                    ? extraerTexto(item.articulo[2].post.content).slice(
+                        0,
+                        300
+                      ) + "..."
+                    : "Este contenido aún se está cargando...",
                 },
                 {
                   id: item.articulo[3].post.id,
                   imageUrl: item.articulo[3].post.imagenes[0].imagen.url,
                   title: item.articulo[3].post.title,
                   subtitle: item.articulo[3].post.subtitle,
-                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  description: extraerTexto(item?.articulo?.[3]?.post?.content)
+                    ? extraerTexto(item.articulo[3].post.content).slice(
+                        0,
+                        300
+                      ) + "..."
+                    : "Este contenido aún se está cargando...",
                 },
                 {
-                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  description: extraerTexto(item?.articulo?.[4]?.post?.content)
+                    ? extraerTexto(item.articulo[4].post.content).slice(
+                        0,
+                        300
+                      ) + "..."
+                    : "Este contenido aún se está cargando...",
                   id: item.articulo[4].post.id,
                   imageUrl: item.articulo[4].post.imagenes[0].imagen.url,
                   title: item.articulo[4].post.title,
@@ -220,7 +276,12 @@ const { data, isValid: datosValidos } = await obtenerYValidarDatos();
                   imageUrl: item.articulo[5].post.imagenes[0].imagen.url,
                   title: item.articulo[5].post.title,
                   subtitle: item.articulo[5].post.subtitle,
-                  description: item.articulo[0].post.content.slice(0,300) + "...",
+                  description: extraerTexto(item?.articulo?.[5]?.post?.content)
+                    ? extraerTexto(item.articulo[5].post.content).slice(
+                        0,
+                        300
+                      ) + "..."
+                    : "Este contenido aún se está cargando...",
                 },
               ]}
               client:load
@@ -252,48 +313,72 @@ const { data, isValid: datosValidos } = await obtenerYValidarDatos();
       ))}
 
       <Footer
-          facebook={data.acerca.social.facebook}
-        youtube={data.acerca.social.youtube}
-        tiktok={data.acerca.social.tiktok}
-        twitter={data.acerca.social.twitter}
-        content={[
-          {
-            id: data.inicio.cierre[0].articulo[0].post.id,
-            title: data.inicio.cierre[0].articulo[0].post.title,
-            imageUrl:
-              data.inicio.cierre[0].articulo[0].post.imagenes[0].imagen.url,
-          },
-          {
-            id: data.inicio.cierre[0].articulo[1].post.id,
-            title: data.inicio.cierre[0].articulo[1].post.title,
-            imageUrl:
-              data.inicio.cierre[0].articulo[1].post.imagenes[0].imagen.url,
-          },
-          {
-            id: data.inicio.cierre[0].articulo[2].post.id,
-            title: data.inicio.cierre[0].articulo[2].post.title,
-            imageUrl:
-              data.inicio.cierre[0].articulo[2].post.imagenes[0].imagen.url,
-          },
-          {
-            id: data.inicio.cierre[0].articulo[3].post.id,
-            title: data.inicio.cierre[0].articulo[3].post.title,
-            imageUrl:
-              data.inicio.cierre[0].articulo[3].post.imagenes[0].imagen.url,
-          },
-          {
-            id: data.inicio.cierre[0].articulo[4].post.id,
-            title: data.inicio.cierre[0].articulo[4].post.title,
-            imageUrl:
-              data.inicio.cierre[0].articulo[4].post.imagenes[0].imagen.url,
-          },
-          {
-            id: data.inicio.cierre[0].articulo[5].post.id,
-            title: data.inicio.cierre[0].articulo[5].post.title,
-            imageUrl:
-              data.inicio.cierre[0].articulo[5].post.imagenes[0].imagen.url,
-          },
-        ]}
+        content={
+          data?.inicio?.cierre?.[0]?.articulo
+            ? [
+                {
+                  id: data.inicio.cierre[0].articulo[0]?.post?.id || "",
+                  title:
+                    data.inicio.cierre[0].articulo[0]?.post?.title ||
+                    "Contenido cargando...",
+                  imageUrl:
+                    data.inicio.cierre[0].articulo[0]?.post?.imagenes?.[0]
+                      ?.imagen?.url || "",
+                },
+                {
+                  id: data.inicio.cierre[0].articulo[1]?.post?.id || "",
+                  title:
+                    data.inicio.cierre[0].articulo[1]?.post?.title ||
+                    "Contenido cargando...",
+                  imageUrl:
+                    data.inicio.cierre[0].articulo[1]?.post?.imagenes?.[0]
+                      ?.imagen?.url || "",
+                },
+                {
+                  id: data.inicio.cierre[0].articulo[2]?.post?.id || "",
+                  title:
+                    data.inicio.cierre[0].articulo[2]?.post?.title ||
+                    "Contenido cargando...",
+                  imageUrl:
+                    data.inicio.cierre[0].articulo[2]?.post?.imagenes?.[0]
+                      ?.imagen?.url || "",
+                },
+                {
+                  id: data.inicio.cierre[0].articulo[3]?.post?.id || "",
+                  title:
+                    data.inicio.cierre[0].articulo[3]?.post?.title ||
+                    "Contenido cargando...",
+                  imageUrl:
+                    data.inicio.cierre[0].articulo[3]?.post?.imagenes?.[0]
+                      ?.imagen?.url || "",
+                },
+                {
+                  id: data.inicio.cierre[0].articulo[4]?.post?.id || "",
+                  title:
+                    data.inicio.cierre[0].articulo[4]?.post?.title ||
+                    "Contenido cargando...",
+                  imageUrl:
+                    data.inicio.cierre[0].articulo[4]?.post?.imagenes?.[0]
+                      ?.imagen?.url || "",
+                },
+                {
+                  id: data.inicio.cierre[0].articulo[5]?.post?.id || "",
+                  title:
+                    data.inicio.cierre[0].articulo[5]?.post?.title ||
+                    "Contenido cargando...",
+                  imageUrl:
+                    data.inicio.cierre[0].articulo[5]?.post?.imagenes?.[0]
+                      ?.imagen?.url || "",
+                },
+              ]
+            : [
+                {
+                  id: "",
+                  title: "Este contenido aún se está cargando",
+                  imageUrl: "",
+                },
+              ]
+        }
       />
     </Layout>
   ) : (

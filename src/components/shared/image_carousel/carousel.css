@@ -1,0 +1,103 @@
+/* Estilos personalizados para el carousel */
+.image-carousel .swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.image-carousel .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.image-carousel .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilos para la navegación */
+.image-carousel .swiper-button-next,
+.image-carousel .swiper-button-prev {
+  color: white;
+  transition: all 0.3s ease;
+}
+
+
+.image-carousel .swiper-button-next{
+  right: 0px;
+}
+
+.image-carousel .swiper-button-prev {
+  left: 0px;
+}
+
+.image-carousel .swiper-button-next{
+  right: 0px;
+}
+
+.image-carousel .swiper-button-next:hover,
+.image-carousel .swiper-button-prev:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.image-carousel .swiper-button-next:after,
+.image-carousel .swiper-button-prev:after {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Estilos para la paginación */
+.image-carousel .swiper-pagination {
+  bottom: 20px;
+}
+
+.image-carousel .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.image-carousel .swiper-pagination-bullet-active {
+  background: white;
+  transform: scale(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .image-carousel .swiper-button-next,
+  .image-carousel .swiper-button-prev {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .image-carousel .swiper-button-next:after,
+  .image-carousel .swiper-button-prev:after {
+    font-size: 14px;
+  }
+}
+
+/* Efectos de transición suaves */
+.image-carousel .swiper-slide {
+  transition: transform 0.3s ease;
+}
+
+/* Caption overlay styling */
+.image-carousel .caption-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  padding: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+}
